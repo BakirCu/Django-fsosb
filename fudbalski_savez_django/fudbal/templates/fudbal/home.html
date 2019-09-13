@@ -9,42 +9,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'fudbal/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'fudbal/main.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style>
-        marquee {
-            position: relative;
-            left: 10%;
-            width: 80%;
-            height: 20px;
-            background: #DC3545;
 
 
-        }
 
-        /* Make the image fully responsive */
-        .carousel-inner img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .fit-image {
-            width: 50px;
-            object-fit: cover;
-            height: 50px;
-
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="container-fluid bg-primary">
+    <div class="container-fluid  bg-blue">
 
         <!-- Navigation bar-->
-        <nav class="navbar navbar-expand-md bg-primary navbar-dark fixed-top ">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-blue ">
             <a class="navbar-brand" href="{% url 'pocetna_strana'%}">
                 <img src="{% static 'fudbal/images/logo.jpg'%}" alt="Logo" class="img-thumbnail" alt="Logo" width="150"
                     height="150">
@@ -167,7 +146,7 @@
 
     <!--Animation-->
 
-    <div class="jumbotron jumbotron-fluid bg-danger">
+    <div class="jumbotron jumbotron-fluid bg-danger p-2 ">
         <marquee>
             <h6 class="text-white">Bakir car je pokidao kako je ulepsao ovaj sajt| Nigiri je
                 isto car|</h6>
@@ -211,7 +190,7 @@
         </div>
 
     </div>
-    <div class="jumbotron text-center bg-primary" style="margin-bottom:0">
+    <div class="jumbotron text-center bg-blue" style="margin-bottom:0">
         <p>INFORMACIJE</p>
     </div>
 </body>
