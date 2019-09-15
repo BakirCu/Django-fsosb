@@ -35,40 +35,44 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            SAVEZ
+                            САВЕЗ
                         </a>
                         <div class="dropdown-menu bg-blue border border-0">
                             <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'o_savezu' %}">O
-                                Savezu</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="#">Rukovodstvo</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="#">Propisi</a>
+                                Савезу</a>
+                            <a class="dropdown-item bg-blue blue-hover text-white"
+                                href="{% url 'rukovodstvo' %}">Руководство</a>
+                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'propisi'%}">Прописи</a>
                         </div>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            TAKMICENJA
+                            ТАКМИЧЕЊА
                         </a>
                         <div class="dropdown-menu bg-blue border border-0 ">
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="#">Kup</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="#">Opstinska fudbalska liga</a>
+                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'liga' %}">Општинска
+                                фудбалска лига</a>
+                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'kup' %}">Kуп</a>
 
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            SUDIJE
+                            СУДИЈЕ
                         </a>
                         <div class="dropdown-menu bg-blue border border-0">
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="#">Deligiranje</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="#">Lista sudija</a>
+                            <a class="dropdown-item bg-blue blue-hover text-white"
+                                href="{% url 'deligiranje_sudija' %}">Делигирање судија</a>
+                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'lista_sudija' %}">Листа
+                                судија</a>
 
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">VESTI</a>
+                        <a class="nav-link" href="{% url 'vesti' %}">ВЕСТИ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'gallery' %}">GALERIJA</a>
+                        <a class="nav-link" href="{% url 'gallery' %}">ГАЛЕРИЈА</a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +84,7 @@
     {% endblock %}
 
     <div class="jumbotron text-center bg-blue">
-        <p>INFORMACIJE</p>
+        <p>информације</p>
     </div>
 </body>
 
