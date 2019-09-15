@@ -1,9 +1,23 @@
 {% extends "fudbal/base.html" %}
 {% block content %}
 {%load static%}
+<style>
+
+</style>
 <br>
 <img src="{% static 'fudbal/images/deligiranje_sudija.jpg'%}" class="img-fluid mt-5 md-5">
 
-
-
+<br>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <select size='' class="browser-default custom-select">
+                <option selected>Open this menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+    </div>
+</div>
 {% endblock %}
