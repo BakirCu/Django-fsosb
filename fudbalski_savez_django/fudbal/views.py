@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Utakmica
 
 
 def home(request):
@@ -26,7 +27,15 @@ def kup(request):
 
 
 def deligiranje_sudija(request):
-    return render(request, 'fudbal/deligiranje_sudija.html')
+    if request.GET:
+        broj_kola_str = request.GET.get('dropdown')
+        utakmice_izabranog_kola = Utakmica.objects.all().filter(kolo=int(broj_kola_str))
+    else:
+        utakmice_izabranog_kola = Utakmica.objects.all().filter(kolo=2)
+        broj_kola_str = '2'
+
+    return render(request, 'fudbal/deligiranje_sudija.html', {'kola': utakmice_izabranog_kola,
+                                                              'broj_kola': broj_kola_str})
 
 
 def lista_sudija(request):

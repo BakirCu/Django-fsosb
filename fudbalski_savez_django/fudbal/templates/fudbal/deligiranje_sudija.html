@@ -8,65 +8,58 @@
 <img src="{% static 'fudbal/images/deligiranje_sudija.jpg'%}" class="img-fluid mt-5 md-5">
 
 <br>
-<div class="container mt-5">
-    <div class="dropdown">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            Izaberite kolo
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" data-toggle="collapse" href="#collapseTwo">
-                Collapsible Group Item #1
-            </a>
-            <a class="dropdown-item" data-toggle="collapse" href="#collapseOne">
-                Collapsible Group Item #1
-            </a>
-            <a class="dropdown-item" data-toggle="collapse" href="#collapseThree">
-                Collapsible Group Item #3
-            </a>
-            <span class="dropdown-item-text">Just Text</span>
-        </div>
-    </div>
-</div>
+<div class="container">
 
-<!--collapse bar-->
-<div class="container mt-5">
+
+    <div class='row'>
+        <form action="#">
+            {% csrf_token %}
+            <div class="form-group">
+
+                <select name="dropdown" class="custom-select mb-3" onchange="this.form.submit()">
+                    <option disabled selected>Izaberite kolo</option>
+                    <option value="1">1.kolo</option>
+                    <option value="2">2.kolo</option>
+                    <option value="3">3.kolo</option>
+                </select>
+
+            </div>
+        </form>
+        <br>
+    </div>
+
+    <p>{{broj_kola}}.kolo</p>
+</div>
+{% for kolo in kola %}
+<div class='container'>
+
     <div id="accordion">
         <div class="card">
 
-            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat.
-                </div>
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#prvo{{kolo.id}}">
+                    <p>{{ kolo.id_domacin }} ----- {{ kolo.id_gost }}</p>
+                </a>
             </div>
-        </div>
-        <div class="card">
+            <div id="prvo{{kolo.id}}" class="collapse" data-parent="#accordion">
+                <div class="card-body">
 
-            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat.
-                </div>
-            </div>
-        </div>
-        <div class="card">
 
-            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat.
+
+                    <p>prvi sudija:---{{ kolo.prvi_sudija }}</p>
+                    <p>drugi sudija:---{{ kolo.drugi_sudija }}</p>
+
+
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+
+{% endfor %}
+
+</div>
+
 {% endblock %}
