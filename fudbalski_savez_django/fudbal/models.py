@@ -25,26 +25,26 @@ class Tim(models.Model):
 class Utakmica(models.Model):
     kolo = models.PositiveSmallIntegerField()
 
-    id_domacin = models.ForeignKey(
-        Tim, on_delete=models.DO_NOTHING, related_name='domacin')
+    domacin = models.ForeignKey(
+        Tim, on_delete=models.CASCADE, related_name='domacin')
 
-    golovi_domacin = models.PositiveSmallIntegerField(default=0)
+    domacin_gol = models.PositiveSmallIntegerField(default=0)
 
-    id_gost = models.ForeignKey(
-        Tim, on_delete=models.DO_NOTHING, related_name='gost')
+    gost = models.ForeignKey(
+        Tim, on_delete=models.CASCADE, related_name='gost')
 
-    golovi_gost = models.PositiveSmallIntegerField(default=0)
+    gost_gol = models.PositiveSmallIntegerField(default=0)
 
     sezona = models.CharField(max_length=10, default='2019/2020')
 
     prvi_sudija = models.ForeignKey(
-        Sudija, on_delete=models.DO_NOTHING, related_name='prvi_sudija')
+        Sudija, on_delete=models.CASCADE, related_name='prvi_sudija')
 
     drugi_sudija = models.ForeignKey(
-        Sudija, on_delete=models.DO_NOTHING, related_name='drug_sudija')
+        Sudija, on_delete=models.CASCADE, related_name='drug_sudija')
 
     def __str__(self):
-        return '{}.kolo {}-{}'.format(self.kolo, self.id_domacin, self.id_gost)
+        return '{}.kolo {}-{}'.format(self.kolo, self.domacin, self.gost)
 
     class Meta:
         verbose_name_plural = "Utakmice"
