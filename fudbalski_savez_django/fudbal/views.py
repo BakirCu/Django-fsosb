@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Utakmica
+from .mysql_queris import Query
 
 
 def home(request):
@@ -39,6 +40,9 @@ def deligiranje_sudija(request):
 
 
 def lista_sudija(request):
+    k = Query.bodovi()
+    print(k)
+
     return render(request, 'fudbal/lista_sudija.html')
 
 
