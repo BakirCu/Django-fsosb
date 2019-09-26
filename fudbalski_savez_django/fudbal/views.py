@@ -40,7 +40,7 @@ def deligiranje_sudija(request):
 
 
 def lista_sudija(request):
-    k = Query.bodovi()
+    k = Query.bodovi('partizan')
     print(k)
 
     return render(request, 'fudbal/lista_sudija.html')
