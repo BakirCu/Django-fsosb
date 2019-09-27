@@ -93,42 +93,20 @@
                 </tr>
             </thead>
             <tbody>
+                {% for tim in timovi%}
                 <tr>
                     <td>1.</td>
-                    <td>ГРАФИЧАР</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>12</td>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>17</td>
+                    <td>{{tim.ime_tima}}</td>
+                    <td>{{tim.odigrane_utakmice}}</td>
+                    <td>{{tim.broj_pobeda}}</td>
+                    <td>{{tim.broj_neresenih}}</td>
+                    <td>{{tim.broj_poraza}}</td>
+                    <td>{{tim.dati_golovi}}</td>
+                    <td>{{tim.primljni_golovi}}</td>
+                    <td>{{tim.gol_razliak}}</td>
+                    <td>{{tim.bodovi}}</td>
                 </tr>
-                <tr>
-                    <td>1.</td>
-                    <td>РФК ГРАФИЧАР</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>12</td>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>1.</td>
-                    <td>РФК ГРАФИЧАР</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>12</td>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>17</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
 

@@ -3,6 +3,7 @@ from django.db import connection
 
 class Query:
 
+    @staticmethod
     def odigrane_utakmice(ime_tima):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT count(*)  FROM fudbal_sb.fudbal_utakmica
@@ -13,6 +14,7 @@ class Query:
             broj_odigrane_utacmice = cursor.fetchone()
         return broj_odigrane_utacmice[0]
 
+    @staticmethod
     def pobede(ime_time):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT COUNT(*) FROM fudbal_utakmica
@@ -26,6 +28,7 @@ class Query:
             broj_pobeda = cursor.fetchone()
         return broj_pobeda[0]
 
+    @staticmethod
     def porazi(ime_time):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT COUNT(*) FROM fudbal_utakmica
@@ -39,6 +42,7 @@ class Query:
             broj_porazi = cursor.fetchone()
         return broj_porazi[0]
 
+    @staticmethod
     def nereseno(ime_time):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT COUNT(*) FROM fudbal_utakmica
@@ -52,6 +56,7 @@ class Query:
             broj_porazi = cursor.fetchone()
         return broj_porazi[0]
 
+    @staticmethod
     def dati_golovi(ime_tima):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT SUM(golovi) FROM
@@ -67,8 +72,9 @@ class Query:
             broj_bodova = cursor.fetchone()
             if not broj_bodova[0]:
                 return 0
-        return broj_bodova[0]
+        return int(broj_bodova[0])
 
+    @staticmethod
     def primljeni_golovi(ime_tima):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT SUM(golovi) FROM
@@ -84,8 +90,9 @@ class Query:
             broj_bodova = cursor.fetchone()
             if not broj_bodova[0]:
                 return 0
-        return broj_bodova[0]
+        return int(broj_bodova[0])
 
+    @staticmethod
     def imena_timova():
         with connection.cursor() as cursor:
             cursor.execute('''SELECT fudbal_tim.ime_tima FROM fudbal_tim''')
