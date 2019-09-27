@@ -21,11 +21,7 @@ def propisi(request):
 
 def liga(request):
     tabela_utakmica = Liga.tabela_timova()
-
-    print(tabela_utakmica)
-    for tim in tabela_utakmica:
-        print(tim.ime_tima)
-
+    tabela_utakmica.sort(key=lambda x: x.bodovi, reverse=True)
     return render(request, 'fudbal/liga.html', {'timovi': tabela_utakmica})
 
 

@@ -95,7 +95,7 @@
             <tbody>
                 {% for tim in timovi%}
                 <tr>
-                    <td>1.</td>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{tim.ime_tima}}</td>
                     <td>{{tim.odigrane_utakmice}}</td>
                     <td>{{tim.broj_pobeda}}</td>
