@@ -28,7 +28,7 @@ class Liga():
             poraz = Query.porazi(ime_tima)
             nereseno = Query.nereseno(ime_tima)
             gol_razlika = dati_golovi - primljeni_golovi
-            broj_bodova = pobeda*3 + nereseno
+            broj_bodova = tim[1]
             tabela_timova_list.append(Liga(ime_tima, utakmica, pobeda, nereseno, poraz,
                                            dati_golovi, primljeni_golovi, gol_razlika, broj_bodova))
         return tabela_timova_list

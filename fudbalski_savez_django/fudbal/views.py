@@ -34,7 +34,7 @@ def liga(request):
         utakmice_izabranog_kola = Utakmica.objects.all().filter(kolo=int(1))
 
     tabela_utakmica = Liga.tabela_timova()
-    tabela_utakmica.sort(key=lambda x: x.bodovi, reverse=True)
+    print(tabela_utakmica)
     return render(request, 'fudbal/liga.html', {'timovi': tabela_utakmica,
                                                 'broj_kola': brojevi_kola,
                                                 'kola': utakmice_izabranog_kola, })

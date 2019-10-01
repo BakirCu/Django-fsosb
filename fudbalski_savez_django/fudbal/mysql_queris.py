@@ -95,6 +95,31 @@ class Query:
     @staticmethod
     def imena_timova():
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT fudbal_tim.ime_tima FROM fudbal_tim''')
+            cursor.execute('''SELECT r.ime_tima, SUM(r.bodovi) as broj_bodova
+                            FROM
+                            (SELECT t.ime_tima,
+                            CASE
+                            WHEN u.domacin_gol > u.gost_gol  THEN 3
+                                WHEN u.domacin_gol = u.gost_gol  THEN 1
+                                ELSE 0
+                                END AS bodovi
+                            FROM fudbal_utakmica AS u
+                            INNER JOIN fudbal_tim AS t
+                            ON u.domacin_id = t.id
+
+                            UNION ALL
+
+                            SELECT t.ime_tima,
+                            CASE
+                            WHEN u.gost_gol > u.domacin_gol THEN 3
+                                WHEN u.gost_gol = u.domacin_gol  THEN 1
+                                ELSE 0
+                                END AS bodovi
+                            FROM fudbal_utakmica AS u
+                            INNER JOIN fudbal_tim AS t
+                            ON u.gost_id = t.id) AS r
+
+                            GROUP BY r.ime_tima
+                            ORDER BY SUM(r.bodovi) DESC''')
             imena_timova = cursor.fetchall()
         return imena_timova
