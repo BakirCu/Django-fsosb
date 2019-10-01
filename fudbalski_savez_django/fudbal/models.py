@@ -35,7 +35,7 @@ class Utakmica(models.Model):
 
     gost_gol = models.PositiveSmallIntegerField(default=0)
 
-    sezona = models.CharField(max_length=10, default='2019/2020')
+    sezona = models.CharField(max_length=10)
 
     prvi_sudija = models.ForeignKey(
         Sudija, on_delete=models.CASCADE, related_name='prvi_sudija')
@@ -44,7 +44,7 @@ class Utakmica(models.Model):
         Sudija, on_delete=models.CASCADE, related_name='drug_sudija')
 
     def __str__(self):
-        return '{}.kolo {}-{}'.format(self.kolo, self.domacin, self.gost)
+        return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
 
     class Meta:
         verbose_name_plural = "Utakmice"
