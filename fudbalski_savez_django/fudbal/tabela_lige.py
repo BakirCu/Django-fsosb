@@ -14,6 +14,7 @@ class Liga():
         self.gol_razliak = gol_razliak
         self.bodovi = bodovi
 
+    @staticmethod
     def tabela_timova():
         tabela_timova_list = []
         imena_timova = Query.imena_timova()

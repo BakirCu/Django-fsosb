@@ -20,9 +20,21 @@ def propisi(request):
 
 
 def liga(request):
+    sva_kola = Utakmica.objects.values('kolo').distinct()
+    brojevi_kola = []
+    for kolo in sva_kola:
+        broj = kolo.get('kolo')
+        brojevi_kola.append(broj)
+
+    if request.GET:
+        broj_kola_str = request.GET.get('broj')
+        utakmice_izabranog_kola = Utakmica.objects.all().filter(kolo=int(broj_kola_str))
+
     tabela_utakmica = Liga.tabela_timova()
     tabela_utakmica.sort(key=lambda x: x.bodovi, reverse=True)
-    return render(request, 'fudbal/liga.html', {'timovi': tabela_utakmica})
+    return render(request, 'fudbal/liga.html', {'timovi': tabela_utakmica,
+                                                'broj_kola': brojevi_kola,
+                                                'kola': utakmice_izabranog_kola, })
 
 
 def kup(request):
