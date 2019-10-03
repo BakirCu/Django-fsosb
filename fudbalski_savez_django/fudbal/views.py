@@ -21,22 +21,22 @@ def propisi(request):
 
 def liga(request):
     # ovde uzimam sva kola i izdvajam broj kola i cuvam ih u listi 'brojevi_kola'
-    sva_kola = Utakmica.objects.filter(
+    sva_kola_sezone = Utakmica.objects.filter(
         sezona='2019/2020').values('kolo').distinct().order_by('-kolo')
-    print(sva_kola)
-    brojevi_kola = []
-    for kolo in sva_kola:
+    print(sva_kola_sezone)
+    broj_utacmice_kola = []
+    for kolo in sva_kola_sezone:
         utacmice_kola = {}
         broj_key = kolo.get('kolo')
         utakmice_izabranog_kola_value = Utakmica.objects.all().filter(kolo=int(broj_key))
         utacmice_kola[broj_key] = utakmice_izabranog_kola_value
-        brojevi_kola.append(utacmice_kola)
+        broj_utacmice_kola.append(utacmice_kola)
 
-    print(brojevi_kola)
+    print(broj_utacmice_kola)
     tabela_utakmica = Liga.tabela_timova()
 
     return render(request, 'fudbal/liga.html', {'timovi': tabela_utakmica,
-                                                'broj_kola': brojevi_kola,
+                                                'broj_utacmice_kola': broj_utacmice_kola,
                                                 })
 
 

@@ -25,24 +25,25 @@
     <div id="rezultati" class="container tab-pane active"><br>
 
         <div id="accordion">
-            {% for broj in broj_kola%}
-            {%for key, value in broj.items %}
+            {% for broj_utakmice in broj_utacmice_kola %}
+            {% for broj_kola, utakmice in broj_utakmice.items %}
 
             <div class="card">
                 <div class="card-header">
 
 
 
-                    <a class='card-link' data-toggle="collapse" href="#b{{key}}">
-                        {{key}}.kolo
+                    <a class='card-link' data-toggle="collapse" href="#b{{broj_kola}}">
+                        {{broj_kola}}.kolo
                     </a>
 
 
                 </div>
-                <div id="b{{key}}" class="collapse" data-parent="#accordion">
+                <div id="b{{broj_kola}}" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        {% for kolo in value %}
-                        <p>{{kolo.domacin}} : {{kolo.domacin_gol}} - {{kolo.gost_gol}} : {{kolo.gost}}</p>
+                        {% for utakmica in utakmice %}
+                        <p>{{utakmica.domacin}} : {{utakmica.domacin_gol}} - {{utakmica.gost_gol}} : {{utakmica.gost}}
+                        </p>
                         {% endfor %}
                     </div>
                 </div>
