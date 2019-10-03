@@ -26,27 +26,29 @@
 
         <div id="accordion">
             {% for broj in broj_kola%}
+            {%for key, value in broj.items %}
+
             <div class="card">
                 <div class="card-header">
                     <form action="#" id='form1' method="GET">
 
 
-                        <button name='broj' value='{{broj}}' type="submit" data-toggle="collapse"
-                            data-target="#b{{broj}}">
-                            {{broj}}.kolo
+                        <button name='broj' value='{{key}}' type="button" data-toggle="collapse"
+                            data-target="#b{{key}}">
+                            {{key}}.kolo
                         </button>
 
                     </form>
                 </div>
-                <div id="b{{broj}}" class="collapse" data-parent="#accordion">
+                <div id="b{{key}}" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        {% for kolo in kola %}
+                        {% for kolo in value %}
                         <p>{{kolo.domacin}} : {{kolo.domacin_gol}} - {{kolo.gost_gol}} : {{kolo.gost}}</p>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-
+            {% endfor %}
             {% endfor %}
 
         </div>
