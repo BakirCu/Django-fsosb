@@ -30,15 +30,14 @@
 
             <div class="card">
                 <div class="card-header">
-                    <form action="#" id='form1' method="GET">
 
 
-                        <button name='broj' value='{{key}}' type="button" data-toggle="collapse"
-                            data-target="#b{{key}}">
-                            {{key}}.kolo
-                        </button>
 
-                    </form>
+                    <a class='card-link' data-toggle="collapse" href="#b{{key}}">
+                        {{key}}.kolo
+                    </a>
+
+
                 </div>
                 <div id="b{{key}}" class="collapse" data-parent="#accordion">
                     <div class="card-body">
