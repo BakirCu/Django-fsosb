@@ -22,7 +22,7 @@ def propisi(request):
 def liga(request):
     # ovde uzimam sva kola i izdvajam broj kola i cuvam ih u listi 'brojevi_kola'
     sva_kola = Utakmica.objects.filter(
-        sezona='2019/2020').values('kolo').distinct()
+        sezona='2019/2020').values('kolo').distinct().order_by('-kolo')
     print(sva_kola)
     brojevi_kola = []
     for kolo in sva_kola:
