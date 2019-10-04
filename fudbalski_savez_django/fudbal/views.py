@@ -19,11 +19,10 @@ def propisi(request):
     return render(request, 'fudbal/propisi.html')
 
 
-def liga(request):
-    # ovde uzimam sva kola i izdvajam broj kola i cuvam ih u listi 'brojevi_kola'
+def liga_rezultati(request):
     sva_kola_sezone = Utakmica.objects.filter(
         sezona='2019/2020').values('kolo').distinct().order_by('-kolo')
-    print(sva_kola_sezone)
+
     broj_utacmice_kola = []
     for kolo in sva_kola_sezone:
         utacmice_kola = {}
@@ -32,12 +31,12 @@ def liga(request):
         utacmice_kola[broj_key] = utakmice_izabranog_kola_value
         broj_utacmice_kola.append(utacmice_kola)
 
-    print(broj_utacmice_kola)
-    tabela_utakmica = Liga.tabela_timova()
+    return render(request, 'fudbal/liga_rezultati.html', {'broj_utacmice_kola': broj_utacmice_kola, })
 
-    return render(request, 'fudbal/liga.html', {'timovi': tabela_utakmica,
-                                                'broj_utacmice_kola': broj_utacmice_kola,
-                                                })
+
+def liga_tabela(request):
+    tabela_utakmica = Liga.tabela_timova()
+    return render(request, 'fudbal/liga_tabela.html', {'timovi': tabela_utakmica, })
 
 
 def kup(request):

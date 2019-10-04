@@ -1,0 +1,54 @@
+{% extends "fudbal/base.html" %}
+{% block content %}
+{%load static%}
+
+<br>
+<img src="{% static 'fudbal/images/liga.jpg'%}" class="img-fluid mt-5 md-5">
+<div class="container mt-5 "><br>
+
+    <hr class="bg-danger">
+    <br>
+
+    <table class="table table-active table-striped text-center">
+        <thead>
+            <tr>
+                <th data-toggle="tooltip" data-placement="top" title="Позиција">П</th>
+                <th>Назив клуба</th>
+                <th data-toggle="tooltip" data-placement="top" title="Одигране утакмице">ОУ</th>
+                <th data-toggle="tooltip" data-placement="top" title="Број победа">БП</th>
+                <th data-toggle="tooltip" data-placement="top" title="Број нерешених">БH</th>
+                <th data-toggle="tooltip" data-placement="top" title="Број изгубљених">БИ</th>
+                <th data-toggle="tooltip" data-placement="top" title="Дати голови">ДГ</th>
+                <th data-toggle="tooltip" data-placement="top" title="Примљени голови">ПГ</th>
+                <th data-toggle="tooltip" data-placement="top" title="Гол разлика" width="10">ГР</th>
+                <th data-toggle="tooltip" data-placement="top" title="Бодови">Б</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tim in timovi%}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{tim.ime_tima}}</td>
+                <td>{{tim.odigrane_utakmice}}</td>
+                <td>{{tim.broj_pobeda}}</td>
+                <td>{{tim.broj_neresenih}}</td>
+                <td>{{tim.broj_poraza}}</td>
+                <td>{{tim.dati_golovi}}</td>
+                <td>{{tim.primljni_golovi}}</td>
+                <td>{{tim.gol_razliak}}</td>
+                <td>{{tim.bodovi}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+
+{% endblock %}
