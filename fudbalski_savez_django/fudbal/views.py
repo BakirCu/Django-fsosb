@@ -20,14 +20,17 @@ def propisi(request):
 
 
 def liga_rezultati(request):
+    poslednje_kolo = Utakmica.objects.values(
+        'sezona').distinct().order_by('-sezona')[0]
+    broj_sezone = poslednje_kolo.get('sezona')
     sva_kola_sezone = Utakmica.objects.filter(
-        sezona='2019/2020').values('kolo').distinct().order_by('-kolo')
-
+        sezona=broj_sezone).values('kolo').distinct().order_by('-kolo')
     broj_utacmice_kola = []
     for kolo in sva_kola_sezone:
         utacmice_kola = {}
         broj_key = kolo.get('kolo')
-        utakmice_izabranog_kola_value = Utakmica.objects.all().filter(kolo=int(broj_key))
+        utakmice_izabranog_kola_value = Utakmica.objects.all().filter(
+            kolo=int(broj_key), sezona=broj_sezone)
         utacmice_kola[broj_key] = utakmice_izabranog_kola_value
         broj_utacmice_kola.append(utacmice_kola)
 
