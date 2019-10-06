@@ -93,7 +93,7 @@ class Query:
         return int(broj_bodova[0])
 
     @staticmethod
-    def imena_timova():
+    def imena_timova(poslednja_sezona):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT r.ime_tima, SUM(r.bodovi) as broj_bodova
                             FROM
@@ -106,6 +106,7 @@ class Query:
                             FROM fudbal_utakmica AS u
                             INNER JOIN fudbal_tim AS t
                             ON u.domacin_id = t.id
+                            WHERE u.sezona = %s
 
                             UNION ALL
 
@@ -117,9 +118,10 @@ class Query:
                                 END AS bodovi
                             FROM fudbal_utakmica AS u
                             INNER JOIN fudbal_tim AS t
-                            ON u.gost_id = t.id) AS r
+                            ON u.gost_id = t.id
+                             WHERE u.sezona = %s) AS r
 
                             GROUP BY r.ime_tima
-                            ORDER BY SUM(r.bodovi) DESC''')
+                            ORDER BY SUM(r.bodovi) DESC''', [poslednja_sezona, poslednja_sezona])
             imena_timova = cursor.fetchall()
         return imena_timova

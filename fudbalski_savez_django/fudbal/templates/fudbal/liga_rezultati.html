@@ -5,49 +5,26 @@
 <img src="{% static 'fudbal/images/liga.jpg'%}" class="img-fluid mt-5 md-5">
 
 <div class="container mt-5">
-
-    <hr class="bg-danger">
-
-
-
-    <div id="rezultati" class="container tab-pane active"><br>
-
-        <div id="accordion">
-            {% for broj_utakmice in broj_utacmice_kola %}
-            {% for broj_kola, utakmice in broj_utakmice.items %}
-
-            <div class="card">
-                <div class="card-header">
-
-
-
-                    <a class='card-link' data-toggle="collapse" href="#b{{broj_kola}}">
-                        {{broj_kola}}.kolo
-                    </a>
-
-
-                </div>
-                <div id="b{{broj_kola}}" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        {% for utakmica in utakmice %}
-                        <p>{{utakmica.domacin}} : {{utakmica.domacin_gol}} - {{utakmica.gost_gol}} : {{utakmica.gost}}
-                        </p>
-                        {% endfor %}
-                    </div>
+    <div id="accordion">
+        {% for broj_utakmice in broj_utacmice_kola %}
+        {% for broj_kola, utakmice in broj_utakmice.items %}
+        <div class="card">
+            <div class="card-header">
+                <a class='card-link' data-toggle="collapse" href="#b{{broj_kola}}">
+                    {{broj_kola}}.kolo
+                </a>
+            </div>
+            <div id="b{{broj_kola}}" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    {% for utakmica in utakmice %}
+                    <p>{{utakmica.domacin}} : {{utakmica.domacin_gol}} - {{utakmica.gost_gol}} : {{utakmica.gost}}
+                    </p>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
-            {% endfor %}
-
         </div>
+        {% endfor %}
+        {% endfor %}
     </div>
-
-
-
-
-
-
-
-
-
-    {% endblock %}
+</div>
+{% endblock %}

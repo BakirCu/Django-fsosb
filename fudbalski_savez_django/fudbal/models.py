@@ -35,7 +35,7 @@ class Utakmica(models.Model):
 
     gost_gol = models.PositiveSmallIntegerField(default=0)
 
-    sezona = models.CharField(max_length=10)
+    sezona = models.PositiveSmallIntegerField(blank=False)
 
     prvi_sudija = models.ForeignKey(
         Sudija, on_delete=models.CASCADE, related_name='prvi_sudija')

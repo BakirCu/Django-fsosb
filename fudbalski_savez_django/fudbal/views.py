@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from .models import Utakmica
-from .tabela_lige import Liga
+from .liga_rezultati import Liga, Sezona, Utakmica
 
 
 def home(request):
@@ -20,11 +19,11 @@ def propisi(request):
 
 
 def liga_rezultati(request):
-    poslednje_kolo = Utakmica.objects.values(
-        'sezona').distinct().order_by('-sezona')[0]
-    broj_sezone = poslednje_kolo.get('sezona')
+    broj_sezone = Sezona.poslednja_sezona()
+
     sva_kola_sezone = Utakmica.objects.filter(
         sezona=broj_sezone).values('kolo').distinct().order_by('-kolo')
+
     broj_utacmice_kola = []
     for kolo in sva_kola_sezone:
         utacmice_kola = {}
@@ -38,7 +37,8 @@ def liga_rezultati(request):
 
 
 def liga_tabela(request):
-    tabela_utakmica = Liga.tabela_timova()
+    broj_sezone = Sezona.poslednja_sezona()
+    tabela_utakmica = Liga.tabela_timova(broj_sezone)
     return render(request, 'fudbal/liga_tabela.html', {'timovi': tabela_utakmica, })
 
 
