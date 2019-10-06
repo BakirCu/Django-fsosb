@@ -14,6 +14,17 @@
                     {{broj_kola}}.kolo
                 </a>
             </div>
+            {%if broj_kola == 4 %}
+            <div id="b{{broj_kola}}" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    {% for utakmica in utakmice %}
+                    <p>{{utakmica.domacin}} : {{utakmica.domacin_gol}} - {{utakmica.gost_gol}} : {{utakmica.gost}}
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+            {%else%}
+
             <div id="b{{broj_kola}}" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                     {% for utakmica in utakmice %}
@@ -22,7 +33,10 @@
                     {% endfor %}
                 </div>
             </div>
+
+            {%endif%}
         </div>
+
         {% endfor %}
         {% endfor %}
     </div>
