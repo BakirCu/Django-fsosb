@@ -35,7 +35,7 @@ class Tim(models.Model):
 
 
 class Utakmica(models.Model):
-    sezona = models.PositiveSmallIntegerField(blank=False)
+    sezona = models.PositiveSmallIntegerField(blank=False, default=2019)
 
     kolo = models.PositiveSmallIntegerField()
 
