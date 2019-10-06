@@ -1,4 +1,16 @@
 from django.db import models
+from django.utils import timezone
+
+
+class Delegat(models.Model):
+    ime_delegata = models.CharField(max_length=20)
+    prezime_delegata = models.CharField(max_length=20)
+
+    def __str__(self):
+        return '{} {}'.format(self.ime_delegata, self.prezime_delegata)
+
+    class Meta:
+        verbose_name_plural = "Delegati"
 
 
 class Sudija(models.Model):
@@ -23,6 +35,8 @@ class Tim(models.Model):
 
 
 class Utakmica(models.Model):
+    sezona = models.PositiveSmallIntegerField(blank=False)
+
     kolo = models.PositiveSmallIntegerField()
 
     domacin = models.ForeignKey(
@@ -35,13 +49,21 @@ class Utakmica(models.Model):
 
     gost_gol = models.PositiveSmallIntegerField(default=0)
 
-    sezona = models.PositiveSmallIntegerField(blank=False)
+    mesto_odigravanja = models.CharField(max_length=100)
 
-    prvi_sudija = models.ForeignKey(
-        Sudija, on_delete=models.CASCADE, related_name='prvi_sudija')
+    vreme_odigravanja = models.DateTimeField(default=timezone.now)
 
-    drugi_sudija = models.ForeignKey(
-        Sudija, on_delete=models.CASCADE, related_name='drug_sudija')
+    glavni_sudija = models.ForeignKey(
+        Sudija, on_delete=models.CASCADE, related_name='glavni_sudija')
+
+    prvi_pomocnik = models.ForeignKey(
+        Sudija, on_delete=models.CASCADE, related_name='prvi_pomocnik')
+
+    drugi_pomocnik = models.ForeignKey(
+        Sudija, on_delete=models.CASCADE, related_name='drug_pomocnik')
+
+    delegat = models.ForeignKey(
+        Delegat, on_delete=models.CASCADE, related_name='delegat')
 
     def __str__(self):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
