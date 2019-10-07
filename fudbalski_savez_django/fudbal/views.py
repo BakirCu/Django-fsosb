@@ -19,21 +19,18 @@ def propisi(request):
 
 
 def liga_rezultati(request):
-    broj_sezone = Sezona.poslednja_sezona()
-
+    poslednja_sezona_int = Sezona.poslednja_sezona()
     sva_kola_sezone = Utakmica.objects.filter(
-        sezona=broj_sezone).values('kolo').distinct().order_by('-kolo')
-
-    broj_utacmice_kola = []
+        sezona=poslednja_sezona_int).values('kolo').distinct().order_by('-kolo')
+    kola_list = []
     for kolo in sva_kola_sezone:
-        utacmice_kola = {}
-        broj_key = kolo.get('kolo')
-        utakmice_izabranog_kola_value = Utakmica.objects.all().filter(
-            kolo=int(broj_key), sezona=broj_sezone)
-        utacmice_kola[broj_key] = utakmice_izabranog_kola_value
-        broj_utacmice_kola.append(utacmice_kola)
-
-    return render(request, 'fudbal/liga_rezultati.html', {'broj_utacmice_kola': broj_utacmice_kola, })
+        utacmice_kola_dct = {}
+        broj_kola_str = kolo.get('kolo')
+        utakmice_izabranog_kola = Utakmica.objects.all().filter(
+            kolo=int(broj_kola_str), sezona=poslednja_sezona_int)
+        utacmice_kola_dct[broj_kola_str] = utakmice_izabranog_kola
+        kola_list.append(utacmice_kola_dct)
+    return render(request, 'fudbal/liga_rezultati.html', {'kola': kola_list, })
 
 
 def liga_tabela(request):
