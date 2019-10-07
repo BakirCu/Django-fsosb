@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class Delegat(models.Model):
@@ -67,6 +69,14 @@ class Utakmica(models.Model):
 
     def __str__(self):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
+
+    def clean(self):
+        if self.prvi_pomocnik == self.drugi_pomocnik:
+            raise ValidationError(
+                _('Prvi i drugi moraju biti razlicite osobe'))
+        if self.domacin == self.gost:
+            raise ValidationError(
+                _('Domacin i Gost moraju biti razliciti timovi'))
 
     class Meta:
         verbose_name_plural = "Utakmice"
