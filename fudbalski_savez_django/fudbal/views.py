@@ -43,12 +43,12 @@ def kup(request):
 def deligiranje_sudija(request):
     if request.GET:
         broj_kola_str = request.GET.get('dropdown')
-        utakmice_izabranog_kola = Utakmica.objects.all().filter(kolo=int(broj_kola_str))
+        kola = Utakmica.objects.all().filter(kolo=int(broj_kola_str))
     else:
-        utakmice_izabranog_kola = Utakmica.objects.all().filter(kolo=2)
+        kola = Utakmica.objects.all().filter(kolo=2)
         broj_kola_str = '2'
 
-    return render(request, 'fudbal/deligiranje_sudija.html', {'kola': utakmice_izabranog_kola,
+    return render(request, 'fudbal/deligiranje_sudija.html', {'kola': kola,
                                                               'broj_kola': broj_kola_str})
 
 

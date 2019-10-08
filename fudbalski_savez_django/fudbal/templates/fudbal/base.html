@@ -1,6 +1,4 @@
 {% load static %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,15 +11,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-
 </head>
 
 <body>
-
     <div class="container-fluid  bg-blue">
-
         <!-- Navigation bar-->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-blue ">
             <a class="navbar-brand" href="{% url 'pocetna_strana'%}">
@@ -44,7 +37,6 @@
                                 href="{% url 'rukovodstvo' %}">Rukovodstvo</a>
                             <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'propisi'%}">Propisi</a>
                         </div>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             OPŠTINSKA FUDBALSKA LIGA
@@ -54,7 +46,6 @@
                                 Rezultati</a>
                             <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'liga_tabela' %}">
                                 Tabela</a>
-
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -75,7 +66,6 @@
                             <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'lista_sudija' %}">Lista
                                 sudija
                             </a>
-
                         </div>
                     </li>
                     <li class="nav-item">
@@ -88,11 +78,8 @@
             </div>
         </nav>
     </div>
-
     {% block content %}
-
     {% endblock %}
-
     <div class="jumbotron text-center bg-blue mt-5">
         <p>INFORMACIJE</p>
     </div>

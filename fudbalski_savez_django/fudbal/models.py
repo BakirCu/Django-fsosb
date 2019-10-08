@@ -56,16 +56,16 @@ class Utakmica(models.Model):
     vreme_odigravanja = models.DateTimeField(default=timezone.now)
 
     glavni_sudija = models.ForeignKey(
-        Sudija, on_delete=models.CASCADE, related_name='glavni_sudija')
+        Sudija, on_delete=models.DO_NOTHING, related_name='glavni_sudija')
 
     prvi_pomocnik = models.ForeignKey(
-        Sudija, on_delete=models.CASCADE, related_name='prvi_pomocnik')
+        Sudija, on_delete=models.DO_NOTHING, related_name='prvi_pomocnik')
 
     drugi_pomocnik = models.ForeignKey(
-        Sudija, on_delete=models.CASCADE, related_name='drug_pomocnik')
+        Sudija, on_delete=models.DO_NOTHING, related_name='drug_pomocnik')
 
     delegat = models.ForeignKey(
-        Delegat, on_delete=models.CASCADE, related_name='delegat')
+        Delegat, on_delete=models.DO_NOTHING, related_name='delegat')
 
     def __str__(self):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
