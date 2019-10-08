@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .liga_rezultati import Liga, Sezona, Utakmica
+from .my_functions import create_list_of_dicts
 
 
 def home(request):
@@ -22,15 +23,11 @@ def liga_rezultati(request):
     poslednja_sezona_int = Sezona.poslednja_sezona()
     sva_kola_sezone = Utakmica.objects.filter(
         sezona=poslednja_sezona_int).values('kolo').distinct().order_by('-kolo')
-    kola_list = []
-    for kolo in sva_kola_sezone:
-        utacmice_kola_dct = {}
-        broj_kola_str = kolo.get('kolo')
-        utakmice_izabranog_kola = Utakmica.objects.all().filter(
-            kolo=int(broj_kola_str), sezona=poslednja_sezona_int)
-        utacmice_kola_dct[broj_kola_str] = utakmice_izabranog_kola
-        kola_list.append(utacmice_kola_dct)
-    return render(request, 'fudbal/liga_rezultati.html', {'kola': kola_list, })
+    kola_list = create_list_of_dicts(poslednja_sezona_int, sva_kola_sezone)
+    trenutna_sezona = '{}/{}'.format(poslednja_sezona_int,
+                                     poslednja_sezona_int + 1)
+    return render(request, 'fudbal/liga_rezultati.html', {'kola': kola_list,
+                                                          'sezona': trenutna_sezona, })
 
 
 def liga_tabela(request):

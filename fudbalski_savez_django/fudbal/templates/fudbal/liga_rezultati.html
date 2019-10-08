@@ -5,6 +5,7 @@
 <img src="{% static 'fudbal/images/liga.jpg'%}" class="img-fluid mt-5 md-5">
 
 <div class="container mt-5">
+    <h6>Sezona {{sezona}}</h6>
     <div id="accordion">
         {% for kolo in kola %}
         {% for broj_kola, utakmice in kolo.items %}
@@ -14,24 +15,18 @@
                     {{broj_kola}}.kolo
                 </a>
             </div>
-
-
             <div id="b{{broj_kola}}" class="{% if broj_kola ==  kola|length  %}
             collapse show {% else %} collapse {% endif %}" data-parent="#accordion">
                 <div class="card-body">
                     <div class='container'>
                         <table class="table table-sm">
                             <thead>
-                                <tr>
-                                    <th>{{utakmice.first.sezona}}.sezona</th>
-
-                                </tr>
+                            </thead>
                             <tbody>
                                 {% for utakmica in utakmice %}
                                 <tr>
-                                    <td>{{utakmica.vreme_odigravanja}} </td>
+                                    <td>{{utakmica.vreme_odigravanja|date:"F d Y"}} </td>
                                     <td>{{utakmica.mesto_odigravanja}} </td>
-                                    <td>|</td>
                                     <td>{{utakmica.domacin}} </td>
                                     <td> {{utakmica.domacin_gol}}</td>
                                     <td>:</td>
