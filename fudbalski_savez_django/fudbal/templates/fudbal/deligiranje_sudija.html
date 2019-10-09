@@ -1,21 +1,14 @@
 {% extends "fudbal/base.html" %}
 {% block content %}
 {%load static%}
-<style>
-
-</style>
 <br>
 <img src="{% static 'fudbal/images/deligiranjesudija.jpg'%}" class="img-fluid mt-5 md-5">
-
 <br>
 <div class="container">
-
-
     <div class='row'>
         <form action="#">
             {% csrf_token %}
             <div class="form-group">
-
                 <select name="dropdown" class="custom-select mb-3" onchange="this.form.submit()">
                     <option disabled selected>Izaberite kolo</option>
                     <option value="1">1.kolo</option>
@@ -27,15 +20,12 @@
         </form>
         <br>
     </div>
-
     <p>{{broj_kola}}.kolo</p>
 </div>
 {% for kolo in kola %}
 <div class='container'>
-
     <div id="accordion">
         <div class="card">
-
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#prvo{{kolo.id}}">
                     <p>{{ kolo.domacin }} ----- {{ kolo.gost }}</p>
@@ -43,23 +33,13 @@
             </div>
             <div id="prvo{{kolo.id}}" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-
-
-
                     <p>prvi sudija:---{{ kolo.prvi_pomocnik }}</p>
                     <p>drugi sudija:---{{ kolo.drugi_pomocnik }}</p>
-
-
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-
-
 {% endfor %}
-
-</div>
-
 {% endblock %}

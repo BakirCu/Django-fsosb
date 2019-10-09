@@ -4,7 +4,7 @@ from .models import Utakmica
 
 class Liga():
 
-    def __init__(self, ime_tima, odigrane_utakmice, broj_pobeda, broj_neresenih, broj_poraza, dati_golovi, primljni_golovi, gol_razliak, bodovi):
+    def __init__(self, ime_tima, odigrane_utakmice, broj_pobeda, broj_neresenih, broj_poraza, dati_golovi, primljni_golovi, gol_razlika, bodovi):
         self.ime_tima = ime_tima
         self.odigrane_utakmice = odigrane_utakmice
         self.broj_pobeda = broj_pobeda
@@ -12,7 +12,7 @@ class Liga():
         self.broj_poraza = broj_poraza
         self.dati_golovi = dati_golovi
         self.primljni_golovi = primljni_golovi
-        self.gol_razliak = gol_razliak
+        self.gol_razlika = gol_razlika
         self.bodovi = bodovi
 
     @staticmethod
