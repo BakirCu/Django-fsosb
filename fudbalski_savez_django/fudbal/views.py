@@ -36,8 +36,12 @@ def liga_tabela(request):
     return render(request, 'fudbal/liga_tabela.html', {'timovi': tabela_utakmica, })
 
 
-def kup(request):
-    return render(request, 'fudbal/kup.html')
+def kup_rezultati(request):
+    return render(request, 'fudbal/kup_rezultati.html')
+
+
+def kup_tabela(request):
+    return render(request, 'fudbal/kup_tabela.html')
 
 
 def deligiranje_sudija(request):
@@ -53,12 +57,10 @@ def deligiranje_sudija(request):
 
 
 def lista_sudija(request):
-
     return render(request, 'fudbal/lista_sudija.html')
 
 
 def vesti(request):
-
     return render(request, 'fudbal/vesti.html')
 
 

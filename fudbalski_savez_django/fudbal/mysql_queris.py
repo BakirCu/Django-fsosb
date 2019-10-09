@@ -10,7 +10,6 @@ class Query:
                             INNER JOIN fudbal_tim
                             ON fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
                             WHERE fudbal_tim.ime_tima= %s; ''', [ime_tima])
-
             broj_odigrane_utacmice = cursor.fetchone()
         return broj_odigrane_utacmice[0]
 
@@ -38,7 +37,6 @@ class Query:
                              AND ((fudbal_utakmica.domacin_id=fudbal_tim.id AND fudbal_utakmica.domacin_gol < fudbal_utakmica.gost_gol)
                               OR
                             (fudbal_utakmica.gost_id=fudbal_tim.id AND fudbal_utakmica.gost_gol < fudbal_utakmica.domacin_gol));''', [ime_time])
-
             broj_porazi = cursor.fetchone()
         return broj_porazi[0]
 
@@ -52,7 +50,6 @@ class Query:
                              AND ((fudbal_utakmica.domacin_id=fudbal_tim.id AND fudbal_utakmica.domacin_gol = fudbal_utakmica.gost_gol)
                               OR
                             (fudbal_utakmica.gost_id=fudbal_tim.id AND fudbal_utakmica.gost_gol = fudbal_utakmica.domacin_gol));''', [ime_time])
-
             broj_porazi = cursor.fetchone()
         return broj_porazi[0]
 
@@ -68,7 +65,6 @@ class Query:
                             INNER JOIN fudbal_tim
                             ON fudbal_utakmica.gost_id=fudbal_tim.id
                              WHERE fudbal_tim.ime_tima = %s) AS bodovi''', [ime_tima, ime_tima])
-
             broj_bodova = cursor.fetchone()
             if not broj_bodova[0]:
                 return 0
@@ -109,7 +105,6 @@ class Query:
                             WHERE u.sezona = %s
 
                             UNION ALL
-
                             SELECT t.ime_tima,
                             CASE
                             WHEN u.gost_gol > u.domacin_gol THEN 3
@@ -120,7 +115,6 @@ class Query:
                             INNER JOIN fudbal_tim AS t
                             ON u.gost_id = t.id
                              WHERE u.sezona = %s) AS r
-
                             GROUP BY r.ime_tima
                             ORDER BY SUM(r.bodovi) DESC''', [poslednja_sezona, poslednja_sezona])
             imena_timova = cursor.fetchall()
