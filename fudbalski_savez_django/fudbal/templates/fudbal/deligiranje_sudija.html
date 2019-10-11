@@ -11,33 +11,49 @@
             <div class="form-group">
                 <select name="dropdown" class="custom-select mb-3" onchange="this.form.submit()">
                     <option disabled selected>Izaberite kolo</option>
-                    <option value="1">1.kolo</option>
-                    <option value="2">2.kolo</option>
-                    <option value="3">3.kolo</option>
+                    {% for kolo in kola%}
+                    <option value="{{kolo}}">{{kolo}}.kolo</option>
+                    {% endfor %}
                 </select>
             </div>
         </form>
         <br>
     </div>
     <p>{{broj_kola}}.kolo</p>
-</div>
-{% for kolo in kola %}
-<div class='container'>
+    <div class='card'>
+        <div class="card-header">
+            <div class='row'>
+                <div class='col-3'>Utakmica</div>
+                <div class='col-3'>Datum</div>
+                <div class='col-3'>Vreme</div>
+                <div class='col-3'>Mesto</div>
+            </div>
+        </div>
+
+    </div>
+    {% for utakmica in utakmice %}
     <div id="accordion">
         <div class="card">
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#prvo{{kolo.id}}">
-                    <p>{{ kolo.domacin }} ----- {{ kolo.gost }}</p>
+            <div class="card-body">
+                <a class="card-link" data-toggle="collapse" href="#prvo{{utakmica.id}}">
+                    <div class='row'>
+                        <div class='col-3'>{{ utakmica.domacin }}-{{ utakmica.gost }}</div>
+                        <div class='col-3'>{{utakmica.vreme_odigravanja|date:"m d Y"}}</div>
+                        <div class='col-3'>{{utakmica.vreme_odigravanja|date:"f"}}</div>
+                        <div class='col-3'>{{utakmica.mesto_odigravanja}}</div>
+                    </div>
                 </a>
             </div>
-            <div id="prvo{{kolo.id}}" class="collapse" data-parent="#accordion">
+            <div id="prvo{{utakmica.id}}" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                    <p>prvi sudija:---{{ kolo.prvi_pomocnik }}</p>
-                    <p>drugi sudija:---{{ kolo.drugi_pomocnik }}</p>
+                    <p>Glavni sudija:<b>{{ utakmica.glavni_sudija }}</b></p>
+                    <p>Prvi pomoćnik:<b>{{ utakmica.prvi_pomocnik }}</b></p>
+                    <p>Drugi pomoćnik:<b>{{ utakmica.drugi_pomocnik }}</b></p>
+                    <p>Delegat:<b>{{ utakmica.delegat }}</b></p>
                 </div>
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}

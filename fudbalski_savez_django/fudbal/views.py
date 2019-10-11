@@ -20,12 +20,12 @@ def propisi(request):
 
 
 def liga_rezultati(request):
-    poslednja_sezona_int = Sezona.poslednja_sezona()
+    poslednja_sezona = Sezona.poslednja_sezona()
     sva_kola_sezone = Utakmica.objects.filter(
-        sezona=poslednja_sezona_int).values('kolo').distinct().order_by('-kolo')
-    kola_list = create_list_of_dicts(poslednja_sezona_int, sva_kola_sezone)
-    trenutna_sezona = '{}/{}'.format(poslednja_sezona_int,
-                                     poslednja_sezona_int + 1)
+        sezona=poslednja_sezona).values('kolo').distinct().order_by('-kolo')
+    kola_list = create_list_of_dicts(poslednja_sezona, sva_kola_sezone)
+    trenutna_sezona = '{}/{}'.format(poslednja_sezona,
+                                     poslednja_sezona + 1)
     return render(request, 'fudbal/liga_rezultati.html', {'kola': kola_list,
                                                           'sezona': trenutna_sezona, })
 
@@ -45,15 +45,24 @@ def kup_tabela(request):
 
 
 def deligiranje_sudija(request):
+    poslednja_sezona = Sezona.poslednja_sezona()
+    kola_poslednje_sezone = Utakmica.objects.filter(
+        sezona=poslednja_sezona).values('kolo').distinct().order_by('-kolo')
+    kola = []
+    for kolo in kola_poslednje_sezone:
+        kola.append(kolo.get('kolo'))
+    print(kola)
     if request.GET:
-        broj_kola_str = request.GET.get('dropdown')
-        kola = Utakmica.objects.all().filter(kolo=int(broj_kola_str))
+        izabrano_kolo = request.GET.get('dropdown')
+        utakmice = Utakmica.objects.all().filter(
+            kolo=int(izabrano_kolo), sezona=poslednja_sezona)
     else:
-        kola = Utakmica.objects.all().filter(kolo=2)
-        broj_kola_str = '2'
+        izabrano_kolo = kola[0]
+        utakmice = Utakmica.objects.all().filter(kolo=int(izabrano_kolo))
 
-    return render(request, 'fudbal/deligiranje_sudija.html', {'kola': kola,
-                                                              'broj_kola': broj_kola_str})
+    return render(request, 'fudbal/deligiranje_sudija.html', {'utakmice': utakmice,
+                                                              'broj_kola': izabrano_kolo,
+                                                              'kola': kola})
 
 
 def lista_sudija(request):
