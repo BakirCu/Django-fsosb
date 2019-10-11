@@ -6,15 +6,14 @@
 <div class="container mt-5">
     <h6>Sezona {{sezona}}</h6>
     <div id="accordion">
-        {% for kolo in kola %}
-        {% for broj_kola, utakmice in kolo.items %}
+        {% for utakmice in kola %}
         <div class="card">
             <div class="card-header">
-                <a class='card-link' data-toggle="collapse" href="#b{{broj_kola}}">
-                    {{broj_kola}}.kolo
+                <a class='card-link' data-toggle="collapse" href="#b{{utakmice.0.kolo}}">
+                    {{utakmice.0.kolo}}.kolo
                 </a>
             </div>
-            <div id="b{{broj_kola}}" class="{% if broj_kola ==  kola|length  %}
+            <div id="b{{utakmice.0.kolo}}" class="{% if utakmice.0.kolo ==  kola|length  %}
             collapse show {% else %} collapse {% endif %}" data-parent="#accordion">
                 <div class="card-body">
                     <div class='container'>
@@ -32,7 +31,7 @@
                                     <td>{{utakmica.gost_gol}} </td>
                                     <td>{{utakmica.gost}}</td>
                                 </tr>
-                                {% endfor %}
+                                {%endfor%}
                             </tbody>
                         </table>
                     </div>
@@ -40,7 +39,6 @@
             </div>
         </div>
 
-        {% endfor %}
         {% endfor %}
     </div>
 </div>

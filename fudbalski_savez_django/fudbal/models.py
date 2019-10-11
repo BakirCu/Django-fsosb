@@ -5,32 +5,32 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Delegat(models.Model):
-    ime_delegata = models.CharField(max_length=20)
-    prezime_delegata = models.CharField(max_length=20)
+    ime = models.CharField(max_length=20)
+    prezime = models.CharField(max_length=20)
 
     def __str__(self):
-        return '{} {}'.format(self.ime_delegata, self.prezime_delegata)
+        return '{} {}'.format(self.ime, self.prezime)
 
     class Meta:
         verbose_name_plural = "Delegati"
 
 
 class Sudija(models.Model):
-    ime_sudije = models.CharField(max_length=20)
-    prezime_sudije = models.CharField(max_length=20)
+    ime = models.CharField(max_length=20)
+    prezime = models.CharField(max_length=20)
 
     def __str__(self):
-        return '{} {}'.format(self.ime_sudije, self.prezime_sudije)
+        return '{} {}'.format(self.ime, self.prezime)
 
     class Meta:
         verbose_name_plural = "Sudije"
 
 
 class Tim(models.Model):
-    ime_tima = models.CharField(max_length=30)
+    ime = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.ime_tima
+        return self.ime
 
     class Meta:
         verbose_name_plural = "Timovi"
