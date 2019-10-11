@@ -51,15 +51,12 @@ def deligiranje_sudija(request):
     kola = []
     for kolo in kola_poslednje_sezone:
         kola.append(kolo.get('kolo'))
-    print(kola)
     if request.GET:
         izabrano_kolo = request.GET.get('dropdown')
-        utakmice = Utakmica.objects.all().filter(
-            kolo=int(izabrano_kolo), sezona=poslednja_sezona)
     else:
         izabrano_kolo = kola[0]
-        utakmice = Utakmica.objects.all().filter(kolo=int(izabrano_kolo))
-
+    utakmice = Utakmica.objects.all().filter(
+        kolo=int(izabrano_kolo), sezona=poslednja_sezona)
     return render(request, 'fudbal/deligiranje_sudija.html', {'utakmice': utakmice,
                                                               'broj_kola': izabrano_kolo,
                                                               'kola': kola})
