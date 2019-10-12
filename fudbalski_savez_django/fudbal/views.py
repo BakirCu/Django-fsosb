@@ -21,12 +21,12 @@ def propisi(request):
 
 def liga_rezultati(request):
     poslednja_sezona = Sezona.poslednja_sezona()
-    sva_kola_sezone = Utakmica.objects.filter(
+    kola_poslednje_sezone = Utakmica.objects.filter(
         sezona=poslednja_sezona).values('kolo').distinct().order_by('-kolo')
-    kola = dohvati_kola(poslednja_sezona, sva_kola_sezone)
+    utakmice_po_kolima = dohvati_kola(poslednja_sezona, kola_poslednje_sezone)
     trenutna_sezona = '{}/{}'.format(poslednja_sezona,
                                      poslednja_sezona + 1)
-    return render(request, 'fudbal/liga_rezultati.html', {'kola': kola,
+    return render(request, 'fudbal/liga_rezultati.html', {'utakmice_po_kolima': utakmice_po_kolima,
                                                           'sezona': trenutna_sezona, })
 
 
