@@ -32,9 +32,9 @@ def is_valid(some_txt):
     index = 0
     final_list = []
     while index < len(some_txt):
-        while index < len(some_txt) and some_txt[index].isspace():
+        if some_txt[index].isspace():
             index += 1
-        while index < len(some_txt) and some_txt[index].isalpha():
+        elif index < len(some_txt) and some_txt[index].isalpha():
             if some_txt[index].isupper():
                 final_list.append(some_txt[index])
                 index += 1
@@ -42,12 +42,13 @@ def is_valid(some_txt):
                 final_list.append(temp_str)
             else:
                 print('Prvo slovo mora da bude veliko')
-
+        else:
+            print('Za naziv mozes da koristis samo alfabet')
     return ''.join(final_list)
 
 
 def main():
-    test_str = '  By   Br   Knn    '
+    test_str = '  By   br   Knn    '
     valid = is_valid(test_str)
     print(valid)
 
