@@ -24,7 +24,7 @@ def after_first_ch(some_txt, index):
             print('posle velikog slova ide malo slovo')
     while index < len(some_txt) and some_txt[index].isspace():
         index += 1
-    lower_ch.append(' ')
+    lower_ch.append(some_txt[index-1])
     return ''.join(lower_ch), index
 
 
@@ -48,7 +48,7 @@ def is_valid(some_txt):
 
 
 def main():
-    test_str = '  By   br   Knn    '
+    test_str = '  By   Br   Knn    '
     valid = is_valid(test_str)
     print(valid)
 
