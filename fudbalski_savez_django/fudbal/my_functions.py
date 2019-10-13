@@ -20,6 +20,8 @@ def after_first_ch(some_txt, index):
             index += 1
         elif some_txt[index].isspace():
             break
+        elif not some_txt[index].isalpha():
+            print('korsti samo alfabet')
         else:
             print('posle velikog slova ide malo slovo "Koristi samo alfabet"')
     while index < len(some_txt) and some_txt[index].isspace():
@@ -48,7 +50,7 @@ def is_valid(some_txt):
 
 
 def main():
-    test_str = '  By   Br.   Knn    '
+    test_str = 'Hyykr   sKnn    '
     valid = is_valid(test_str)
     print(valid)
 
