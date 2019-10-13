@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from .my_validators import check_validation_of_txt
 
 
 class Delegat(models.Model):
@@ -10,6 +11,10 @@ class Delegat(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.ime, self.prezime)
+
+    def clean(self):
+        check_validation_of_txt(self.ime)
+        check_validation_of_txt(self.prezime)
 
     class Meta:
         verbose_name_plural = "Delegati"
@@ -22,6 +27,10 @@ class Sudija(models.Model):
     def __str__(self):
         return '{} {}'.format(self.ime, self.prezime)
 
+    def clean(self):
+        check_validation_of_txt(self.ime)
+        check_validation_of_txt(self.prezime)
+
     class Meta:
         verbose_name_plural = "Sudije"
 
@@ -31,6 +40,9 @@ class Tim(models.Model):
 
     def __str__(self):
         return self.ime
+
+    def clean(self):
+        check_validation_of_txt(self.ime)
 
     class Meta:
         verbose_name_plural = "Timovi"
@@ -71,6 +83,7 @@ class Utakmica(models.Model):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
 
     def clean(self):
+
         if self.prvi_pomocnik == self.drugi_pomocnik:
             raise ValidationError(
                 _('Prvi i drugi pomocnik moraju biti razlicite osobe'))
