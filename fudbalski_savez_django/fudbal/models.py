@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from .my_validators import check_validation_of_txt
+from .my_validators import check_first_upper
 
 
 class Delegat(models.Model):
@@ -13,8 +13,8 @@ class Delegat(models.Model):
         return '{} {}'.format(self.ime, self.prezime)
 
     def clean(self):
-        check_validation_of_txt(self.ime)
-        check_validation_of_txt(self.prezime)
+        check_first_upper(self.ime)
+        check_first_upper(self.prezime)
 
     class Meta:
         verbose_name_plural = "Delegati"
@@ -28,8 +28,8 @@ class Sudija(models.Model):
         return '{} {}'.format(self.ime, self.prezime)
 
     def clean(self):
-        check_validation_of_txt(self.ime)
-        check_validation_of_txt(self.prezime)
+        check_first_upper(self.ime)
+        check_first_upper(self.prezime)
 
     class Meta:
         verbose_name_plural = "Sudije"
@@ -42,7 +42,7 @@ class Tim(models.Model):
         return self.ime
 
     def clean(self):
-        check_validation_of_txt(self.ime)
+        check_first_upper(self.ime)
 
     class Meta:
         verbose_name_plural = "Timovi"

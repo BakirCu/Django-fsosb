@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 
-def after_first_ch(some_txt, index):
+def check_lower_ch(some_txt, index):
     lower_ch = []
     while index < len(some_txt):
         if some_txt[index].islower():
@@ -23,7 +23,7 @@ def after_first_ch(some_txt, index):
     return ''.join(lower_ch), index
 
 
-def check_validation_of_txt(some_txt):
+def check_first_upper(some_txt):
     index = 0
     final_list = []
     while index < len(some_txt):
@@ -33,7 +33,7 @@ def check_validation_of_txt(some_txt):
             if some_txt[index].isupper():
                 final_list.append(some_txt[index])
                 index += 1
-                temp_str, index = after_first_ch(some_txt, index)
+                temp_str, index = check_lower_ch(some_txt, index)
                 final_list.append(temp_str)
             else:
                 raise ValidationError(
