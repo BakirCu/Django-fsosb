@@ -48,18 +48,11 @@ def deligiranje_sudija(request):
     poslednja_sezona = Sezona.poslednja_sezona()
     kola_poslednje_sezone = Utakmica.objects.filter(
         sezona=poslednja_sezona).values('kolo').distinct().order_by('-kolo')
-    kola = []
-    for kolo in kola_poslednje_sezone:
-        kola.append(kolo.get('kolo'))
-    if request.GET:
-        izabrano_kolo = request.GET.get('dropdown')
-    else:
-        izabrano_kolo = kola[0]
-    utakmice = Utakmica.objects.all().filter(
-        kolo=int(izabrano_kolo), sezona=poslednja_sezona)
-    return render(request, 'fudbal/deligiranje_sudija.html', {'utakmice': utakmice,
-                                                              'broj_kola': izabrano_kolo,
-                                                              'kola': kola})
+    utakmice_po_kolima = dohvati_kola(poslednja_sezona, kola_poslednje_sezone)
+    trenutna_sezona = '{}/{}'.format(poslednja_sezona,
+                                     poslednja_sezona + 1)
+    return render(request, 'fudbal/deligiranje_sudija.html', {'utakmice_po_kolima': utakmice_po_kolima,
+                                                              'sezona': trenutna_sezona, })
 
 
 def lista_sudija(request):

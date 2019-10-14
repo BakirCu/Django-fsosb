@@ -3,51 +3,49 @@
 {%load static%}
 <br>
 <img src="{% static 'fudbal/images/deligiranjesudija.jpg'%}" class="img-fluid mt-5 md-5">
-<br>
-<div class="container">
-    <div class='row'>
-        <form action="#">
-            {% csrf_token %}
-            <div class="form-group">
-                <select name="dropdown" class="custom-select mb-3" onchange="this.form.submit()">
-                    <option disabled selected>Izaberite kolo</option>
-                    {% for kolo in kola%}
-                    <option value="{{kolo}}">{{kolo}}.kolo</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </form>
-        <br>
-    </div>
-    <p>{{broj_kola}}.kolo</p>
+<div class="container mt-5">
+    <h6>Sezona {{sezona}}</h6>
     <div id="accordion">
         <div class='card'>
             <div class="card-header">
-                <div class='row'>
-                    <div class='col-3'>Utakmica</div>
-                    <div class='col-3'>Datum</div>
-                    <div class='col-3'>Vreme</div>
-                    <div class='col-3'>Mesto</div>
-                </div>
+                Broj kola
             </div>
         </div>
-        {% for utakmica in utakmice %}
+        {% for utakmice in utakmice_po_kolima %}
         <div class="card-header">
-            <a class="card-link" data-toggle="collapse" href="#prvo{{utakmica.id}}">
-                <div class='row'>
-                    <div class='col-3'>{{ utakmica.domacin }}-{{ utakmica.gost }}</div>
-                    <div class='col-3'>{{utakmica.vreme_odigravanja|date:"d.m.Y"}}</div>
-                    <div class='col-3'>{{utakmica.vreme_odigravanja|date:"f"}}</div>
-                    <div class='col-3'>{{utakmica.mesto_odigravanja}}</div>
-                </div>
+            <a class='card-link' data-toggle="collapse" href="#b{{utakmice.0.kolo}}">
+                {{utakmice.0.kolo}}.kolo
             </a>
         </div>
-        <div id="prvo{{utakmica.id}}" class="collapse" data-parent="#accordion">
+        <div id="b{{utakmice.0.kolo}}" class="{% if utakmice.0.kolo ==  utakmice_po_kolima|length  %}
+            collapse show {% else %} collapse {% endif %}" data-parent="#accordion">
             <div class="card-body">
-                <p>Glavni sudija:<b>{{ utakmica.glavni_sudija }}</b></p>
-                <p>Prvi pomoćnik:<b>{{ utakmica.prvi_pomocnik }}</b></p>
-                <p>Drugi pomoćnik:<b>{{ utakmica.drugi_pomocnik }}</b></p>
-                <p>Delegat:<b>{{ utakmica.delegat }}</b></p>
+                <div class='container'>
+                    <table class="table table-sm text-center">
+                        <thead>
+                            <tr>
+                                <th>Utakmica</th>
+                                <th>Datum</th>
+                                <th>Glavni sudija</th>
+                                <th>Prvi pomocnik</th>
+                                <th>Drugi pomocnik</th>
+                                <th>Delegat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for utakmica in utakmice %}
+                            <tr>
+                                <td>{{utakmica.domacin}}-{{utakmica.gost}}</td>
+                                <td>{{utakmica.vreme_odigravanja|date:"d.m.Y"}}</td>
+                                <td>{{utakmica.glavni_sudija}}</td>
+                                <td>{{utakmica.prvi_pomocnik}}</td>
+                                <td>{{utakmica.drugi_pomocnik}}</td>
+                                <td>{{utakmica.delegat}}</td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         {% endfor %}

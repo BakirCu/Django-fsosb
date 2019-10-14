@@ -22,8 +22,16 @@
             collapse show {% else %} collapse {% endif %}" data-parent="#accordion">
             <div class="card-body">
                 <div class='container'>
-                    <table class="table table-sm">
+                    <table class="table table-sm text-center">
                         <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Mesto</th>
+                                <th>Domaćin</th>
+                                <th>Domaćin golovi</th>
+                                <th>Gost golovi</th>
+                                <th>Gost</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {% for utakmica in utakmice %}
@@ -32,7 +40,6 @@
                                 <td>{{utakmica.mesto_odigravanja}} </td>
                                 <td>{{utakmica.domacin}} </td>
                                 <td> {{utakmica.domacin_gol}}</td>
-                                <td>:</td>
                                 <td>{{utakmica.gost_gol}} </td>
                                 <td>{{utakmica.gost}}</td>
                             </tr>
