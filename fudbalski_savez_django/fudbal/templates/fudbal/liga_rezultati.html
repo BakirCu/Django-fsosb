@@ -1,55 +1,28 @@
-{% extends "fudbal/base.html" %}
-{% block content %}
-{%load static%}
-<br>
-<img src="{% static 'fudbal/images/liga.jpg'%}" class="img-fluid mt-5 md-5">
-<div class="container mt-5">
-    <h6>Sezona {{sezona}}</h6>
-
-    <div id="accordion">
-        <div class='card'>
-            <div class="card-header">
-                Broj kola
-            </div>
-        </div>
-        {% for utakmice in utakmice_po_kolima %}
-        <div class="card-header">
-            <a class='card-link' data-toggle="collapse" href="#b{{utakmice.0.kolo}}">
-                {{utakmice.0.kolo}}.kolo
-            </a>
-        </div>
-        <div id="b{{utakmice.0.kolo}}" class="{% if utakmice.0.kolo ==  utakmice_po_kolima|length  %}
-            collapse show {% else %} collapse {% endif %}" data-parent="#accordion">
-            <div class="card-body">
-                <div class='container'>
-                    <table class="table table-sm text-center">
-                        <thead>
-                            <tr>
-                                <th>Datum</th>
-                                <th>Mesto</th>
-                                <th>Domaćin</th>
-                                <th>Domaćin golovi</th>
-                                <th>Gost golovi</th>
-                                <th>Gost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for utakmica in utakmice %}
-                            <tr>
-                                <td>{{utakmica.vreme_odigravanja|date:"d.m.Y"}} </td>
-                                <td>{{utakmica.mesto_odigravanja}} </td>
-                                <td>{{utakmica.domacin}} </td>
-                                <td> {{utakmica.domacin_gol}}</td>
-                                <td>{{utakmica.gost_gol}} </td>
-                                <td>{{utakmica.gost}}</td>
-                            </tr>
-                            {%endfor%}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+{% extends "fudbal/liga_kup_deligiranje.html" %}
+{% block table %}
+<table class="table table-sm text-center">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Mesto</th>
+            <th>Domaćin</th>
+            <th>Domaćin golovi</th>
+            <th>Gost golovi</th>
+            <th>Gost</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for utakmica in utakmice %}
+        <tr>
+            <td>{{utakmica.vreme_odigravanja|date:"d.m.Y"}} </td>
+            <td>{{utakmica.mesto_odigravanja}} </td>
+            <td>{{utakmica.domacin}} </td>
+            <td> {{utakmica.domacin_gol}}</td>
+            <td>{{utakmica.gost_gol}} </td>
+            <td>{{utakmica.gost}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
 {% endblock %}
+</div>
