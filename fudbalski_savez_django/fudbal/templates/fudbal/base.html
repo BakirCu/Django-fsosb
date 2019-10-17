@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div class="container-fluid  bg-blue">
+    <div class="container">
         <!-- Navigation bar-->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-blue ">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
             <a class="navbar-brand" href="{% url 'pocetna_strana'%}">
                 <img src="{% static 'fudbal/images/logo.jpg'%}" alt="Logo" class="img-thumbnail" alt="Logo" width="150"
                     height="150">
@@ -30,21 +30,20 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             SAVEZ
                         </a>
-                        <div class="dropdown-menu bg-blue border border-0">
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'o_savezu' %}">O
+                        <div class="dropdown-menu border border-0">
+                            <a class="dropdown-item" href="{% url 'o_savezu' %}">O
                                 Savezu</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white"
-                                href="{% url 'rukovodstvo' %}">Rukovodstvo</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'propisi'%}">Propisi</a>
+                            <a class="dropdown-item" href="{% url 'rukovodstvo' %}">Rukovodstvo</a>
+                            <a class="dropdown-item" href="{% url 'propisi'%}">Propisi</a>
                         </div>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             OPŠTINSKA FUDBALSKA LIGA
                         </a>
-                        <div class="dropdown-menu bg-blue border border-0 ">
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'liga_rezultati' %}">
+                        <div class="dropdown-menu border border-0 ">
+                            <a class="dropdown-item" href="{% url 'liga_rezultati' %}">
                                 Rezultati</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'liga_tabela' %}">
+                            <a class="dropdown-item" href="{% url 'liga_tabela' %}">
                                 Tabela</a>
                         </div>
                     </li>
@@ -52,21 +51,18 @@
                         <a class="nav-link dropdown-toggle" href='#' id='navbardrop' data-toggle="dropdown">
                             KUP
                         </a>
-                        <div class="dropdown-menu bg-blue border border-0 ">
-                            <a class="dropdown-item bg-blue blue-hover text-white"
-                                href="{% url 'kup_rezultati' %}">Rezultati</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white"
-                                href="{% url 'kup_tabela' %}">Tabela</a>
+                        <div class="dropdown-menu border border-0 ">
+                            <a class="dropdown-item" href="{% url 'kup_rezultati' %}">Rezultati</a>
+                            <a class="dropdown-item" href="{% url 'kup_tabela' %}">Tabela</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             SUDIJE
                         </a>
-                        <div class="dropdown-menu bg-blue border border-0">
-                            <a class="dropdown-item bg-blue blue-hover text-white"
-                                href="{% url 'deligiranje_sudija' %}">Deligiranje sudija</a>
-                            <a class="dropdown-item bg-blue blue-hover text-white" href="{% url 'lista_sudija' %}">Lista
+                        <div class="dropdown-menu border border-0">
+                            <a class="dropdown-item" href="{% url 'delegiranje_sudija' %}">Delegiranje sudija</a>
+                            <a class="dropdown-item" href="{% url 'lista_sudija' %}">Lista
                                 sudija
                             </a>
                         </div>
@@ -83,7 +79,7 @@
     </div>
     {% block content %}
     {% endblock %}
-    <div class="jumbotron text-center bg-blue mt-5">
+    <div class="jumbotron text-center mt-5">
         <p>INFORMACIJE</p>
     </div>
 </body>

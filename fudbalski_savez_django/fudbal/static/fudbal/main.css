@@ -1,21 +1,9 @@
-
-/* backgraung color set more blue  */
-.bg-blue {
-    background-color: rgb(13, 16, 179);
-}
-.blue-hover:hover{
-    background-color: rgb(0, 71, 179);
-    
-}
-
 marquee {   
     position: relative;
     left: 10%;
     width: 80%;
     height: 20px;
-    background: #DC3545;
 }
-
 
  /* image responsive */
 .carousel-inner img {

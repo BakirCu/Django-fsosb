@@ -86,16 +86,16 @@ class Utakmica(models.Model):
 
         if self.prvi_pomocnik == self.drugi_pomocnik:
             raise ValidationError(
-                _('Prvi i drugi pomocnik moraju biti razlicite osobe'))
+                _('Prvi i drugi pomocnik moraju biti razliciti'))
         if self.glavni_sudija == self.drugi_pomocnik:
             raise ValidationError(
-                _('Glavni sudija i drugi pomocnik moraju biti razlicite osobe'))
+                _('Glavni sudija i drugi pomocnik moraju biti razliciti'))
         if self.glavni_sudija == self.prvi_pomocnik:
             raise ValidationError(
-                _('Glavni sudija i prvi pomocnik moraju biti razlicite osobe'))
+                _('Glavni sudija i prvi pomocnik moraju biti razliciti'))
         if self.domacin == self.gost:
             raise ValidationError(
-                _('Domacin i Gost moraju biti razliciti timovi'))
+                _('Domacin i Gost moraju biti razliciti'))
 
     class Meta:
         verbose_name_plural = "Utakmice"

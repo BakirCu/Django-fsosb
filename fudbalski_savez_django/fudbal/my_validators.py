@@ -13,10 +13,10 @@ def check_lower_ch(some_txt, index):
             break
         elif not some_txt[index].isalpha():
             raise ValidationError(
-                _('Za naziv imena i prezimena mozes da koristis samo slova'))
+                _('Smeju se koristiti samo slova'))
         else:
             raise ValidationError(
-                _('Posle velikog slova ide malo slovo'))
+                _('Samo pocetno slovo moze biti veliko'))
     while index < len(some_txt) and some_txt[index].isspace():
         index += 1
     lower_ch.append(some_txt[index-1])
@@ -37,8 +37,8 @@ def check_first_upper(some_txt):
                 final_list.append(temp_str)
             else:
                 raise ValidationError(
-                    _('Prvo slovo reči mora da bude veliko'))
+                    _('Prvo slovo mora biti veliko'))
         else:
             raise ValidationError(
-                _('Za naziv imena i prezimena mozes da koristis samo slova'))
+                _('Smeju se koristiti samo slova'))
     return ''.join(final_list)
