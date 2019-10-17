@@ -12,7 +12,5 @@ urlpatterns = [
     path('kup-tabela/', views.kup_tabela, name='kup_tabela'),
     path('delegiranje/', views.delegiranje_sudija, name='delegiranje_sudija'),
     path('lista/', views.lista_sudija, name='lista_sudija'),
-    path('vesti/', views.vesti, name='vesti'),
-    path('gallery/', views.gallery, name="gallery"),
 
 ]

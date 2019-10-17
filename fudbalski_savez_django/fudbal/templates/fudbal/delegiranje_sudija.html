@@ -1,33 +1,35 @@
 {% extends "fudbal/prikaz_po_kolima_base.html" %}
 {% block table %}
 
-<table class="table text-center table-bordered">
-    <colgroup>
-        <col class="bg-light">
-        </col>
-    </colgroup>
-    <thead class="thead-light">
-        <tr>
-            <th>Utakmica</th>
-            <th>Datum</th>
-            <th>Glavni sudija</th>
-            <th>Prvi pomoćnik</th>
-            <th>Drugi pomoćnik</th>
-            <th>Delegat</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for utakmica in utakmice %}
-        <tr>
-            <td>{{utakmica.domacin}}-{{utakmica.gost}}</td>
-            <td>{{utakmica.vreme_odigravanja|date:"d.m.Y."}}</td>
-            <td>{{utakmica.glavni_sudija}}</td>
-            <td>{{utakmica.prvi_pomocnik}}</td>
-            <td>{{utakmica.drugi_pomocnik}}</td>
-            <td>{{utakmica.delegat}}</td>
-        </tr>
-        {%endfor%}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table text-center table-bordered">
+        <colgroup>
+            <col class="bg-light">
+            </col>
+        </colgroup>
+        <thead class="thead-light">
+            <tr>
+                <th>Utakmica</th>
+                <th>Datum</th>
+                <th>Glavni sudija</th>
+                <th>Prvi pomoćnik</th>
+                <th>Drugi pomoćnik</th>
+                <th>Delegat</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for utakmica in utakmice %}
+            <tr>
+                <td>{{utakmica.domacin}}-{{utakmica.gost}}</td>
+                <td>{{utakmica.vreme_odigravanja|date:"d.m.Y."}}</td>
+                <td>{{utakmica.glavni_sudija}}</td>
+                <td>{{utakmica.prvi_pomocnik}}</td>
+                <td>{{utakmica.drugi_pomocnik}}</td>
+                <td>{{utakmica.delegat}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
