@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from .liga_rezultati import Liga, Sezona
 from .my_functions import dohvati_kola
+from vesti.models import Vesti
 
 
 def home(request):
-    return render(request, "fudbal/home.html")
+    vesti = Vesti.objects.all()
+    return render(request, "fudbal/home.html", {"vesti": vesti})
 
 
 def savez(request):

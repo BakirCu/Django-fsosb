@@ -2,25 +2,19 @@
 {% block content %}
 {% load static %}
 
+
 <img src="{% static 'fudbal/images/vesti.jpg'%}" class="img-fluid mt-5 md-5">
 <div class="container mt-5">
     <div class="row">
+
+        {% for vest in vesti %}
         <div class="col-lg-12 text-center">
-            <h2>Prva objava</h2>
-            <img src="https://www.w3schools.com/bootstrap4/paris.jpg" class="mx-auto d-block" style="width:50%">
-            <p>objavljeno: 21.03.2019.</p>
+            <h2>{{vest.naslov}}</h2>
+            <img src="{{vest.slika.url}}" class="mx-auto d-block" style="width:50%">
+            <p>{{vest.vreme_posta|date:"d.m.Y."}}</p>
         </div>
-        <div class="col-lg-12 text-center">
-            <h2>Druga objava</h2>
-            <img src="https://www.w3schools.com/bootstrap4/paris.jpg" class="mx-auto d-block" style="width:50%">
-            <p>objavljeno: 21.03.2019.</p>
-        </div>
-        <div class="col-lg-12 text-center">
-            <h2>Treca objava</h2>
-            <img src="https://www.w3schools.com/bootstrap4/paris.jpg" class="mx-auto d-block" style="width:50%">
-            <p>objavljeno: 21.03.2019.</p>
-        </div>
-        <br>
+        {% endfor%}
+
     </div>
 </div>
 {%endblock%}
