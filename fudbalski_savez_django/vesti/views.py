@@ -1,12 +1,15 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import Vesti
 
 
-def vesti(request):
-    vesti = Vesti.objects.all()
-    return render(request, "vesti/vesti.html",  {'vesti': vesti})
+class VestiListView(ListView):
+    model = Vesti
+    context_object_name = "vesti"
 
 
-def gallery(request):
+class VestDetailView(DetailView):
+    model = Vesti
 
-    return render(request, "vesti/gallery.html")
+
+class GalleryTemplateView(TemplateView):
+    template_name = "vesti/gallery.html"

@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import VestiListView, VestDetailView, GalleryTemplateView
+
 
 urlpatterns = [
-    path('vesti/', views.vesti, name='vesti'),
-    path('gallery/', views.gallery, name="gallery"),
-
+    path('vesti/', VestiListView.as_view(), name='vesti'),
+    path('vest/<int:pk>/', VestDetailView.as_view(), name="vest"),
+    path('gallery/', GalleryTemplateView.as_view(), name="gallery"),
 ]

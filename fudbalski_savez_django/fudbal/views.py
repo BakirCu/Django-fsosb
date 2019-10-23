@@ -5,7 +5,7 @@ from vesti.models import Vesti
 
 
 def home(request):
-    vesti = Vesti.objects.all()
+    vesti = Vesti.objects.all()[:3]
     return render(request, "fudbal/home.html", {"vesti": vesti})
 
 
