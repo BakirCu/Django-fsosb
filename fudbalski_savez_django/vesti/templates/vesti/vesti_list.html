@@ -15,7 +15,7 @@
             <a href="{% url 'vest' vest.id %}">
                 <h2>{{vest.naslov}}</h2>
             </a>
-            <img src="{{vest.slika.url}}" class="mx-auto d-block" style="width:50%">
+            <img src="{{vest.slika.url}}" class="img-tumbnail" width="400" height="400">
             <p>{{vest.vreme_posta|date:"d.m.Y."}}</p>
         </div>
         {% endfor%}
