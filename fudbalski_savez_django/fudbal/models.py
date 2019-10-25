@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .my_validators import check_first_upper
-from django.core.exceptions import ObjectDoesNotExist
 
 
 class Delegat(models.Model):
@@ -84,22 +83,22 @@ class Utakmica(models.Model):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
 
     def clean(self):
-        try:
-            if self.prvi_pomocnik == self.drugi_pomocnik:
+        def clean(self):
+            if self.prvi_pomocnik_id and self.drugi_pomocnik_id and self.prvi_pomocnik_id == self.drugi_pomocnik_id:
                 raise ValidationError(
                     _('Prvi i drugi pomocnik moraju biti razliciti'))
-            if self.glavni_sudija == self.drugi_pomocnik:
+
+            if self.glavni_sudija_id and self.drugi_pomocnik_id and self.glavni_sudija_id == self.drugi_pomocnik_id:
                 raise ValidationError(
                     _('Glavni sudija i drugi pomocnik moraju biti razliciti'))
-            if self.glavni_sudija == self.prvi_pomocnik:
+
+            if self.glavni_sudija_id and self.prvi_pomocnik_id and self.glavni_sudija_id == self.prvi_pomocnik_id:
                 raise ValidationError(
                     _('Glavni sudija i prvi pomocnik moraju biti razliciti'))
-            if self.domacin == self.gost:
+
+            if self.domacin_id and self.gost_id and self.domacin_id and self.gost_id:
                 raise ValidationError(
                     _('Domacin i Gost moraju biti razliciti'))
-        except ObjectDoesNotExist:
-            raise ValidationError(
-                _('Popuni sva polja'))
 
     class Meta:
         verbose_name_plural = "Utakmice"
