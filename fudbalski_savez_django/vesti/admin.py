@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vesti
+from .models import Vesti, Galerija
 
 
-admin.site.register([Vesti])
+admin.site.register([Vesti, Galerija])
