@@ -68,8 +68,10 @@
 
         {% for vest in vesti %}
         <div class="col-md-4 text-center">
-            <h2>{{vest.naslov}}</h2>
-            <img src="{{vest.slika.url}}" class="mx-auto d-block" style="width:50%">
+            <a href="{% url 'vest' vest.id %}">
+                <h2>{{vest.naslov}}</h2>
+                <img src="{{vest.slika.url}}" class="mx-auto d-block" style="width:50%">
+            </a>
             <p>{{vest.vreme_posta|date:"d.m.Y."}}</p>
         </div>
         {% endfor%}
