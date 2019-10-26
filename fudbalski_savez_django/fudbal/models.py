@@ -83,22 +83,22 @@ class Utakmica(models.Model):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
 
     def clean(self):
-        def clean(self):
-            if self.prvi_pomocnik_id and self.drugi_pomocnik_id and self.prvi_pomocnik_id == self.drugi_pomocnik_id:
-                raise ValidationError(
-                    _('Prvi i drugi pomocnik moraju biti razliciti'))
 
-            if self.glavni_sudija_id and self.drugi_pomocnik_id and self.glavni_sudija_id == self.drugi_pomocnik_id:
-                raise ValidationError(
-                    _('Glavni sudija i drugi pomocnik moraju biti razliciti'))
+        if self.prvi_pomocnik_id and self.drugi_pomocnik_id and self.prvi_pomocnik_id == self.drugi_pomocnik_id:
+            raise ValidationError(
+                _('Prvi i drugi pomocnik moraju biti razliciti'))
 
-            if self.glavni_sudija_id and self.prvi_pomocnik_id and self.glavni_sudija_id == self.prvi_pomocnik_id:
-                raise ValidationError(
-                    _('Glavni sudija i prvi pomocnik moraju biti razliciti'))
+        if self.glavni_sudija_id and self.drugi_pomocnik_id and self.glavni_sudija_id == self.drugi_pomocnik_id:
+            raise ValidationError(
+                _('Glavni sudija i drugi pomocnik moraju biti razliciti'))
 
-            if self.domacin_id and self.gost_id and self.domacin_id and self.gost_id:
-                raise ValidationError(
-                    _('Domacin i Gost moraju biti razliciti'))
+        if self.glavni_sudija_id and self.prvi_pomocnik_id and self.glavni_sudija_id == self.prvi_pomocnik_id:
+            raise ValidationError(
+                _('Glavni sudija i prvi pomocnik moraju biti razliciti'))
+
+        if self.domacin_id and self.gost_id and self.domacin_id == self.gost_id:
+            raise ValidationError(
+                _('Domacin i Gost moraju biti razliciti'))
 
     class Meta:
         verbose_name_plural = "Utakmice"
