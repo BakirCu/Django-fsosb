@@ -1,6 +1,7 @@
 {% extends "fudbal/base.html" %}
 {% block content %}
 {% load static %}
+{% load embed_video_tags %}
 
 <div class="image-text-container">
     <img src="{% static 'fudbal/images/vesti.jpg'%}" class="img-fluid mt-5 md-5">
@@ -12,11 +13,9 @@
     <img src="{{object.slika.url}}" class="mx-auto d-block" style="width:50%">
     <h6>{{object.sadrzaj}}</h6>
     {% if object.video %}
-    <video width="500" height="300" controls>
-        <source src="{{object.video.url}}" type="video/mp4">
-        <source src="{{object.video.url}}" type="video/ogg">
-        Tvoj pretrazivac ne podrzava ovaj format
-    </video>
+    <iframe width="560" height="315" src="{{object.video}}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
     {% else %}
     {% endif %}
     <p>{{object.vreme_posta|date:"d.m.Y."}}</p>

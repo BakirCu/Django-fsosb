@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import FileExtensionValidator
 from django.utils import timezone
 
 
@@ -8,8 +7,7 @@ class Vesti(models.Model):
     sadrzaj = models.TextField()
     vreme_posta = models.DateTimeField(default=timezone.now)
     slika = models.ImageField(default='default.jpg', upload_to='vesti_img')
-    video = models.FileField(null=True, blank=True, validators=[
-                             FileExtensionValidator(['mp4', 'mkv', 'flv', 'avi'])], upload_to='vesti_video')
+    video = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.naslov}"
