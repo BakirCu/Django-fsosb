@@ -19,7 +19,7 @@ class Vesti(models.Model):
         ordering = ['-vreme_posta']
 
 
-class Galerija(models.Model):
+class Slika(models.Model):
     naslov = models.CharField(max_length=100)
     vreme_posta = models.DateTimeField(default=timezone.now)
     slika = models.ImageField(default='default.jpg', upload_to='galerija_img')

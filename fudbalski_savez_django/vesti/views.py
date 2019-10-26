@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-from .models import Vesti, Galerija
+from .models import Vesti, Slika
 
 
 class VestiListView(ListView):
@@ -13,6 +13,6 @@ class VestDetailView(DetailView):
 
 
 class GalleryListView(ListView):
-    model = Galerija
+    model = Slika
     context_object_name = "slike"
     paginate_by = 12
