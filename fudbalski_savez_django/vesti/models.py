@@ -13,9 +13,7 @@ class Vesti(models.Model):
         return f"{self.naslov}"
 
     def save(self, *args, **kwargs):
-
         self.video = 'https://www.youtube.com/embed/' + str(self.video[-11:])
-
         return super(Vesti, self).save(*args, **kwargs)
 
     class Meta:
