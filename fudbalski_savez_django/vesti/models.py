@@ -12,6 +12,12 @@ class Vesti(models.Model):
     def __str__(self):
         return f"{self.naslov}"
 
+    def save(self, *args, **kwargs):
+
+        self.video = 'https://www.youtube.com/embed/' + str(self.video[-11:])
+
+        return super(Vesti, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = 'Vesti'
         ordering = ['-vreme_posta']
