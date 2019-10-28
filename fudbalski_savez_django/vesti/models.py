@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from PIL import Image
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class Vesti(models.Model):
@@ -11,6 +14,18 @@ class Vesti(models.Model):
 
     def __str__(self):
         return f"{self.naslov}"
+
+    def clean(self):
+        if self.slika.size > 2e+7:
+            raise ValidationError(
+                _('Slika  ne moze biti veca od 20 MB'))
+
+    def save(self):
+        super().save()
+        img = Image.open(self.slika.path)
+        if img.height > 533 or img.width > 800:
+            img.thumbnail((533, 800))
+            img.save(self.slika.path)
 
     class Meta:
         verbose_name_plural = 'Vesti'
