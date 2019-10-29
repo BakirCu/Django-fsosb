@@ -12,7 +12,7 @@
     <h2>{{object.naslov}}</h2>
     <img src="{{ object.slika.url }}" class="mx-auto d-block" style="width:50%">
     <h6>{{object.sadrzaj}}</h6>
-    {% if object.video %}
+    {% if object.video|length > 30 %}
     <iframe width="560" height="315" src="{{object.video}}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     {% else %}

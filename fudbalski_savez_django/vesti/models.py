@@ -1,6 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from .video_id import embed_video
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
 
 
 class Vesti(models.Model):
@@ -8,14 +12,23 @@ class Vesti(models.Model):
     sadrzaj = models.TextField()
     vreme_posta = models.DateTimeField(default=timezone.now)
     slika = models.ImageField(default='default.jpg', upload_to='vesti_img')
-    video = models.CharField(max_length=300, blank=True, null=True)
+    video = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.naslov}"
 
     def save(self, *args, **kwargs):
-        self.video = 'https://www.youtube.com/embed/' + \
-            embed_video(str(self.video))
+        video_id = embed_video(str(self.video))
+        self.video = 'https://www.youtube.com/embed/' + video_id
+
+        # resajzovanje slike
+        output = BytesIO()
+        img_temp = Image.open(self.slika)
+        img_temp_rez = img_temp.resize((1920, 1080))
+        img_temp_rez.save(output, format="JPEG", quality=85)
+        output.seek(0)
+        self.slika = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.slika.name.split(
+            '.')[0], 'image/jpeg', sys.getsizeof(output), None)
         return super(Vesti, self).save(*args, **kwargs)
 
     class Meta:
