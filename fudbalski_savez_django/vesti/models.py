@@ -41,8 +41,5 @@ class Vesti(SlikaVesti):
 class Slika(SlikaVesti):
     slika = models.ImageField(default='default.jpg', upload_to='galerija_img')
 
-    def __str__(self):
-        return f"{self.naslov}"
-
     class Meta:
         verbose_name_plural = 'Slika'
