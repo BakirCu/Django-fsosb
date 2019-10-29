@@ -5,12 +5,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 
-class Vesti(models.Model):
+class SlikaVesti(models.Model):
     naslov = models.CharField(max_length=100)
-    sadrzaj = models.TextField()
     vreme_posta = models.DateTimeField(default=timezone.now)
-    slika = models.ImageField(default='default.jpg', upload_to='vesti_img')
-    video = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):
         return f"{self.naslov}"
@@ -28,13 +25,20 @@ class Vesti(models.Model):
             img.save(self.slika.path)
 
     class Meta:
-        verbose_name_plural = 'Vesti'
+        abstract = True
         ordering = ['-vreme_posta']
 
 
-class Slika(models.Model):
-    naslov = models.CharField(max_length=100)
-    vreme_posta = models.DateTimeField(default=timezone.now)
+class Vesti(SlikaVesti):
+    sadrzaj = models.TextField()
+    slika = models.ImageField(default='default.jpg', upload_to='vesti_img')
+    video = models.CharField(max_length=300, blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Vesti'
+
+
+class Slika(SlikaVesti):
     slika = models.ImageField(default='default.jpg', upload_to='galerija_img')
 
     def __str__(self):
@@ -42,4 +46,3 @@ class Slika(models.Model):
 
     class Meta:
         verbose_name_plural = 'Slika'
-        ordering = ['-vreme_posta']
