@@ -8,7 +8,7 @@
             </col>
             <col span="1" class="bg-light">
             </col>
-            <col span="2">
+            <col width="5">
             </col>
             <col span="1" class="bg-light">
             </col>
@@ -18,8 +18,7 @@
                 <th>Datum</th>
                 <th>Mesto</th>
                 <th>Domaćin</th>
-                <th>Domaćin golovi</th>
-                <th>Gost golovi</th>
+                <th>Golovi</th>
                 <th>Gost</th>
             </tr>
         </thead>
@@ -29,8 +28,7 @@
                 <td>{{utakmica.vreme_odigravanja|date:"d.m.Y."}} </td>
                 <td>{{utakmica.mesto_odigravanja}} </td>
                 <td>{{utakmica.domacin}} </td>
-                <td> {{utakmica.domacin_gol}}</td>
-                <td>{{utakmica.gost_gol}} </td>
+                <td> {{utakmica.domacin_gol}}:{{utakmica.gost_gol}} </td>
                 <td>{{utakmica.gost}}</td>
             </tr>
             {%endfor%}
