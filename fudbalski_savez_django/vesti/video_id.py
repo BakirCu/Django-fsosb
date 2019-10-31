@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 def embed_video(link):
 
     video_id = dict(parse_qsl(urlsplit(link).query))
+
     if video_id:
         return 'https://www.youtube.com/embed/' + video_id['v']
     elif urlsplit(link).netloc == 'youtu.be':

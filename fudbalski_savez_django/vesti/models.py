@@ -18,7 +18,8 @@ class Vesti(models.Model):
         return f"{self.naslov}"
 
     def save(self, *args, **kwargs):
-        self.video = embed_video(str(self.video))
+        if self.video:
+            self.video = embed_video(str(self.video))
 
         # resajzovanje slike
         output = BytesIO()
@@ -31,7 +32,8 @@ class Vesti(models.Model):
         return super(Vesti, self).save(*args, **kwargs)
 
     def clean(self):
-        embed_video(str(self.video))
+        if self.video:
+            embed_video(str(self.video))
 
     class Meta:
         verbose_name_plural = 'Vesti'
