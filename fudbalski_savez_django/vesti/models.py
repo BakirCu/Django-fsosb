@@ -22,13 +22,24 @@ class Vesti(models.Model):
             self.video = embed_video(str(self.video))
 
         # resajzovanje slike
+        height_def = 1920
+        width_def = 1080
         output = BytesIO()
         img_temp = Image.open(self.slika)
-        img_temp_rez = img_temp.resize((1920, 1080))
-        img_temp_rez.save(output, format="JPEG", quality=85)
-        output.seek(0)
-        self.slika = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.slika.name.split(
-            '.')[0], 'image/jpeg', sys.getsizeof(output), None)
+        if img_temp.height > height_def or img_temp.width > height_def:
+            skale_factor_1 = img_temp.height / height_def
+            skale_factor_2 = img_temp.width / width_def
+            if skale_factor_1 > skale_factor_2:
+                new_height = img_temp.height / skale_factor_1
+                new_width = img_temp.width / skale_factor_1
+            else:
+                new_height = img_temp.height / skale_factor_2
+                new_width = img_temp.width / skale_factor_2
+            img_temp_rez = img_temp.resize((int(new_height), int(new_width)))
+            img_temp_rez.save(output, format="JPEG", quality=85)
+            output.seek(0)
+            self.slika = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.slika.name.split(
+                '.')[0], 'image/jpeg', sys.getsizeof(output), None)
         return super(Vesti, self).save(*args, **kwargs)
 
     def clean(self):
