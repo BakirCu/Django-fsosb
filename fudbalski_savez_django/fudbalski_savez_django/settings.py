@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fudbal.apps.FudbalConfig',
     'vesti.apps.VestiConfig',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
