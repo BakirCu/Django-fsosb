@@ -35,7 +35,7 @@ class Vesti(models.Model):
             else:
                 new_height = img_temp.height / skale_factor_2
                 new_width = img_temp.width / skale_factor_2
-            img_temp_rez = img_temp.resize((int(new_height), int(new_width)))
+            img_temp_rez = img_temp.resize((int(new_width), int(new_height)))
             img_temp_rez.save(output, format="JPEG", quality=85)
             output.seek(0)
             self.slika = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.slika.name.split(
