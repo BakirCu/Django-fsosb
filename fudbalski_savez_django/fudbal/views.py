@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .liga_rezultati import Liga, Sezona
 from .my_functions import dohvati_kola
 from vesti.models import Vesti
+from .models import Sudija
 
 
 def home(request):
@@ -58,7 +59,8 @@ def delegiranje_sudija(request):
 
 
 def lista_sudija(request):
-    return render(request, "fudbal/lista_sudija.html")
+    sudije = Sudija.objects.all()
+    return render(request, "fudbal/lista_sudija.html", {"sudije": sudije})
 
 
 def vesti(request):
