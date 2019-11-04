@@ -3,10 +3,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .my_validators import check_first_upper
-from PIL import Image
-from io import BytesIO
-from django.core.files.uploadedfile import InMemoryUploadedFile
-import sys
+from vesti.video_id import resize_image
 
 
 class Delegat(models.Model):
@@ -39,24 +36,7 @@ class Sudija(models.Model):
 
     def save(self, *args, **kwargs):
 
-        height_def = 300
-        width_def = 300
-        output = BytesIO()
-        img_temp = Image.open(self.slika)
-        if img_temp.height > height_def or img_temp.width > height_def:
-            skale_factor_1 = img_temp.height / height_def
-            skale_factor_2 = img_temp.width / width_def
-            if skale_factor_1 > skale_factor_2:
-                new_height = img_temp.height / skale_factor_1
-                new_width = img_temp.width / skale_factor_1
-            else:
-                new_height = img_temp.height / skale_factor_2
-                new_width = img_temp.width / skale_factor_2
-            img_temp_rez = img_temp.resize((int(new_width), int(new_height)))
-            img_temp_rez.save(output, format="JPEG", quality=85)
-            output.seek(0)
-            self.slika = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.slika.name.split(
-                '.')[0], 'image/jpeg', sys.getsizeof(output), None)
+        self.slika = resize_image(self.slika, 300, 300)
         return super(Sudija, self).save(*args, **kwargs)
 
     def clean(self):

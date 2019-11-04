@@ -1,10 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from .video_id import embed_video
-from PIL import Image
-from io import BytesIO
-from django.core.files.uploadedfile import InMemoryUploadedFile
-import sys
+from .video_id import embed_video, resize_image
 
 
 class Vesti(models.Model):
@@ -20,26 +16,7 @@ class Vesti(models.Model):
     def save(self, *args, **kwargs):
         if self.video:
             self.video = embed_video(str(self.video))
-
-        # resajzovanje slike
-        height_def = 1920
-        width_def = 1080
-        output = BytesIO()
-        img_temp = Image.open(self.slika)
-        if img_temp.height > height_def or img_temp.width > height_def:
-            skale_factor_1 = img_temp.height / height_def
-            skale_factor_2 = img_temp.width / width_def
-            if skale_factor_1 > skale_factor_2:
-                new_height = img_temp.height / skale_factor_1
-                new_width = img_temp.width / skale_factor_1
-            else:
-                new_height = img_temp.height / skale_factor_2
-                new_width = img_temp.width / skale_factor_2
-            img_temp_rez = img_temp.resize((int(new_width), int(new_height)))
-            img_temp_rez.save(output, format="JPEG", quality=85)
-            output.seek(0)
-            self.slika = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.slika.name.split(
-                '.')[0], 'image/jpeg', sys.getsizeof(output), None)
+        self.slika = resize_image(self.slika, 1080, 1920)
         return super(Vesti, self).save(*args, **kwargs)
 
     def clean(self):
