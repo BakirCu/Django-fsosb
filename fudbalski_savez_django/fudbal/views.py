@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from .liga_rezultati import Liga, Sezona
 from .my_functions import dohvati_kola
-from vesti.models import Vesti
+from vesti.models import Vest, Slika
 from .models import Sudija
 
 
 def home(request):
-    vesti = Vesti.objects.all()[:3]
-    return render(request, "fudbal/home.html", {"vesti": vesti})
+    vesti = Vest.objects.all()[:3]
+    slika = Slika.objects.first()
+    return render(request, "fudbal/home.html", {"vesti": vesti,
+                                                "slika": slika})
 
 
 def savez(request):

@@ -10,13 +10,16 @@
 
 <div class="col-lg-12 text-center">
     <h2>{{object.naslov}}</h2>
-    <img src="{{ object.slika.url }}" class="mx-auto d-block" style="width:50%">
-    <h6>{{object.sadrzaj}}</h6>
-    {% if object.video|length > 30 %}
-    <iframe width="560" height="315" src="{{object.video}}" frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    {% else %}
+    {% for slika in slike %}
+    {% if object.id == slika.vest_id %}
+    <img src="{{ slika.slika.url }}" class="mx-auto d-block" style="width:50%">
     {% endif %}
+    {% endfor %}
+    <h6>{{object.sadrzaj}}</h6>
+    {% for video in videi %}
+    <iframe width="560" height="315" src="{{video.video}}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% endfor %}
     <p>{{ object.vreme_posta|date:"d.m.Y." }}</p>
 </div>
 
