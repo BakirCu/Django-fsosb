@@ -17,8 +17,10 @@
     {% endfor %}
     <h6>{{object.sadrzaj}}</h6>
     {% for video in videi %}
+    {% if object.id == video.vest_id %}
     <iframe width="560" height="315" src="{{video.video}}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% endif %}
     {% endfor %}
     <p>{{ object.vreme_posta|date:"d.m.Y." }}</p>
 </div>
