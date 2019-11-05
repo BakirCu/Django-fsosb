@@ -12,7 +12,7 @@
 
         {% for slika in slike %}
         {% if not slika.vest_id %}
-        <div class="col-lg-4 text-center">
+        <div class="col-lg-4 text-center mt-5">
             <a href="{{slika.slika.url}}" data-title="{{slika.naslov}}"
                 data-footer="{{slika.vreme_posta|date:'d.m.Y.'}}" data-toggle="lightbox" data-gallery="example-gallery"
                 class="col-sm-4 ">

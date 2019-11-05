@@ -21,7 +21,7 @@
             {% for utakmica in utakmice %}
             <tr>
                 <td>{{utakmica.domacin}}-{{utakmica.gost}}</td>
-                <td>{{utakmica.vreme_odigravanja|date:"d.m.Y."}}</td>
+                <td>{{utakmica.datum_zakazano|date:"d.m.Y."}}</td>
                 <td>{{utakmica.glavni_sudija}}</td>
                 <td>{{utakmica.prvi_pomocnik}}</td>
                 <td>{{utakmica.drugi_pomocnik}}</td>

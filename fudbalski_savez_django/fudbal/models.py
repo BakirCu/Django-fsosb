@@ -54,6 +54,9 @@ class Sezona(models.Model):
     sezona = models.PositiveSmallIntegerField(blank=False)
     tip = models.CharField(max_length=30)
 
+    def __str__(self):
+        return f"{self.sezona}:{self.tip}"
+
     class Meta:
         unique_together = ['sezona', 'tip']
         verbose_name_plural = "Sezone"
@@ -77,7 +80,11 @@ class TimSezona(models.Model):
     sezona = models.ForeignKey(Sezona, on_delete=models.CASCADE)
     aktivan = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.sezona}:{self.tim}:{self.aktivan}"
+
     class Meta:
+        unique_together = ['sezona', 'tim']
         verbose_name_plural = "Timovi u sezoni"
 
 

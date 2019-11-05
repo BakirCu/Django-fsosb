@@ -8,6 +8,6 @@ def dohvati_kola(poslednja_sezona):
     for kolo in kola_poslednje_sezone:
         broj_kola = kolo.get('kolo')
         utakmice_izabranog_kola = Utakmica.objects.all().filter(
-            kolo=int(broj_kola), sezona=poslednja_sezona).order_by('-vreme_odigravanja')
+            kolo=int(broj_kola), sezona=poslednja_sezona).order_by('-datum_zakazano')
         kola.append(utakmice_izabranog_kola)
     return kola
