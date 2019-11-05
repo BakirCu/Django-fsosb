@@ -14,10 +14,7 @@
         <div class="col-lg-4 text-center">
             <a href="{% url 'vest' vest.id %}">
                 <h2>{{vest.naslov}}</h2>
-
-
                 <img src="{{slike.first.slika.url}}" class="img-thumbnail" width="400" height="300" title="Video">
-
                 <p>{{vest.vreme_posta|date:"d.m.Y."}}</p>
         </div>
         {% endfor%}

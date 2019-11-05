@@ -16,6 +16,10 @@ class Delegat(models.Model):
     def __str__(self):
         return '{} {}'.format(self.ime, self.prezime)
 
+    def save(self, *args, **kwargs):
+        self.slika = resize_image(self.slika, 300, 300)
+        return super(Delegat, self).save(*args, **kwargs)
+
     def clean(self):
         check_first_upper(self.ime)
         check_first_upper(self.prezime)
@@ -35,7 +39,6 @@ class Sudija(models.Model):
         return '{} {}'.format(self.ime, self.prezime)
 
     def save(self, *args, **kwargs):
-
         self.slika = resize_image(self.slika, 300, 300)
         return super(Sudija, self).save(*args, **kwargs)
 
@@ -47,8 +50,18 @@ class Sudija(models.Model):
         verbose_name_plural = "Sudije"
 
 
-class Tim(models.Model):
+class Sezona(models.Model):
+    sezona = models.PositiveSmallIntegerField(blank=False)
+    tip = models.CharField(max_length=30)
+
+    class Meta:
+        unique_together = ['sezona', 'tip']
+
+
+class TimoviSokobanja(models.Model):
     ime = models.CharField(max_length=30)
+    ucesce = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='logo_img')
 
     def __str__(self):
         return self.ime
@@ -60,36 +73,39 @@ class Tim(models.Model):
         verbose_name_plural = "Timovi"
 
 
+class TimSezona(models.Model):
+    tim = models.ForeignKey(TimoviSokobanja, on_delete=models.CASCADE)
+    sezona = models.ForeignKey(Sezona, on_delete=models.CASCADE)
+    aktivan = models.BooleanField(default=True)
+
+
+class Kazne(models.Model):
+    tim = models.ForeignKey(TimSezona, on_delete=models.CASCADE)
+    kazneni_bodovi = models.PositiveSmallIntegerField()
+    razlog = models.TextField()
+    datum = models.DateField()
+
+
 class Utakmica(models.Model):
-    sezona = models.PositiveSmallIntegerField(blank=False, default=2019)
-
+    sezona = models.ForeignKey(Sezona, on_delete=models.CASCADE)
     kolo = models.PositiveSmallIntegerField()
-
     domacin = models.ForeignKey(
-        Tim, on_delete=models.CASCADE, related_name='domacin')
-
+        TimoviSokobanja, on_delete=models.CASCADE, related_name='domacin')
     domacin_gol = models.PositiveSmallIntegerField(default=0)
-
     gost = models.ForeignKey(
-        Tim, on_delete=models.CASCADE, related_name='gost')
-
+        TimoviSokobanja, on_delete=models.CASCADE, related_name='gost')
     gost_gol = models.PositiveSmallIntegerField(default=0)
-
     mesto_odigravanja = models.CharField(max_length=100)
-
-    vreme_odigravanja = models.DateTimeField(default=timezone.now)
-
     glavni_sudija = models.ForeignKey(
         Sudija, on_delete=models.DO_NOTHING, related_name='glavni_sudija')
-
     prvi_pomocnik = models.ForeignKey(
         Sudija, on_delete=models.DO_NOTHING, related_name='prvi_pomocnik')
-
     drugi_pomocnik = models.ForeignKey(
         Sudija, on_delete=models.DO_NOTHING, related_name='drug_pomocnik')
-
     delegat = models.ForeignKey(
         Delegat, on_delete=models.DO_NOTHING, related_name='delegat')
+    datum_zakazano = models.DateTimeField(default=timezone.now)
+    datum_odigrano = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
