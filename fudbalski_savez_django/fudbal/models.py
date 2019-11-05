@@ -56,12 +56,11 @@ class Sezona(models.Model):
 
     class Meta:
         unique_together = ['sezona', 'tip']
+        verbose_name_plural = "Sezone"
 
 
-class TimoviSokobanja(models.Model):
+class Tim(models.Model):
     ime = models.CharField(max_length=30)
-    ucesce = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='logo_img')
 
     def __str__(self):
         return self.ime
@@ -74,9 +73,12 @@ class TimoviSokobanja(models.Model):
 
 
 class TimSezona(models.Model):
-    tim = models.ForeignKey(TimoviSokobanja, on_delete=models.CASCADE)
+    tim = models.ForeignKey(Tim, on_delete=models.CASCADE)
     sezona = models.ForeignKey(Sezona, on_delete=models.CASCADE)
     aktivan = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Timovi u sezoni"
 
 
 class Kazne(models.Model):
@@ -85,15 +87,18 @@ class Kazne(models.Model):
     razlog = models.TextField()
     datum = models.DateField()
 
+    class Meta:
+        verbose_name_plural = "Kazneni bodovi"
+
 
 class Utakmica(models.Model):
     sezona = models.ForeignKey(Sezona, on_delete=models.CASCADE)
     kolo = models.PositiveSmallIntegerField()
     domacin = models.ForeignKey(
-        TimoviSokobanja, on_delete=models.CASCADE, related_name='domacin')
+        Tim, on_delete=models.CASCADE, related_name='domacin')
     domacin_gol = models.PositiveSmallIntegerField(default=0)
     gost = models.ForeignKey(
-        TimoviSokobanja, on_delete=models.CASCADE, related_name='gost')
+        Tim, on_delete=models.CASCADE, related_name='gost')
     gost_gol = models.PositiveSmallIntegerField(default=0)
     mesto_odigravanja = models.CharField(max_length=100)
     glavni_sudija = models.ForeignKey(
@@ -130,3 +135,18 @@ class Utakmica(models.Model):
 
     class Meta:
         verbose_name_plural = "Utakmice"
+
+
+class TimoviSokobanja(models.Model):
+    ime = models.CharField(max_length=30)
+    ucesce = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='logo_img')
+
+    def __str__(self):
+        return self.ime
+
+    def clean(self):
+        check_first_upper(self.ime)
+
+    class Meta:
+        verbose_name_plural = "TimoviSokobanje"
