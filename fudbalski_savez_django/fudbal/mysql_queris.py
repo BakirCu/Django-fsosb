@@ -102,7 +102,7 @@ class Query:
                             FROM fudbal_utakmica AS u
                             INNER JOIN fudbal_tim AS t
                             ON u.domacin_id = t.id
-                            WHERE u.sezona = %s
+                            WHERE u.sezona_id = %s
 
                             UNION ALL
                             SELECT t.ime,
@@ -114,7 +114,7 @@ class Query:
                             FROM fudbal_utakmica AS u
                             INNER JOIN fudbal_tim AS t
                             ON u.gost_id = t.id
-                             WHERE u.sezona = %s) AS r
+                             WHERE u.sezona_id = %s) AS r
                             GROUP BY r.ime
                             ORDER BY SUM(r.bodovi) DESC''', [poslednja_sezona, poslednja_sezona])
             imena_timova = cursor.fetchall()

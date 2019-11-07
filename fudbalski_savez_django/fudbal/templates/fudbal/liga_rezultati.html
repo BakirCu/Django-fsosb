@@ -25,10 +25,10 @@
         <tbody>
             {% for utakmica in utakmice %}
             <tr>
-                <td>{{utakmica.vreme_odigravanja|date:"d.m.Y."}} </td>
+                <td>{{utakmica.datum_zakazano|date:"d.m.Y / H:i"}} </td>
                 <td>{{utakmica.mesto_odigravanja}} </td>
                 <td>{{utakmica.domacin}} </td>
-                <td> {{utakmica.domacin_gol}}:{{utakmica.gost_gol}} </td>
+                <td>{{utakmica.domacin_gol|default_if_none:""}}:{{utakmica.gost_gol|default_if_none:""}} </td>
                 <td>{{utakmica.gost}}</td>
             </tr>
             {%endfor%}

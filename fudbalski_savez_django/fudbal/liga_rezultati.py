@@ -1,5 +1,5 @@
 from .mysql_queris import Query
-from .models import Utakmica
+from .models import Sezona
 
 
 class Liga():
@@ -35,10 +35,9 @@ class Liga():
         return tabela_timova_list
 
 
-class Sezona():
+class Sezonaa():
     @staticmethod
     def poslednja_sezona():
-        poslednja_sezona = Utakmica.objects.values(
-            'sezona').distinct().order_by('-sezona')[0]
-        broj_sezone = poslednja_sezona.get('sezona')
+        poslednja_sezona = Sezona.objects.all().order_by('-sezona').first()
+        broj_sezone = poslednja_sezona.sezona
         return broj_sezone
