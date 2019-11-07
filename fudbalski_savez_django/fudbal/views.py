@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .liga_rezultati import Liga, Sezonaa
+from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
 from .models import Sudija, Sezona
+from django.db.models import Q
 
 
 def home(request):
@@ -38,8 +39,11 @@ def liga_rezultati(request):
 
 
 def liga_tabela(request):
-    poslednja_sezona = Sezonaa.poslednja_sezona()
-    tabela_utakmica = Liga.tabela_timova(poslednja_sezona)
+    poslednja_sezona = Sezona.objects.all().order_by('-sezona').first().sezona
+    poslednja_sezona_obj = Sezona.objects.get(
+        Q(sezona=poslednja_sezona) & Q(tip_id__tip="LIGA"))
+
+    tabela_utakmica = Liga.tabela_timova(poslednja_sezona_obj.id)
     return render(request, "fudbal/liga_tabela.html", {"timovi": tabela_utakmica})
 
 
@@ -52,7 +56,7 @@ def kup_tabela(request):
 
 
 def delegiranje_sudija(request):
-    poslednja_sezona = Sezonaa.poslednja_sezona()
+    poslednja_sezona = Sezona.poslednja_sezona()
     utakmice_po_kolima = dohvati_kola(poslednja_sezona)
     trenutna_sezona = "{}/{}".format(poslednja_sezona, poslednja_sezona + 1)
     return render(

@@ -1,5 +1,4 @@
 from .mysql_queris import Query
-from .models import Sezona
 
 
 class Liga():
@@ -33,11 +32,3 @@ class Liga():
             tabela_timova_list.append(Liga(ime_tima, utakmica, pobeda, nereseno, poraz,
                                            dati_golovi, primljeni_golovi, gol_razlika, broj_bodova))
         return tabela_timova_list
-
-
-class Sezonaa():
-    @staticmethod
-    def poslednja_sezona():
-        poslednja_sezona = Sezona.objects.all().order_by('-sezona').first()
-        broj_sezone = poslednja_sezona.sezona
-        return broj_sezone
