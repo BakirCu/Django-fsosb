@@ -1,6 +1,7 @@
 {% extends "fudbal/base.html" %}
 {% block content %}
 {% load static %}
+{% now "m" as current_month %}
 
 <div class="image-text-container">
     {% if request.path == '/delegiranje/' %}
@@ -21,7 +22,7 @@
                 {{utakmice.0.kolo}}.kolo
             </a>
         </div>
-        <div id="b{{utakmice.0.kolo}}" class="{% for utakmica in utakmice%}{% if utakmica.domacin_gol or utakmica.gost_gol  %}
+        <div id="b{{utakmice.0.kolo}}" class="{% for utakmica in utakmice%}{% if utakmica.datum_zakazano|date:'m' == current_month %}
             collapse show {% else %} collapse {% endif %} {% endfor %}" data-parent="#accordion">
             <div class="card-body">
                 {% block table %}
