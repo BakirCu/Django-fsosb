@@ -44,7 +44,6 @@ def liga_tabela(request):
         Q(sezona=poslednja_sezona) & Q(tip_id__tip="LIGA"))
     izbaceni_timovi = TimSezona.objects.filter(
         sezona=poslednja_sezona_obj.id, aktivan=0).values('tim_id')
-    print(izbaceni_timovi)
     if izbaceni_timovi:
         izbaceni_timovi_id = []
         for tim_id in izbaceni_timovi:
