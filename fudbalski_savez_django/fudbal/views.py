@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
-from .models import Sudija, Sezona
+from .models import Sudija, Sezona, TimSezona
 from django.db.models import Q
 
 
@@ -42,8 +42,19 @@ def liga_tabela(request):
     poslednja_sezona = Sezona.objects.all().order_by('-sezona').first().sezona
     poslednja_sezona_obj = Sezona.objects.get(
         Q(sezona=poslednja_sezona) & Q(tip_id__tip="LIGA"))
-
-    tabela_utakmica = Liga.tabela_timova(poslednja_sezona_obj.id)
+    izbaceni_timovi = TimSezona.objects.filter(
+        sezona=poslednja_sezona_obj.id, aktivan=0).values('tim_id')
+    print(izbaceni_timovi)
+    if izbaceni_timovi:
+        izbaceni_timovi_id = []
+        for tim_id in izbaceni_timovi:
+            izbaceni_timovi_id.append(tim_id.get('tim_id'))
+        izbaceni_timovi = tuple(izbaceni_timovi_id)
+        print(izbaceni_timovi)
+    else:
+        izbaceni_timovi = tuple([0])
+    tabela_utakmica = Liga.tabela_timova(
+        poslednja_sezona_obj.id, izbaceni_timovi)
     return render(request, "fudbal/liga_tabela.html", {"timovi": tabela_utakmica})
 
 

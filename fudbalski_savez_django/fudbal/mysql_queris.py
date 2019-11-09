@@ -4,12 +4,12 @@ from django.db import connection
 class Query:
 
     @staticmethod
-    def odigrane_utakmice(ime_tima):
+    def odigrane_utakmice(ime_tima, izbaceni_timovi):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT count(*)  FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_sb.fudbal_tim
-                            ON fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
-                            WHERE fudbal_tim.ime= %s; ''', [ime_tima])
+            INNER JOIN fudbal_sb.fudbal_tim
+            ON  fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
+            WHERE fudbal_tim.ime = %s and fudbal_utakmica.domacin_id NOT IN %s and  fudbal_utakmica.gost_id NOT IN %s ''', [ime_tima, izbaceni_timovi, izbaceni_timovi])
             broj_odigrane_utacmice = cursor.fetchone()
         return broj_odigrane_utacmice[0]
 
@@ -89,33 +89,12 @@ class Query:
         return int(broj_bodova[0])
 
     @staticmethod
-    def imena_timova(poslednja_sezona):
+    def imena_timova(poslednja_sezona_id):
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT r.ime, SUM(r.bodovi) as broj_bodova
-                            FROM
-                            (SELECT t.ime,
-                            CASE
-                            WHEN u.domacin_gol > u.gost_gol  THEN 3
-                                WHEN u.domacin_gol = u.gost_gol  THEN 1
-                                ELSE 0
-                                END AS bodovi
-                            FROM fudbal_utakmica AS u
-                            INNER JOIN fudbal_tim AS t
-                            ON u.domacin_id = t.id
-                            WHERE u.sezona_id = %s
-
-                            UNION ALL
-                            SELECT t.ime,
-                            CASE
-                            WHEN u.gost_gol > u.domacin_gol THEN 3
-                                WHEN u.gost_gol = u.domacin_gol  THEN 1
-                                ELSE 0
-                                END AS bodovi
-                            FROM fudbal_utakmica AS u
-                            INNER JOIN fudbal_tim AS t
-                            ON u.gost_id = t.id
-                             WHERE u.sezona_id = %s) AS r
-                            GROUP BY r.ime
-                            ORDER BY SUM(r.bodovi) DESC''', [poslednja_sezona, poslednja_sezona])
+            cursor.execute('''SELECT  ime FROM fudbal_sb.fudbal_timsezona as ts
+                            INNER JOIN fudbal_sb.fudbal_tim as t
+                            INNER JOIN fudbal_sb.fudbal_sezona as s
+                            ON ts.tim_id = t.id AND ts.sezona_id = s.id
+                            WHERE ts.aktivan = 1 AND ts.sezona_id = %s''', [poslednja_sezona_id])
             imena_timova = cursor.fetchall()
         return imena_timova
