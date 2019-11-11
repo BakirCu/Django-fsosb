@@ -33,6 +33,7 @@
                             <a class="dropdown-item" href="{% url 'o_savezu' %}">O
                                 Savezu</a>
                             <a class="dropdown-item" href="{% url 'rukovodstvo' %}">Rukovodstvo</a>
+                            <a class="dropdown-item" href="{% url 'odbori' %}">Odbori</a>
                             <a class="dropdown-item" href="{% url 'propisi'%}">Propisi</a>
                         </div>
                     <li class="nav-item dropdown">
@@ -64,13 +65,22 @@
                             <a class="dropdown-item" href="{% url 'lista_sudija' %}">Lista
                                 sudija
                             </a>
+                            <a class="dropdown-item" href="{% url 'lista_delegata' %}">Lista
+                                delegata
+                            </a>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'obavestenja' %}">OBAVEŠTENJA</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vesti' %}">VESTI</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'slike' %}">GALERIJA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'timovi_sokobanje' %}">TIMOVI FSO SOKOBANJA</a>
                     </li>
                 </ul>
             </div>

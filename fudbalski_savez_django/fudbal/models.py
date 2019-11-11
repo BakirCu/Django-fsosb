@@ -160,8 +160,9 @@ class TimoviSokobanja(models.Model):
     def __str__(self):
         return self.ime
 
-    def clean(self):
-        check_first_upper(self.ime)
+    def save(self, *args, **kwargs):
+        self.logo = resize_image(self.logo, 300, 300)
+        return super(TimoviSokobanja, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "TimoviSokobanje"

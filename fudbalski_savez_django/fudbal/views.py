@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
-from .models import Sudija, Sezona, TimSezona
+from .models import Sudija, Delegat, Sezona, TimSezona, TimoviSokobanja
 from django.db.models import Q
 
 
@@ -18,6 +18,10 @@ def savez(request):
 
 
 def rukovodstvo(request):
+    return render(request, "fudbal/rukovodstvo.html")
+
+
+def odbori(request):
     return render(request, "fudbal/rukovodstvo.html")
 
 
@@ -78,12 +82,24 @@ def delegiranje_sudija(request):
 
 def lista_sudija(request):
     sudije = Sudija.objects.all()
-    return render(request, "fudbal/lista_sudija.html", {"sudije": sudije})
+    return render(request, "fudbal/lista_sudija_delegata.html", {"sudije": sudije})
 
 
-def vesti(request):
-    return render(request, "fudbal/vesti.html")
+def lista_delagata(request):
+    delegati = Delegat.objects.all()
+    return render(request, "fudbal/lista_sudija_delegata.html", {"sudije": delegati})
 
 
-def gallery(request):
-    return render(request, "fudbal/gallery.html")
+def obavestenja(request):
+    return render(request, "fudbal/obavestenja.html")
+
+
+def timovi_sokobanje(request):
+    ucesca = TimoviSokobanja.objects.values('ucesce').distinct()
+    timovi_sokobanje = []
+    for ucesce in ucesca:
+        liga = ucesce['ucesce']
+        timovi_u_ligi = TimoviSokobanja.objects.filter(ucesce=liga)
+        timovi_po_ligama = {liga: timovi_u_ligi}
+        timovi_sokobanje.append(timovi_po_ligama)
+    return render(request, "fudbal/timovi_sokobanje.html", {"timovi_sokobanje": timovi_sokobanje})

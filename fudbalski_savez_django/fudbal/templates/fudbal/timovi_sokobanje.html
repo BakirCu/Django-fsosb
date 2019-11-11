@@ -1,0 +1,26 @@
+{% extends "fudbal/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="image-text-container">
+    <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid mt-5 md-5">
+</div>
+
+
+<div class='container '>
+    {% for lige in timovi_sokobanje %}
+    {% for liga, timovi in lige.items %}
+    <h4 class="bg-secondary mt-5">{{ liga }}</h4>
+    {% for tim in timovi %}
+    <div class="media mt-3 ml-5">
+        <img src="{{tim.logo.url}}" class="align-self-center mr-3" style="width:60px">
+        <div class="media-body">
+            <h4 class="mt-3">{{tim.ime}}</h4>
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+</div>
+
+{% endblock %}
