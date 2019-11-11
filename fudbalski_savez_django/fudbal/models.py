@@ -166,3 +166,28 @@ class TimoviSokobanja(models.Model):
 
     class Meta:
         verbose_name_plural = "TimoviSokobanje"
+
+
+class Odbor(models.Model):
+    naziv_odbora = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.naziv_odbora
+
+    class Meta:
+        verbose_name_plural = "Odbori"
+
+
+class ClanOdbora(models.Model):
+    odbor = models.ForeignKey(Odbor, on_delete=models.CASCADE)
+    funkcija = models.CharField(max_length=100)
+    ime = models.CharField(max_length=30)
+    prezime = models.CharField(max_length=30)
+    rezime = models.TextField(null=True, blank=True)
+    slika = models.ImageField(null=True, blank=True, upload_to='odbor_img')
+
+    def __str__(self):
+        return f'{self.odbor}:{self.funkcija}'
+
+    class Meta:
+        verbose_name_plural = "Clanovi odbora"

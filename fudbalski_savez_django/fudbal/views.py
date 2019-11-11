@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
-from .models import Sudija, Delegat, Sezona, TimSezona, TimoviSokobanja
+from .models import Sudija, Delegat, Sezona, TimSezona, TimoviSokobanja, ClanOdbora, Odbor
 from django.db.models import Q
 
 
@@ -18,11 +18,20 @@ def savez(request):
 
 
 def rukovodstvo(request):
-    return render(request, "fudbal/rukovodstvo.html")
+    clanovi_rukovodstava = ClanOdbora.objects.filter(
+        odbor_id__naziv_odbora='Rukovodstvo')
+
+    return render(request, "fudbal/rukovodstvo.html", {'clanovi': clanovi_rukovodstava})
 
 
 def odbori(request):
-    return render(request, "fudbal/rukovodstvo.html")
+    odbori = Odbor.objects.filter(~Q(naziv_odbora='Rukovodstvo'))
+    clanovi_po_odborima = []
+    for odbor in odbori:
+        clanovi_odbora = ClanOdbora.objects.filter(
+            odbor_id__naziv_odbora=odbor.naziv_odbora)
+        clanovi_po_odborima.append(clanovi_odbora)
+    return render(request, "fudbal/odbori.html", {'odbori': clanovi_po_odborima})
 
 
 def propisi(request):

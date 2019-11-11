@@ -1,0 +1,32 @@
+{% extends "fudbal/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="image-text-container">
+    <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid mt-5 md-5">
+</div>
+
+<div class="container">
+    {% for odbor in odbori %}
+    <h2 class="bg-secondary mt-5 text-center">{{odbor.first.odbor}}</h2>
+    <div class="row">
+        {% for clan in odbor %}
+        <div class="col-sm-4">
+            <div class="card mt-5">
+                <h2 class="card-header text-center">{{clan.funkcija}}</h2>
+                <div class="card-body">
+                    <h4 class="card-title text-center">{{clan.ime}} {{clan.prezime}}</h4>
+                    {% if clan.rezime %}
+                    <p class="card-text">{{clan.rezime}}</p>
+                    {% endif %}
+                </div>
+                {% if clan.slika %}
+                <img class="card-img-bottom" src="{{clan.slika.url}}" alt="Card image">
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock%}
