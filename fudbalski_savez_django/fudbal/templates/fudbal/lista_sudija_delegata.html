@@ -4,7 +4,11 @@
 
 <div class="image-text-container">
     <img src="{% static 'fudbal/images/sudije.jpg'%}" class="img-fluid mt-5 md-5">
+    {% if request.path == '/sudije/'%}
     <h1 class="centered-text">Sudije</h1>
+    {% else %}
+    <h1 class="centered-text">Delegati</h1>
+    {% endif %}
 </div>
 
 <div class="container mt-5 ">
