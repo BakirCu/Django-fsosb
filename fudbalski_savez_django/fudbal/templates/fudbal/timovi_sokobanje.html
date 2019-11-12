@@ -6,7 +6,6 @@
     <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid mt-5 md-5">
 </div>
 <div class='container '>
-    {% for lige in timovi_sokobanje %}
     {% for liga, timovi in lige.items %}
     <h4 class="bg-secondary mt-5">{{ liga }}</h4>
     {% for tim in timovi %}
@@ -18,7 +17,7 @@
     </div>
     {% endfor %}
     {% endfor %}
-    {% endfor %}
+
 </div>
 
 {% endblock %}

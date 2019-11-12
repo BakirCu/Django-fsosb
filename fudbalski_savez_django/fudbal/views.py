@@ -62,7 +62,6 @@ def liga_tabela(request):
         for tim_id in izbaceni_timovi:
             izbaceni_timovi_id.append(tim_id.get('tim_id'))
         izbaceni_timovi = tuple(izbaceni_timovi_id)
-        print(izbaceni_timovi)
     else:
         izbaceni_timovi = tuple([0])
     tabela_utakmica = Liga.tabela_timova(
@@ -105,10 +104,9 @@ def obavestenja(request):
 
 def timovi_sokobanje(request):
     ucesca = TimoviSokobanja.objects.values('ucesce').distinct()
-    timovi_sokobanje = []
+    timovi_sokobanje = {}
     for ucesce in ucesca:
         liga = ucesce['ucesce']
         timovi_u_ligi = TimoviSokobanja.objects.filter(ucesce=liga)
-        timovi_po_ligama = {liga: timovi_u_ligi}
-        timovi_sokobanje.append(timovi_po_ligama)
-    return render(request, "fudbal/timovi_sokobanje.html", {"timovi_sokobanje": timovi_sokobanje})
+        timovi_sokobanje[liga] = timovi_u_ligi
+    return render(request, "fudbal/timovi_sokobanje.html", {"lige": timovi_sokobanje})
