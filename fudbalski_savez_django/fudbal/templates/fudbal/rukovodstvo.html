@@ -13,14 +13,16 @@
             <div class="card mt-5">
                 <h2 class="card-header text-center">{{clan.funkcija}}</h2>
                 <div class="card-body">
+                    {% if clan.slika %}
+                    <img class="card-img-top rounded-circle mx-auto d-block" src="{{clan.slika.url}}" alt="Card image"
+                        style="width:50%">
+                    {% endif %}
                     <h4 class="card-title text-center">{{clan.ime}} {{clan.prezime}}</h4>
                     {% if clan.rezime %}
                     <p class="card-text">{{clan.rezime}}</p>
                     {% endif %}
                 </div>
-                {% if clan.slika %}
-                <img class="card-img-bottom" src="{{clan.slika.url}}" alt="Card image">
-                {% endif %}
+
             </div>
 
         </div>

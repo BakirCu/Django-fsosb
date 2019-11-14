@@ -184,6 +184,10 @@ class ClanOdbora(models.Model):
     rezime = models.TextField(null=True, blank=True)
     slika = models.ImageField(null=True, blank=True, upload_to='odbor_img')
 
+    def save(self, *args, **kwargs):
+        self.slika = resize_image(self.slika, 300, 300)
+        return super(ClanOdbora, self).save(*args, **kwargs)
+
     def __str__(self):
         return f'{self.odbor}:{self.funkcija}'
 
@@ -194,3 +198,9 @@ class ClanOdbora(models.Model):
 class Obavestenja(models.Model):
     naslov = models.CharField(max_length=200)
     fajl = models.FileField(upload_to='obavestenja')
+
+    def __str__(self):
+        return f'{self.naslov}'
+
+    class Meta:
+        verbose_name_plural = "Obaveštenja"
