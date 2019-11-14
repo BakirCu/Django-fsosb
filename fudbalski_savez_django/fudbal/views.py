@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .liga_rezultati import tabela_timova
+from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
 from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor
@@ -55,8 +55,7 @@ def liga_tabela(request):
     poslednja_sezona = Sezona.objects.all().order_by('-sezona').first().sezona
     poslednja_sezona_obj = Sezona.objects.get(
         Q(sezona=poslednja_sezona) & Q(tip_id__tip="LIGA"))
-    tabela_utakmica = tabela_timova(poslednja_sezona_obj)
-    print(tabela_utakmica)
+    tabela_utakmica = Liga.tabela_timova(poslednja_sezona_obj)
     return render(request, "fudbal/liga_tabela.html", {"timovi": tabela_utakmica})
 
 
