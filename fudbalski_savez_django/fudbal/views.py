@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
-from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor
+from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja
 from django.db.models import Q
 
 
@@ -68,9 +68,11 @@ def kup_tabela(request):
 
 
 def delegiranje_sudija(request):
-    poslednja_sezona = Sezona.poslednja_sezona()
-    utakmice_po_kolima = dohvati_kola(poslednja_sezona)
-    trenutna_sezona = "{}/{}".format(poslednja_sezona, poslednja_sezona + 1)
+    poslednja_sezona_obj = Sezona.objects.all().order_by('-sezona').first()
+    poslednja_sezona = poslednja_sezona_obj.sezona
+    utakmice_po_kolima = dohvati_kola(poslednja_sezona, 'LIGA')
+    trenutna_sezona = "{}/{}".format(poslednja_sezona_obj.sezona,
+                                     poslednja_sezona_obj.sezona + 1)
     return render(
         request,
         "fudbal/delegiranje_sudija.html",
@@ -89,7 +91,8 @@ def lista_delagata(request):
 
 
 def obavestenja(request):
-    return render(request, "fudbal/obavestenja.html")
+    obavestenje = Obavestenja.objects.all()
+    return render(request, "fudbal/obavestenja.html", {"obavestenja": obavestenje})
 
 
 def timovi_sokobanje(request):

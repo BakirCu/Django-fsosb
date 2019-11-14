@@ -8,8 +8,10 @@
 
 
 <div class='container '>
-    <h1>prvo obavesenje</h1>
-    <p> pise nesto</p>
-    <p> zakaci word fail</p>
+    {% for obavestenje in obavestenja %}
+    <h3>{{obavestenje.naslov}}</h3>
+
+    <a href="{{obavestenje.fajl.url}}">{{obavestenje.fajl}}</a> </p>
+    {% endfor %}
 </div>
 {% endblock %}
