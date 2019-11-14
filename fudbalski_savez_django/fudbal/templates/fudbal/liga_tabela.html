@@ -25,18 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            {% for tim in timovi%}
+            {% for tim, rezultati in timovi.items %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{tim.ime_tima}}</td>
-                <td>{{tim.odigrane_utakmice}}</td>
-                <td>{{tim.pobeda}}</td>
-                <td>{{tim.nereseno}}</td>
-                <td>{{tim.porazi}}</td>
-                <td>{{tim.dati_golovi}}</td>
-                <td>{{tim.primljeni_golovi}}</td>
-                <td>{{tim.gol_razlika}}</td>
-                <td>{{tim.bodovi}}</td>
+                <td>{{tim}}</td>
+                <td>{{rezultati.0}}</td>
+                <td>{{rezultati.1}}</td>
+                <td>{{rezultati.2}}</td>
+                <td>{{rezultati.3}}</td>
+                <td>{{rezultati.4}}</td>
+                <td>{{rezultati.5}}</td>
+                <td>{{rezultati.6}}</td>
+                <td>{{rezultati.7}}</td>
             </tr>
             {% endfor %}
         </tbody>

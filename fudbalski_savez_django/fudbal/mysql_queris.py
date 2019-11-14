@@ -4,97 +4,38 @@ from django.db import connection
 class Query:
 
     @staticmethod
-    def odigrane_utakmice(ime_tima, izbaceni_timovi):
+    def aktivni_timovi_sezone(sezona_obj):
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT count(*)  FROM fudbal_sb.fudbal_utakmica
-            INNER JOIN fudbal_sb.fudbal_tim
-            ON  fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
-            WHERE fudbal_tim.ime = %s and fudbal_utakmica.domacin_id NOT IN %s and  fudbal_utakmica.gost_id NOT IN %s ''', [ime_tima, izbaceni_timovi, izbaceni_timovi])
-            broj_odigrane_utacmice = cursor.fetchone()
-        return broj_odigrane_utacmice[0]
+            cursor.execute('''SELECT * FROM fudbal_sb.fudbal_utakmica as u
+                           inner join fudbal_sb.fudbal_sezona as s
+                           inner join fudbal_sb.fudbal_tipsezone as t
+                           on u.sezona_id=s.id and s.tip_id=t.id
+                           where s.sezona=%(sezona)s and t.tip=%(tip)s
+                           and u.domacin_id in
+                           (SELECT tim_id FROM fudbal_sb.fudbal_timsezona as tim
+                            inner join fudbal_sb.fudbal_sezona as s
+                            inner join fudbal_sb.fudbal_tipsezone as tip
+                            on tim.sezona_id=s.id and tip.id=s.tip_id
+                            where s.sezona=%(sezona)s and tim.aktivan=1 and tip.tip=%(tip)s)
+                           and u.gost_id in
+                           (SELECT tim_id FROM fudbal_sb.fudbal_timsezona as tim
+                            inner join fudbal_sb.fudbal_sezona as s
+                            inner join fudbal_sb.fudbal_tipsezone as tip
+                            on tim.sezona_id=s.id and tip.id=s.tip_id
+                            where s.sezona=%(sezona)s and tim.aktivan=1 and tip.tip=%(tip)s);''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
+            utakmice = cursor.fetchall()
+        return utakmice
 
     @staticmethod
-    def pobede(ime_time):
+    def kaznjeni_timovi(sezona_obj):
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT COUNT(*) FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_sb.fudbal_tim
-                            ON fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
-                            WHERE fudbal_tim.ime = %s
-                             AND ((fudbal_utakmica.domacin_id=fudbal_tim.id AND fudbal_utakmica.domacin_gol > fudbal_utakmica.gost_gol)
-                              OR
-                            (fudbal_utakmica.gost_id=fudbal_tim.id AND fudbal_utakmica.gost_gol > fudbal_utakmica.domacin_gol));''', [ime_time])
-
-            broj_pobeda = cursor.fetchone()
-        return broj_pobeda[0]
-
-    @staticmethod
-    def porazi(ime_time):
-        with connection.cursor() as cursor:
-            cursor.execute('''SELECT COUNT(*) FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_sb.fudbal_tim
-                            ON fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
-                            WHERE fudbal_tim.ime = %s
-                             AND ((fudbal_utakmica.domacin_id=fudbal_tim.id AND fudbal_utakmica.domacin_gol < fudbal_utakmica.gost_gol)
-                              OR
-                            (fudbal_utakmica.gost_id=fudbal_tim.id AND fudbal_utakmica.gost_gol < fudbal_utakmica.domacin_gol));''', [ime_time])
-            broj_porazi = cursor.fetchone()
-        return broj_porazi[0]
-
-    @staticmethod
-    def nereseno(ime_time):
-        with connection.cursor() as cursor:
-            cursor.execute('''SELECT COUNT(*) FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_sb.fudbal_tim
-                            ON fudbal_utakmica.domacin_id = fudbal_tim.id OR fudbal_utakmica.gost_id = fudbal_tim.id
-                            WHERE fudbal_tim.ime = %s
-                             AND ((fudbal_utakmica.domacin_id=fudbal_tim.id AND fudbal_utakmica.domacin_gol = fudbal_utakmica.gost_gol)
-                              OR
-                            (fudbal_utakmica.gost_id=fudbal_tim.id AND fudbal_utakmica.gost_gol = fudbal_utakmica.domacin_gol));''', [ime_time])
-            broj_porazi = cursor.fetchone()
-        return broj_porazi[0]
-
-    @staticmethod
-    def dati_golovi(ime_tima):
-        with connection.cursor() as cursor:
-            cursor.execute('''SELECT SUM(golovi) FROM
-                            (SELECT SUM(fudbal_utakmica.domacin_gol) AS golovi FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_tim
-                            ON fudbal_utakmica.domacin_id=fudbal_tim.id
-                            WHERE fudbal_tim.ime= %s UNION ALL
-                            SELECT SUM(fudbal_utakmica.gost_gol ) FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_tim
-                            ON fudbal_utakmica.gost_id=fudbal_tim.id
-                             WHERE fudbal_tim.ime = %s) AS bodovi''', [ime_tima, ime_tima])
-            broj_bodova = cursor.fetchone()
-            if not broj_bodova[0]:
-                return 0
-        return int(broj_bodova[0])
-
-    @staticmethod
-    def primljeni_golovi(ime_tima):
-        with connection.cursor() as cursor:
-            cursor.execute('''SELECT SUM(golovi) FROM
-                            (SELECT SUM(fudbal_utakmica.gost_gol) AS golovi FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_sb.fudbal_tim
-                            ON fudbal_utakmica.domacin_id=fudbal_tim.id
-                            WHERE fudbal_tim.ime= %s UNION ALL
-                            SELECT SUM(fudbal_utakmica.domacin_gol ) FROM fudbal_sb.fudbal_utakmica
-                            INNER JOIN fudbal_sb.fudbal_tim
-                            ON fudbal_utakmica.gost_id=fudbal_tim.id
-                             WHERE fudbal_tim.ime = %s) AS bodovi''', [ime_tima, ime_tima])
-
-            broj_bodova = cursor.fetchone()
-            if not broj_bodova[0]:
-                return 0
-        return int(broj_bodova[0])
-
-    @staticmethod
-    def imena_timova(poslednja_sezona_id):
-        with connection.cursor() as cursor:
-            cursor.execute('''SELECT  ime FROM fudbal_sb.fudbal_timsezona as ts
-                            INNER JOIN fudbal_sb.fudbal_tim as t
-                            INNER JOIN fudbal_sb.fudbal_sezona as s
-                            ON ts.tim_id = t.id AND ts.sezona_id = s.id
-                            WHERE ts.aktivan = 1 AND ts.sezona_id = %s''', [poslednja_sezona_id])
-            imena_timova = cursor.fetchall()
-        return imena_timova
+            cursor.execute('''SELECT ime, sum(kazneni_bodovi)FROM fudbal_sb.fudbal_kazne as k
+                            inner join fudbal_sb.fudbal_timsezona as ts
+                            inner join fudbal_sb.fudbal_tim as tim
+                            inner join fudbal_sb.fudbal_sezona as s
+                            inner join fudbal_sb.fudbal_tipsezone as tip
+                            on k.tim_u_sezoni_id=ts.id and ts.tim_id=tim.id and ts.sezona_id=s.id and s.tip_id=tip.id
+                            where sezona=%(sezona)s and tip=%(tip)s
+                            group by ime''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
+            timovi = cursor.fetchall()
+        return timovi

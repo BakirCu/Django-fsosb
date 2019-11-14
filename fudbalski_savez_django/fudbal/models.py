@@ -124,8 +124,6 @@ class Utakmica(models.Model):
         Delegat, on_delete=models.DO_NOTHING, related_name='delegat')
     datum_zakazano = models.DateTimeField(
         auto_now=False, null=True, blank=True)
-    datum_odigrano = models.DateTimeField(
-        auto_now=False, null=True, blank=True)
 
     def __str__(self):
         return '{}.kolo {} :{}--{}: {} "sezona {}"'.format(self.kolo, self.domacin, self.domacin_gol, self.gost_gol, self.gost, self.sezona)
