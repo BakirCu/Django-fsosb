@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .liga_rezultati import Liga
 from .my_functions import dohvati_kola
 from vesti.models import Vest, Slika
-from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja
+from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja, Propisi
 from django.db.models import Q
 
 
@@ -35,7 +35,8 @@ def odbori(request):
 
 
 def propisi(request):
-    return render(request, "fudbal/propisi.html")
+    propisi = Propisi.objects.all()
+    return render(request, "fudbal/propisi.html", {"propisi": propisi})
 
 
 def liga_rezultati(request):
@@ -91,8 +92,8 @@ def lista_delagata(request):
 
 
 def obavestenja(request):
-    obavestenje = Obavestenja.objects.all()
-    return render(request, "fudbal/obavestenja.html", {"obavestenja": obavestenje})
+    obavestenja = Obavestenja.objects.all()
+    return render(request, "fudbal/obavestenja.html", {"obavestenja": obavestenja})
 
 
 def timovi_sokobanje(request):

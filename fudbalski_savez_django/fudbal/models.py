@@ -195,6 +195,17 @@ class ClanOdbora(models.Model):
         verbose_name_plural = "Clanovi odbora"
 
 
+class Propisi(models.Model):
+    naslov = models.CharField(max_length=200)
+    fajl = models.FileField(upload_to='propisi')
+
+    def __str__(self):
+        return f'{self.naslov}'
+
+    class Meta:
+        verbose_name_plural = "Propisi"
+
+
 class Obavestenja(models.Model):
     naslov = models.CharField(max_length=200)
     fajl = models.FileField(upload_to='obavestenja')
