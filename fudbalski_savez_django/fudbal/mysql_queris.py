@@ -6,7 +6,7 @@ class Query:
     @staticmethod
     def aktivni_timovi_sezone(sezona_obj):
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT * FROM fudbal_sb.fudbal_utakmica as u
+            cursor.execute('''SELECT domacin_gol, gost_gol, domacin_id, gost_id FROM fudbal_sb.fudbal_utakmica as u
                            inner join fudbal_sb.fudbal_sezona as s
                            inner join fudbal_sb.fudbal_tipsezone as t
                            on u.sezona_id=s.id and s.tip_id=t.id
