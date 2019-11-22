@@ -18,35 +18,26 @@ class Liga():
 
     @staticmethod
     def rezultat_tima(tim_id, domacin_gol, gost_gol):
+        if not domacin_gol or not gost_gol:
+            return None, None
+
         ime_tima = Tim.objects.get(id=tim_id).ime
         if ime_tima not in Liga.tabela_timova:
             rezultati = Liga(0, 0, 0, 0, 0, 0, 0, 0)
-            if domacin_gol and gost_gol:
-                rezultati.odigrane_utakmice = 1
-                if domacin_gol > gost_gol:
-                    rezultati.pobeda = 1
-                elif domacin_gol == gost_gol:
-                    rezultati.nereseno = 1
-                else:
-                    rezultati.porazi = 1
-                rezultati.dati_golovi = domacin_gol
-                rezultati.primljeni_golovi = gost_gol
-            else:
-                return rezultati, ime_tima
         else:
-            if domacin_gol and gost_gol:
-                rezultati = Liga.tabela_timova[ime_tima]
-                rezultati.odigrane_utakmice += 1
-                if domacin_gol > gost_gol:
-                    rezultati.pobeda += 1
-                elif domacin_gol == gost_gol:
-                    rezultati.nereseno += 1
-                else:
-                    rezultati.porazi += 1
-                rezultati.dati_golovi += domacin_gol
-                rezultati.primljeni_golovi += gost_gol
-            else:
-                return None, None
+
+            rezultati = Liga.tabela_timova[ime_tima]
+
+        rezultati.odigrane_utakmice += 1
+        if domacin_gol > gost_gol:
+            rezultati.pobeda += 1
+        elif domacin_gol == gost_gol:
+            rezultati.nereseno += 1
+        else:
+            rezultati.porazi += 1
+            rezultati.dati_golovi += domacin_gol
+            rezultati.primljeni_golovi += gost_gol
+
         rezultati.gol_razlika = rezultati.dati_golovi - rezultati.primljeni_golovi
         rezultati.bodovi = rezultati.pobeda * 3 + rezultati.nereseno
         return rezultati, ime_tima

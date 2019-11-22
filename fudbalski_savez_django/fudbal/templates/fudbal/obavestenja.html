@@ -7,11 +7,15 @@
 </div>
 
 
-<div class='container '>
+<div class='container text-center'>
     {% for obavestenje in obavestenja %}
     <h3>{{obavestenje.naslov}}</h3>
-
-    <a href="{{obavestenje.fajl.url}}">{{obavestenje.fajl}}</a> </p>
+    <div class="row">
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe src="https://docs.google.com/viewer?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true">
+            </iframe>
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

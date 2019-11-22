@@ -38,7 +38,8 @@ class Sudija(models.Model):
         return '{} {}'.format(self.ime, self.prezime)
 
     def save(self, *args, **kwargs):
-        self.slika = resize_image(self.slika, 300, 300)
+        if self.slika:
+            self.slika = resize_image(self.slika, 300, 300)
         return super(Sudija, self).save(*args, **kwargs)
 
     def clean(self):
@@ -73,6 +74,7 @@ class Tim(models.Model):
 
     def __str__(self):
         return self.ime
+    # pitaj ga za ovu validaciju gde da je koristimo?
 
     def clean(self):
         check_first_upper(self.ime)
@@ -185,7 +187,8 @@ class ClanOdbora(models.Model):
     slika = models.ImageField(null=True, blank=True, upload_to='odbor_img')
 
     def save(self, *args, **kwargs):
-        self.slika = resize_image(self.slika, 300, 300)
+        if self.slika:
+            self.slika = resize_image(self.slika, 300, 300)
         return super(ClanOdbora, self).save(*args, **kwargs)
 
     def __str__(self):

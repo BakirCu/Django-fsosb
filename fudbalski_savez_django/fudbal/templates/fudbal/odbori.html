@@ -9,24 +9,17 @@
 <div class="container">
     {% for odbor in odbori %}
     <h2 class="bg-secondary mt-5 text-center">{{odbor.first.odbor}}</h2>
-    <div class="row">
-        {% for clan in odbor %}
-        <div class="col-sm-4">
-            <div class="card mt-5">
-                <h2 class="card-header text-center">{{clan.funkcija}}</h2>
-                <div class="card-body">
-                    <h4 class="card-title text-center">{{clan.ime}} {{clan.prezime}}</h4>
-                    {% if clan.rezime %}
-                    <p class="card-text">{{clan.rezime}}</p>
-                    {% endif %}
-                </div>
-                {% if clan.slika %}
-                <img class="card-img-bottom" src="{{clan.slika.url}}" alt="Card image">
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    {% for clan in odbor %}
+    <ul class="list-group list-group-flush">
+        {% if forloop.first %}
+        <li class="list-group-item text-center border-0">{{clan.funkcija}} <b>{{clan.ime}} {{clan.prezime}}</b></li>
+        {% else %}
+        <li class="list-group-item text-center ">{{clan.funkcija}} <b>{{clan.ime}} {{clan.prezime}}</b></li>
+        {% endif %}
+    </ul>
+    {% endfor %}
+
+
     {% endfor %}
 </div>
 {% endblock%}

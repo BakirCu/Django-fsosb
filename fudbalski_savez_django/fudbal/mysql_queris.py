@@ -3,7 +3,6 @@ from django.db import connection
 
 class Query:
 
-    @staticmethod
     def aktivni_timovi_sezone(sezona_obj):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT domacin_gol, gost_gol, domacin_id, gost_id FROM fudbal_sb.fudbal_utakmica as u
