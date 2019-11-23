@@ -1,8 +1,17 @@
 from django.db import connection
 
 
+class Utakmica:
+    def __init__(self, utakmica_podaci):
+        self.golovi_domacin = utakmica_podaci[0]
+        self.golovi_gost = utakmica_podaci[1]
+        self.id_domacin = utakmica_podaci[2]
+        self.id_gost = utakmica_podaci[3]
+
+
 class Query:
 
+    @staticmethod
     def utakmice_aktivnih_timova(sezona_obj):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT domacin_gol, gost_gol, domacin_id, gost_id FROM fudbal_sb.fudbal_utakmica as u
@@ -22,7 +31,12 @@ class Query:
                             inner join fudbal_sb.fudbal_tipsezone as tip
                             on tim.sezona_id=s.id and tip.id=s.tip_id
                             where s.sezona=%(sezona)s and tim.aktivan=1 and tip.tip=%(tip)s);''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
-            utakmice = cursor.fetchall()
+            utakmice_podaci = cursor.fetchall()
+
+            utakmice = []
+            for utakmica_podaci in utakmice_podaci:
+                utakmice.append(Utakmica(utakmica_podaci))
+
         return utakmice
 
     @staticmethod

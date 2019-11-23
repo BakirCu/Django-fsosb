@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .liga_rezultati import Liga
+from .liga_rezultati import Liga, ProvajderPodataka
 from .my_functions import dohvati_kola
+from .mysql_queris import Query
 from vesti.models import Vest, Slika
 from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja, Propisi
 from django.db.models import Q
@@ -56,7 +57,8 @@ def liga_tabela(request):
     poslednja_sezona = Sezona.objects.all().order_by('-sezona').first().sezona
     poslednja_sezona_obj = Sezona.objects.get(
         Q(sezona=poslednja_sezona) & Q(tip_id__tip="LIGA"))
-    tabela_utakmica = Liga.tabela(poslednja_sezona_obj)
+    liga = Liga(ProvajderPodataka())
+    tabela_utakmica = liga.tabela(poslednja_sezona_obj)
     return render(request, "fudbal/liga_tabela.html", {"timovi": tabela_utakmica})
 
 
