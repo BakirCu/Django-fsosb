@@ -74,10 +74,6 @@ class Tim(models.Model):
 
     def __str__(self):
         return self.ime
-    # pitaj ga za ovu validaciju gde da je koristimo?
-
-    def clean(self):
-        check_first_upper(self.ime)
 
     class Meta:
         verbose_name_plural = "Timovi"
@@ -101,6 +97,9 @@ class Kazne(models.Model):
     kazneni_bodovi = models.PositiveSmallIntegerField()
     razlog = models.TextField()
     datum = models.DateField()
+
+    def __str__(self):
+        return f"{self.tim_u_sezoni}:{self.kazneni_bodovi}"
 
     class Meta:
         verbose_name_plural = "Kazneni bodovi"

@@ -3,7 +3,7 @@ from django.db import connection
 
 class Query:
 
-    def aktivni_timovi_sezone(sezona_obj):
+    def utakmice_aktivnih_timova(sezona_obj):
         with connection.cursor() as cursor:
             cursor.execute('''SELECT domacin_gol, gost_gol, domacin_id, gost_id FROM fudbal_sb.fudbal_utakmica as u
                            inner join fudbal_sb.fudbal_sezona as s
