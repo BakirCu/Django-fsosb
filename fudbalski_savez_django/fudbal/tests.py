@@ -35,7 +35,9 @@ class TestLiga(unittest.TestCase):
         liga = Liga(ProvajderPodatakaTest())
         tabela = liga.tabela(None)
 
-        self.assertEqual(tabela["0"].bodovi, 4)
-        self.assertEqual(tabela["1"].bodovi, 1)
-        self.assertEqual(tabela["2"].bodovi, 0)
-        self.assertEqual(tabela["3"].bodovi, 3)
+        tabela = sorted(tabela, key=lambda x: x.ime)
+
+        self.assertEqual(tabela[0].bodovi, 4)
+        self.assertEqual(tabela[1].bodovi, 1)
+        self.assertEqual(tabela[2].bodovi, 0)
+        self.assertEqual(tabela[3].bodovi, 3)

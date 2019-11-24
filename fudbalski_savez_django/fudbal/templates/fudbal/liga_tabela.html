@@ -25,10 +25,10 @@
             </tr>
         </thead>
         <tbody>
-            {% for tim, rezultat in timovi.items %}
+            {% for rezultat in timovi %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{tim}}</td>
+                <td>{{rezultat.ime}}</td>
                 <td>{{rezultat.odigrane_utakmice}}</td>
                 <td>{{rezultat.pobeda}}</td>
                 <td>{{rezultat.nereseno}}</td>

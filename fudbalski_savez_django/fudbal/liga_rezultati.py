@@ -3,7 +3,8 @@ from .models import Tim
 
 
 class Rezultat():
-    def __init__(self):
+    def __init__(self, ime):
+        self.ime = ime
         self.odigrane_utakmice = 0
         self.pobeda = 0
         self.nereseno = 0
@@ -35,22 +36,27 @@ class Liga():
                 continue
 
             if utakmica.id_domacin not in tabela_timova:
-                tabela_timova[utakmica.id_domacin] = Rezultat()
+                tabela_timova[utakmica.id_domacin] = Rezultat(
+                    self.provajder.dohvati_ime_tima(utakmica.id_domacin))
 
             tabela_timova[utakmica.id_domacin] = Liga.osvezi_rezultate(
                 tabela_timova[utakmica.id_domacin], utakmica.golovi_domacin, utakmica.golovi_gost)
 
             if utakmica.id_gost not in tabela_timova:
-                tabela_timova[utakmica.id_gost] = Rezultat()
+                tabela_timova[utakmica.id_gost] = Rezultat(
+                    self.provajder.dohvati_ime_tima(utakmica.id_gost))
 
             tabela_timova[utakmica.id_gost] = Liga.osvezi_rezultate(
                 tabela_timova[utakmica.id_gost], utakmica.golovi_gost, utakmica.golovi_domacin)
 
-        tabela_timova_imena = {}
+        # ovde ce se dohvatiti lista kaznenih poena
+
+        tabela_timova_imena = []
 
         for tim in tabela_timova:
-            ime_tima = self.provajder.dohvati_ime_tima(tim)
-            tabela_timova_imena[ime_tima] = tabela_timova[tim]
+            tabela_timova_imena.append(tabela_timova[tim])
+
+        # ovde moze da se pozove sortiranje liste tabela_timova_imena
 
         return tabela_timova_imena
 
