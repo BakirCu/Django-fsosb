@@ -9,28 +9,34 @@ class Utakmica:
         self.id_gost = utakmica_podaci[3]
 
 
+class Kazna:
+    def __init__(self, kazna_podaci):
+        self.id_tim = kazna_podaci[0]
+        self.kazneni_bodovi = kazna_podaci[1]
+
+
 class Query:
 
     @staticmethod
     def utakmice_aktivnih_timova(sezona_obj):
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT domacin_gol, gost_gol, domacin_id, gost_id FROM fudbal_sb.fudbal_utakmica as u
-                           inner join fudbal_sb.fudbal_sezona as s
-                           inner join fudbal_sb.fudbal_tipsezone as t
-                           on u.sezona_id=s.id and s.tip_id=t.id
-                           where s.sezona=%(sezona)s and t.tip=%(tip)s
-                           and u.domacin_id in
-                           (SELECT tim_id FROM fudbal_sb.fudbal_timsezona as tim
-                            inner join fudbal_sb.fudbal_sezona as s
-                            inner join fudbal_sb.fudbal_tipsezone as tip
-                            on tim.sezona_id=s.id and tip.id=s.tip_id
-                            where s.sezona=%(sezona)s and tim.aktivan=1 and tip.tip=%(tip)s)
+            cursor.execute('''SELECT domacin_gol, gost_gol, domacin_id, gost_id FROM fudbal_sb.fudbal_utakmica AS u
+                           INNER JOIN fudbal_sb.fudbal_sezona AS s
+                           INNER JOIN fudbal_sb.fudbal_tipsezone AS t
+                           ON u.sezona_id=s.id AND s.tip_id=t.id
+                           WHERE s.sezona=%(sezona)s AND t.tip=%(tip)s
+                           AND u.domacin_id IN
+                           (SELECT tim_id FROM fudbal_sb.fudbal_timsezona AS tim
+                            INNER JOIN fudbal_sb.fudbal_sezona AS s
+                            INNER JOIN fudbal_sb.fudbal_tipsezone AS tip
+                            ON tim.sezona_id=s.id AND tip.id=s.tip_id
+                            WHERE s.sezona=%(sezona)s AND tim.aktivan=1 AND tip.tip=%(tip)s)
                            and u.gost_id in
-                           (SELECT tim_id FROM fudbal_sb.fudbal_timsezona as tim
-                            inner join fudbal_sb.fudbal_sezona as s
-                            inner join fudbal_sb.fudbal_tipsezone as tip
-                            on tim.sezona_id=s.id and tip.id=s.tip_id
-                            where s.sezona=%(sezona)s and tim.aktivan=1 and tip.tip=%(tip)s);''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
+                           (SELECT tim_id FROM fudbal_sb.fudbal_timsezona AS tim
+                            INNER JOIN fudbal_sb.fudbal_sezona AS s
+                            INNER JOIN fudbal_sb.fudbal_tipsezone AS tip
+                            ON tim.sezona_id=s.id AND tip.id=s.tip_id
+                            WHERE s.sezona=%(sezona)s AND tim.aktivan=1 AND tip.tip=%(tip)s);''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
             utakmice_podaci = cursor.fetchall()
 
             utakmice = []
@@ -42,13 +48,17 @@ class Query:
     @staticmethod
     def kaznjeni_timovi(sezona_obj):
         with connection.cursor() as cursor:
-            cursor.execute('''SELECT ime, sum(kazneni_bodovi)FROM fudbal_sb.fudbal_kazne as k
-                            inner join fudbal_sb.fudbal_timsezona as ts
-                            inner join fudbal_sb.fudbal_tim as tim
-                            inner join fudbal_sb.fudbal_sezona as s
-                            inner join fudbal_sb.fudbal_tipsezone as tip
-                            on k.tim_u_sezoni_id=ts.id and ts.tim_id=tim.id and ts.sezona_id=s.id and s.tip_id=tip.id
-                            where sezona=%(sezona)s and tip=%(tip)s
-                            group by ime''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
-            timovi = cursor.fetchall()
-        return timovi
+            cursor.execute('''SELECT tim_id, sum(kazneni_bodovi)FROM fudbal_sb.fudbal_kazne AS k
+                            INNER JOIN fudbal_sb.fudbal_timsezona AS ts
+                            INNER JOIN fudbal_sb.fudbal_sezona AS s
+                            INNER JOIN fudbal_sb.fudbal_tipsezone AS tip
+                            ON k.tim_u_sezoni_id=ts.id AND ts.sezona_id=s.id AND s.tip_id=tip.id
+                            WHERE sezona=%(sezona)s AND tip=%(tip)s
+                            GROUP BY tim_id''', {'sezona': sezona_obj.sezona, 'tip': sezona_obj.tip})
+            kazne_podaci = cursor.fetchall()
+
+            kazne = []
+            for kazna_podaci in kazne_podaci:
+                kazne.append(Kazna(kazna_podaci))
+
+        return kazne

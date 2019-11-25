@@ -14,6 +14,16 @@ class Rezultat():
         self.gol_razlika = 0
         self.bodovi = 0
 
+    def __eq__(self, other):
+        if self.ime == other.ime and self.odigrane_utakmice == other.odigrane_utakmice \
+                and self.pobeda == other.pobeda and self.nereseno == other.nereseno \
+                and self.porazi == other.porazi and self.dati_golovi == other.dati_golovi \
+                and self.primljeni_golovi == other.primljeni_golovi \
+                and self.gol_razlika == other.gol_razlika and self.bodovi == other.bodovi:
+            return True
+        else:
+            return False
+
 
 class ProvajderPodataka:
     def dohvati_utakmice_sezone(self, sezona):
@@ -21,6 +31,9 @@ class ProvajderPodataka:
 
     def dohvati_ime_tima(self, id):
         return Tim.objects.get(id=id).ime
+
+    def dohvati_kazne_timova(self, sezona):
+        return Query.kaznjeni_timovi(sezona)
 
 
 class Liga():
@@ -49,14 +62,18 @@ class Liga():
             tabela_timova[utakmica.id_gost] = Liga.osvezi_rezultate(
                 tabela_timova[utakmica.id_gost], utakmica.golovi_gost, utakmica.golovi_domacin)
 
-        # ovde ce se dohvatiti lista kaznenih poena
+        kazneni_poeni = self.provajder.dohvati_kazne_timova(sezona)
+        for kazna in kazneni_poeni:
+            if kazna.id_tim in tabela_timova:
+                tabela_timova[kazna.id_tim].bodovi -= kazna.kazneni_bodovi
 
         tabela_timova_imena = []
 
         for tim in tabela_timova:
             tabela_timova_imena.append(tabela_timova[tim])
 
-        # ovde moze da se pozove sortiranje liste tabela_timova_imena
+        tabela_timova_imena.sort(key=lambda utakmica: (
+            utakmica.bodovi, utakmica.gol_razlika), reverse=True)
 
         return tabela_timova_imena
 
@@ -79,18 +96,3 @@ class Liga():
         tim.bodovi = tim.pobeda * 3 + tim.nereseno
 
         return tim
-
-    @staticmethod
-    def kazneni_bodovi(sezona_obj, tabela_timova):
-        kaznjeni_timovi = Query.kaznjeni_timovi(sezona_obj)
-        for tim_bod in kaznjeni_timovi:
-            kaznjeni_tim = tim_bod[0]
-            kazneni_bodovi = int(tim_bod[1])
-            if kaznjeni_tim in tabela_timova:
-                tim = tabela_timova[kaznjeni_tim]
-                tim.bodovi -= kazneni_bodovi
-        return tabela_timova
-
-    @staticmethod
-    def sort_table(tabela_timova):
-        return {k: v for k, v in sorted(tabela_timova.items(), key=lambda x: (x[1].bodovi, x[1].gol_razlika), reverse=True)}

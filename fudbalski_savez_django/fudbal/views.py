@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .liga_rezultati import Liga, ProvajderPodataka
 from .my_functions import dohvati_kola
-from .mysql_queris import Query
 from vesti.models import Vest, Slika
 from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja, Propisi
 from django.db.models import Q

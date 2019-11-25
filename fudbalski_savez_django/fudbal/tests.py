@@ -1,6 +1,6 @@
 import unittest
 from .liga_rezultati import Liga
-from .mysql_queris import Utakmica
+from .mysql_queris import Utakmica, Kazna
 
 # svaka test klasa se zove TestNESTO (TestLiga npr)
 
@@ -29,6 +29,10 @@ class ProvajderPodatakaTest:
     def dohvati_ime_tima(self, id):
         return str(id)
 
+    def dohvati_kazne_timova(self, sezona):
+        kazneni_poeni = [Kazna((0, 1))]
+        return kazneni_poeni
+
 
 class TestLiga(unittest.TestCase):
     def test_tabela(self):
@@ -37,7 +41,9 @@ class TestLiga(unittest.TestCase):
 
         tabela = sorted(tabela, key=lambda x: x.ime)
 
-        self.assertEqual(tabela[0].bodovi, 4)
+        self.assertEqual(tabela[0].bodovi, 3)
         self.assertEqual(tabela[1].bodovi, 1)
         self.assertEqual(tabela[2].bodovi, 0)
         self.assertEqual(tabela[3].bodovi, 3)
+        self.assertEqual(tabela[0] == tabela[1], False)
+        self.assertEqual(tabela[2] == tabela[3], False)
