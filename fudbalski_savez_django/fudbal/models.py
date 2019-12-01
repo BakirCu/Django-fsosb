@@ -2,7 +2,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .my_validators import check_first_upper
-from vesti.video_id import resize_image
+from django.utils import timezone
+from fudbal.video_id import embed_video, resize_image
 
 
 class Delegat(models.Model):
@@ -217,3 +218,56 @@ class Obavestenja(models.Model):
 
     class Meta:
         verbose_name_plural = "Obaveštenja"
+
+
+class Vest(models.Model):
+    naslov = models.CharField(max_length=100)
+    sadrzaj = models.TextField()
+    vreme_posta = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.naslov}"
+
+    class Meta:
+        verbose_name_plural = 'Vesti'
+        ordering = ['-vreme_posta']
+
+
+class Slika(models.Model):
+    naslov = models.CharField(max_length=100)
+    vreme_posta = models.DateTimeField(default=timezone.now)
+    slika = models.ImageField(default='default.jpg', upload_to='galerija_img')
+    vest = models.ForeignKey(
+        Vest, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.naslov}"
+
+    def save(self, *args, **kwargs):
+        self.slika = resize_image(self.slika, 1080, 1920)
+        return super(Slika, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Slike'
+        ordering = ['-vreme_posta']
+
+
+class Video(models.Model):
+    video = models.CharField(max_length=100, blank=True, null=True)
+    vest = models.ForeignKey(
+        Vest, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.vest}"
+
+    def save(self, *args, **kwargs):
+        if self.video:
+            self.video = embed_video(str(self.video))
+        return super(Video, self).save(*args, **kwargs)
+
+    def clean(self):
+        if self.video:
+            embed_video(str(self.video))
+
+    class Meta:
+        verbose_name_plural = 'Videi'

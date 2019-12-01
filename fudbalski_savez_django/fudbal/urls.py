@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from .views import VestiListView, VestDetailView, GalleryListView
 urlpatterns = [
     path('', views.home, name="pocetna_strana"),
     path('savez/', views.savez, name="o_savezu"),
@@ -16,4 +16,7 @@ urlpatterns = [
     path('delegati/', views.lista_delagata, name='lista_delegata'),
     path('timovi/', views.timovi_sokobanje, name='timovi_sokobanje'),
     path('obavestenja/', views.obavestenja, name='obavestenja'),
+    path('vesti/', VestiListView.as_view(), name='vesti'),
+    path('vest/<int:pk>/', VestDetailView.as_view(), name="vest"),
+    path('gallery/', GalleryListView.as_view(), name="slike"),
 ]

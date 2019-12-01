@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .liga_rezultati import Liga, ProvajderPodataka
 from .my_functions import dohvati_kola
-from vesti.models import Vest, Slika
-from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja, Propisi
+from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja, Propisi, Vest, Slika, Video
 from django.db.models import Q
+from django.views.generic import ListView, DetailView
 
 
 def home(request):
@@ -20,7 +20,6 @@ def savez(request):
 def rukovodstvo(request):
     clanovi_rukovodstava = ClanOdbora.objects.filter(
         odbor_id__naziv_odbora='Rukovodstvo')
-
     return render(request, "fudbal/rukovodstvo.html", {'clanovi': clanovi_rukovodstava})
 
 
@@ -105,3 +104,32 @@ def timovi_sokobanje(request):
         timovi_u_ligi = TimoviSokobanja.objects.filter(ucesce=liga)
         timovi_sokobanje[liga] = timovi_u_ligi
     return render(request, "fudbal/timovi_sokobanje.html", {"lige": timovi_sokobanje})
+
+
+class VestiListView(ListView):
+    context_object_name = "vesti"
+    paginate_by = 3
+    queryset = Vest.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(VestiListView, self).get_context_data(**kwargs)
+        context['slike'] = Slika.objects.all()
+
+        return context
+
+
+class VestDetailView(DetailView):
+    queryset = Vest.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(VestDetailView, self).get_context_data(**kwargs)
+        context['videi'] = Video.objects.all()
+        context['slike'] = Slika.objects.all()
+
+        return context
+
+
+class GalleryListView(ListView):
+    model = Slika
+    context_object_name = "slike"
+    paginate_by = 12
