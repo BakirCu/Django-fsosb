@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'fudbal/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fudbal/main.css' %}">
+    <link rel="stylesheet" href="{% static 'fudbal/sticky_footer.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -93,13 +94,17 @@
     </div>
     {% block content %}
     {% endblock %}
-    <div class="jumbotron text-center mt-5">
-        <p>Vojvode Mišića 10, 18230 Sokobanja</p>
-        <p>Kontakt telefon: 063400144</p>
-        <p>PIB 100694106</p>
-        <p>Vojvođanska banka: TR 3259500700024705-91 </p>
-        <p>Maticni broj: 17469428</p>
-    </div>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">
+                <b>Adresa:</b> Vojvode Mišića 10, 18230 Sokobanja<br>
+                <b>Kontakt telefon:</b> 063400144<br>
+                <b>PIB:</b> 100694106<br>
+                <b>Tekući račun:</b> 355-3259500700024705-91<br>
+                <b>Matični broj:</b> 17469428
+            </span>
+        </div>
+    </footer>
 </body>
 
 </html>
