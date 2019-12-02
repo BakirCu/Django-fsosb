@@ -8,9 +8,13 @@ from django.views.generic import ListView, DetailView
 
 def home(request):
     vesti = Vest.objects.all()[:3]
-    slika = Slika.objects.first()
+    slike = Slika.objects.raw(
+        '''SELECT * FROM fudbal_sb.fudbal_slika as s
+            inner join fudbal_sb.fudbal_vest as v
+            on s.vest_id=v.id
+            group by vest_id''')
     return render(request, "fudbal/home.html", {"vesti": vesti,
-                                                "slika": slika})
+                                                "slike": slike})
 
 
 def savez(request):
@@ -113,7 +117,11 @@ class VestiListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(VestiListView, self).get_context_data(**kwargs)
-        context['slike'] = Slika.objects.all()
+        context['slike'] = Slika.objects.raw(
+            '''SELECT * FROM fudbal_sb.fudbal_slika as s
+            inner join fudbal_sb.fudbal_vest as v
+            on s.vest_id=v.id
+            group by vest_id''')
 
         return context
 

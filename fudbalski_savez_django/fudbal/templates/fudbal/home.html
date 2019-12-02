@@ -70,7 +70,11 @@
         <div class="col-lg-4 text-center">
             <a href="{% url 'vest' vest.id %}">
                 <h2>{{vest.naslov}}</h2>
+                {% for slika in slike %}
+                {%if vest.id == slika.vest_id%}
                 <img src="{{slika.slika.url}}" class="img-thumbnail" width="400" height="300" title="Video">
+                {%endif%}
+                {%endfor%}
                 <p>{{vest.vreme_posta|date:"d.m.Y."}}</p>
         </div>
         {% endfor%}
