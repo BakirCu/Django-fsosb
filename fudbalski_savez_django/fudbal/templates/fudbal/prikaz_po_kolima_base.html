@@ -16,13 +16,14 @@
 <div class="container mt-5">
     <h4>Sezona {{sezona}}</h4>
     <div id="accordion">
-        {% for utakmice in utakmice_po_kolima %}
+        {% for obj in utakmice_po_kolima %}
+
         <div class="card card-header">
-            <a class='card-link' data-toggle="collapse" href="#b{{utakmice.0.kolo}}">
-                {{utakmice.0.kolo}}.kolo
+            <a class='card-link' data-toggle="collapse" href="#b{{obj.utakmice.0.kolo}}">
+                {{obj.utakmice.0.kolo}}.kolo
             </a>
         </div>
-        <div id="b{{utakmice.0.kolo}}" class="{% for utakmica in utakmice%}{% if utakmica.datum_zakazano|date:'m' == current_month %}
+        <div id="b{{obj.utakmice.0.kolo}}" class="{% for utakmica in obj.utakmice%}{% if utakmica.datum_zakazano|date:'m' == current_month %}
             collapse show {% else %} collapse {% endif %} {% endfor %}" data-parent="#accordion">
             <div class="card-body">
                 {% block table %}
