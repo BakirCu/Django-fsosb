@@ -45,7 +45,6 @@ h1 {
 @media only screen and (min-width: 992px) {
     h1 {font-size: 80px;}
 }
-
 tr {
     line-height: 10px;
     min-height: 10px;
