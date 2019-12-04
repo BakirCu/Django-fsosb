@@ -8,13 +8,7 @@ from django.views.generic import ListView, DetailView
 
 def home(request):
     vesti = Vest.objects.all()[:3]
-    slike = Slika.objects.raw(
-        '''SELECT * FROM fudbal_sb.fudbal_slika as s
-            inner join fudbal_sb.fudbal_vest as v
-            on s.vest_id=v.id
-            group by vest_id''')
-    return render(request, "fudbal/home.html", {"vesti": vesti,
-                                                "slike": slike})
+    return render(request, "fudbal/home.html", {"vesti": vesti})
 
 
 def savez(request):
@@ -120,8 +114,7 @@ class VestiListView(ListView):
         context['slike'] = Slika.objects.raw(
             '''SELECT * FROM fudbal_sb.fudbal_slika as s
             inner join fudbal_sb.fudbal_vest as v
-            on s.vest_id=v.id
-            group by vest_id''')
+            on s.vest_id=v.id''')
 
         return context
 
