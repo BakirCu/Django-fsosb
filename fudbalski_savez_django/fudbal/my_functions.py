@@ -36,15 +36,21 @@ class UtakmiceKola():
             utakmice = self.provajder.utakmice_kola(broj_kola,
                                                     poslednja_sezona,
                                                     tip_sezone)
-            for utakmica in utakmice:
-                if utakmica.domacin.ime in aktivini_timovi_list:
-                    aktivini_timovi_list.remove(utakmica.domacin.ime)
-                if utakmica.gost.ime in aktivini_timovi_list:
-                    aktivini_timovi_list.remove(utakmica.gost.ime)
 
+            slobodni_timovi = UtakmiceKola.remove_from_list(utakmice,
+                                                            aktivini_timovi_list)
             utakmice_kola.append(UtakmiceSlobodniTimovi(utakmice,
-                                                        aktivini_timovi_list))
+                                                        slobodni_timovi))
         return utakmice_kola
+
+    @staticmethod
+    def remove_from_list(utakmice, aktivini_timovi_list):
+        for utakmica in utakmice:
+            if utakmica.domacin.ime in aktivini_timovi_list:
+                aktivini_timovi_list.remove(utakmica.domacin.ime)
+            if utakmica.gost.ime in aktivini_timovi_list:
+                aktivini_timovi_list.remove(utakmica.gost.ime)
+        return aktivini_timovi_list
 
     @staticmethod
     def aktive_tims(timovi):
