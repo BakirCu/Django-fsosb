@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for utakmica in utakmice %}
+            {% for utakmica in obj.utakmice %}
             <tr>
                 <td>{{utakmica.domacin}}-{{utakmica.gost}}</td>
                 <td>{{utakmica.datum_zakazano|date:"d.m.Y."}}</td>

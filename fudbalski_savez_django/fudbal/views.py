@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .liga_rezultati import Liga, ProvajderPodataka
-from .my_functions import dohvati_kola
+from .my_functions import UtakmiceKola, Provajder
 from .models import Sudija, Delegat, Sezona, TimoviSokobanja, ClanOdbora, Odbor, Obavestenja, Propisi, Vest, Slika, Video
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
@@ -39,7 +39,8 @@ def propisi(request):
 def liga_rezultati(request):
     poslednja_sezona_obj = Sezona.objects.all().order_by('-sezona').first()
     poslednja_sezona = poslednja_sezona_obj.sezona
-    utakmice_po_kolima = dohvati_kola(poslednja_sezona, 'LIGA')
+    liga = UtakmiceKola(Provajder())
+    utakmice_po_kolima = liga.dohvati_kola(poslednja_sezona, 'LIGA')
     trenutna_sezona = "{}/{}".format(poslednja_sezona_obj.sezona,
                                      poslednja_sezona_obj.sezona + 1)
     return render(
@@ -69,7 +70,8 @@ def kup_tabela(request):
 def delegiranje_sudija(request):
     poslednja_sezona_obj = Sezona.objects.all().order_by('-sezona').first()
     poslednja_sezona = poslednja_sezona_obj.sezona
-    utakmice_po_kolima = dohvati_kola(poslednja_sezona, 'LIGA')
+    liga = UtakmiceKola(Provajder())
+    utakmice_po_kolima = liga.dohvati_kola(poslednja_sezona, 'LIGA')
     trenutna_sezona = "{}/{}".format(poslednja_sezona_obj.sezona,
                                      poslednja_sezona_obj.sezona + 1)
     return render(
