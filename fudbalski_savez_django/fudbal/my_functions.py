@@ -45,7 +45,7 @@ class UtakmiceKola():
         return utakmice_kola
 
     @staticmethod
-    def remove_from_list(utakmice, aktivini_timovi):
+    def remove_from_set(utakmice, aktivini_timovi):
         for utakmica in utakmice:
             aktivini_timovi.discard(utakmica.domacin.ime)
             aktivini_timovi.discard(utakmica.gost.ime)
