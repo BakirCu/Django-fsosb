@@ -41,6 +41,11 @@ h1 {
     text-shadow: 3px 3px 8px #000000;
 }
 
+h2 {
+    font-size: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000000;
+}
 
 tr {
     line-height: 7px;
@@ -51,13 +56,18 @@ tr {
 
 @media only screen and (min-width: 992px) {
     h1 {font-size: 80px;}
+    h2 {font-size: 50px;}
 
     tr {
-        line-height: 10px;
-        min-height: 10px;
-        height: 10px;
-        font-size: 10px;
+        line-height: 15px;
+        min-height: 15px;
+        height: 15px;
+        font-size: 15px;
      }
+}
+
+.table td {
+    padding: 0.4rem;
 }
 
 @media only screen and (max-width: 992px) {

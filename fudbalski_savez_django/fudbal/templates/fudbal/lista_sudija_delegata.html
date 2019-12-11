@@ -11,10 +11,10 @@
     {% endif %}
 </div>
 
-<div class="container mt-5 ">
-    <div class="row mt-5">
+<div class="container">
+    <div class="row">
         {% for sudija in sudije %}
-        <div class="col-sm-6 mt-5  "><img src="{{sudija.slika.url}}" alt="..."
+        <div class="col-sm-6 mt-5"><img src="{{sudija.slika.url}}" alt="..."
                 class="float-left pull-left  mr-3 img-thumbnail" width="100" height="100">
             <h4>{{sudija.ime}} {{sudija.prezime}}</h4>
             <h6>{{sudija.zvanje}}.</h6>
