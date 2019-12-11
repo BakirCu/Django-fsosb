@@ -211,7 +211,8 @@ class Propisi(models.Model):
 
 class Obavestenja(models.Model):
     naslov = models.CharField(max_length=200)
-    fajl = models.FileField(upload_to='obavestenja')
+    sadrzaj = models.TextField(null=True, blank=True)
+    fajl = models.FileField(null=True, blank=True, upload_to='obavestenja')
 
     def __str__(self):
         return f'{self.naslov}'
