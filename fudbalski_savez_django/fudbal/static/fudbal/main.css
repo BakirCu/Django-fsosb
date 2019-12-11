@@ -43,10 +43,10 @@ h1 {
 
 
 tr {
-    line-height: 5px;
-    min-height: 5px;
-    height: 5px;
-    font-size: 5px;
+    line-height: 7px;
+    min-height: 7px;
+    height: 7px;
+    font-size: 7px;
  }
 
 @media only screen and (min-width: 992px) {

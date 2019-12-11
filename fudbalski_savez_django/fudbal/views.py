@@ -8,7 +8,8 @@ from django.views.generic import ListView, DetailView
 
 def home(request):
     vesti = Vest.objects.all()[:3]
-    return render(request, "fudbal/home.html", {"vesti": vesti})
+    slike = Slika.objects.exclude(vest_id__isnull=False)[:3]
+    return render(request, "fudbal/home.html", {"vesti": vesti, "slike": slike})
 
 
 def savez(request):
@@ -108,17 +109,8 @@ def timovi_sokobanje(request):
 
 class VestiListView(ListView):
     context_object_name = "vesti"
-    paginate_by = 3
+    paginate_by = 4
     queryset = Vest.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(VestiListView, self).get_context_data(**kwargs)
-        context['slike'] = Slika.objects.raw(
-            '''SELECT * FROM fudbal_sb.fudbal_slika as s
-            inner join fudbal_sb.fudbal_vest as v
-            on s.vest_id=v.id''')
-
-        return context
 
 
 class VestDetailView(DetailView):
@@ -136,3 +128,4 @@ class GalleryListView(ListView):
     model = Slika
     context_object_name = "slike"
     paginate_by = 12
+    queryset = Slika.objects.exclude(vest_id__isnull=False)
