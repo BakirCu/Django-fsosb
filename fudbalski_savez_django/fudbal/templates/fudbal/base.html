@@ -15,40 +15,40 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- Navigation bar-->
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-            <a class="navbar-left" href="{% url 'pocetna_strana'%}">
-                <img src="{% static 'fudbal/images/logo.jpg'%}" class="rounded" alt="Logo" width="100">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="collapsibleNavbar">
-                <ul class="navbar-nav ">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            SAVEZ
-                        </a>
-                        <div class="dropdown-menu border border-0">
-                            <a class="dropdown-item" href="{% url 'o_savezu' %}">O
-                                Savezu</a>
-                            <a class="dropdown-item" href="{% url 'rukovodstvo' %}">Rukovodstvo</a>
-                            <a class="dropdown-item" href="{% url 'odbori' %}">Odbori</a>
-                            <a class="dropdown-item" href="{% url 'propisi'%}">Propisi</a>
-                        </div>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            LIGA
-                        </a>
-                        <div class="dropdown-menu border border-0 ">
-                            <a class="dropdown-item" href="{% url 'liga_rezultati' %}">
-                                Rezultati</a>
-                            <a class="dropdown-item" href="{% url 'liga_tabela' %}">
-                                Tabela</a>
-                        </div>
-                    </li>
-                    <!-- <li class="nav-item dropdown">
+
+    <!-- Navigation bar-->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark top">
+        <a class="navbar-left" href="{% url 'pocetna_strana'%}">
+            <img src="{% static 'fudbal/images/logo.jpg'%}" class="rounded" alt="Logo" width="100">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="collapsibleNavbar">
+            <ul class="navbar-nav ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        SAVEZ
+                    </a>
+                    <div class="dropdown-menu border border-0">
+                        <a class="dropdown-item" href="{% url 'o_savezu' %}">O
+                            Savezu</a>
+                        <a class="dropdown-item" href="{% url 'rukovodstvo' %}">Rukovodstvo</a>
+                        <a class="dropdown-item" href="{% url 'odbori' %}">Odbori</a>
+                        <a class="dropdown-item" href="{% url 'propisi'%}">Propisi</a>
+                    </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        LIGA
+                    </a>
+                    <div class="dropdown-menu border border-0 ">
+                        <a class="dropdown-item" href="{% url 'liga_rezultati' %}">
+                            Rezultati</a>
+                        <a class="dropdown-item" href="{% url 'liga_tabela' %}">
+                            Tabela</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href='#' id='navbardrop' data-toggle="dropdown">
                             KUP
                         </a>
@@ -57,41 +57,41 @@
                             <a class="dropdown-item" href="{% url 'kup_tabela' %}">Tabela</a>
                         </div>
                     </li>-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            SUDIJE
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        SUDIJE
+                    </a>
+                    <div class="dropdown-menu border border-0">
+                        <a class="dropdown-item" href="{% url 'delegiranje_sudija' %}">Delegiranje sudija</a>
+                        <a class="dropdown-item" href="{% url 'lista_sudija' %}">Lista
+                            sudija
                         </a>
-                        <div class="dropdown-menu border border-0">
-                            <a class="dropdown-item" href="{% url 'delegiranje_sudija' %}">Delegiranje sudija</a>
-                            <a class="dropdown-item" href="{% url 'lista_sudija' %}">Lista
-                                sudija
-                            </a>
-                            <a class="dropdown-item" href="{% url 'lista_delegata' %}">Lista
-                                delegata
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'obavestenja' %}">OBAVEŠTENJA</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'vesti' %}">VESTI</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'slike' %}">GALERIJA</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href='#' id='navbardrop' data-toggle="dropdown">
-                            TIMOVI
+                        <a class="dropdown-item" href="{% url 'lista_delegata' %}">Lista
+                            delegata
                         </a>
-                        <div class="dropdown-menu border border-0 ">
-                            <a class="dropdown-item" href="{% url 'timovi_sokobanje' %}">Timovi FSO Sokobanja</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'obavestenja' %}">OBAVEŠTENJA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vesti' %}">VESTI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'slike' %}">GALERIJA</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href='#' id='navbardrop' data-toggle="dropdown">
+                        TIMOVI
+                    </a>
+                    <div class="dropdown-menu border border-0 ">
+                        <a class="dropdown-item" href="{% url 'timovi_sokobanje' %}">Timovi FSO Sokobanja</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     {% block content %}
     {% endblock %}
 
