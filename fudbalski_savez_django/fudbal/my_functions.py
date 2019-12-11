@@ -38,8 +38,8 @@ class UtakmiceKola():
                                                     poslednja_sezona,
                                                     tip_sezone)
 
-            slobodni_timovi = UtakmiceKola.remove_from_list(utakmice,
-                                                            aktivini_timovi_set)
+            slobodni_timovi = UtakmiceKola.remove_from_set(utakmice,
+                                                           aktivini_timovi_set)
             utakmice_kola.append(UtakmiceSlobodniTimovi(utakmice,
                                                         slobodni_timovi))
         return utakmice_kola
