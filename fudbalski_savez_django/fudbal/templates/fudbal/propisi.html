@@ -10,7 +10,8 @@
     {% for propis in propisi %}
     <h3>{{propis.naslov}}</h3>
 
-    <a href="{{propis.fajl.url}}">{{propis.fajl}}</a>
+    <a href="{{propis.fajl.url}}"><i class="fa fa-download" aria-hidden="true"></i> <b>{{propis.fajl}}</b></a>
+
     {% endfor %}
 </div>
 {% endblock %}
