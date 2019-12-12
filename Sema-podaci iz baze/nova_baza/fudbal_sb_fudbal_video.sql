@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_vest`
+-- Dumping data for table `fudbal_video`
 --
 
-LOCK TABLES `fudbal_vest` WRITE;
-/*!40000 ALTER TABLE `fudbal_vest` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fudbal_vest` ENABLE KEYS */;
+LOCK TABLES `fudbal_video` WRITE;
+/*!40000 ALTER TABLE `fudbal_video` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fudbal_video` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:48:19
+-- Dump completed on 2019-12-13  0:14:56

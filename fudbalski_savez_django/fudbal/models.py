@@ -158,7 +158,7 @@ class TimoviSokobanja(models.Model):
     logo = models.ImageField(upload_to='logo_img')
 
     def __str__(self):
-        return self.ime
+        return f'{self.ime} - {self.ucesce}'
 
     def save(self, *args, **kwargs):
         self.logo = resize_image(self.logo, 300, 300)

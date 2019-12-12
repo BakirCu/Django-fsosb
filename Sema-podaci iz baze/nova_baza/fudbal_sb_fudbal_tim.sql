@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_propisi`
+-- Dumping data for table `fudbal_tim`
 --
 
-LOCK TABLES `fudbal_propisi` WRITE;
-/*!40000 ALTER TABLE `fudbal_propisi` DISABLE KEYS */;
-INSERT INTO `fudbal_propisi` VALUES (1,'Propozicije takmičenja za 2019/2020 godinu','propisi/ПРОПОЗИЦИЈЕ_ТАКМИЧЕЊА.docx');
-/*!40000 ALTER TABLE `fudbal_propisi` ENABLE KEYS */;
+LOCK TABLES `fudbal_tim` WRITE;
+/*!40000 ALTER TABLE `fudbal_tim` DISABLE KEYS */;
+INSERT INTO `fudbal_tim` VALUES (2,'FK Napredak 1976'),(4,'FK Mladost'),(5,'FK Sloga'),(6,'FK Palilulac'),(7,'SU Skograd'),(8,'FK Slemen'),(9,'FK Rtanj'),(10,'FK Jedinstvo 1952');
+/*!40000 ALTER TABLE `fudbal_tim` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:48:21
+-- Dump completed on 2019-12-13  0:14:55

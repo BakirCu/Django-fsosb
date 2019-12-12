@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_timovisokobanja`
+-- Dumping data for table `fudbal_kazne`
 --
 
-LOCK TABLES `fudbal_timovisokobanja` WRITE;
-/*!40000 ALTER TABLE `fudbal_timovisokobanja` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fudbal_timovisokobanja` ENABLE KEYS */;
+LOCK TABLES `fudbal_kazne` WRITE;
+/*!40000 ALTER TABLE `fudbal_kazne` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fudbal_kazne` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:48:21
+-- Dump completed on 2019-12-13  0:14:52

@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_tipsezone`
+-- Dumping data for table `fudbal_sezona`
 --
 
-LOCK TABLES `fudbal_tipsezone` WRITE;
-/*!40000 ALTER TABLE `fudbal_tipsezone` DISABLE KEYS */;
-INSERT INTO `fudbal_tipsezone` VALUES (1,'LIGA'),(2,'KUP');
-/*!40000 ALTER TABLE `fudbal_tipsezone` ENABLE KEYS */;
+LOCK TABLES `fudbal_sezona` WRITE;
+/*!40000 ALTER TABLE `fudbal_sezona` DISABLE KEYS */;
+INSERT INTO `fudbal_sezona` VALUES (1,2019,1);
+/*!40000 ALTER TABLE `fudbal_sezona` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:48:24
+-- Dump completed on 2019-12-13  0:14:53

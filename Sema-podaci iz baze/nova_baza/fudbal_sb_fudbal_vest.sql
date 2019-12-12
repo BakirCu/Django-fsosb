@@ -16,13 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_slika`
+-- Dumping data for table `fudbal_vest`
 --
 
-LOCK TABLES `fudbal_slika` WRITE;
-/*!40000 ALTER TABLE `fudbal_slika` DISABLE KEYS */;
-INSERT INTO `fudbal_slika` VALUES (1,'Stadion Bata Nole','2018-12-01 23:43:08.000000','galerija_img/stadion_Bata_Nole_1.jpg',NULL);
-/*!40000 ALTER TABLE `fudbal_slika` ENABLE KEYS */;
+LOCK TABLES `fudbal_vest` WRITE;
+/*!40000 ALTER TABLE `fudbal_vest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fudbal_vest` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:48:23
+-- Dump completed on 2019-12-13  0:14:53

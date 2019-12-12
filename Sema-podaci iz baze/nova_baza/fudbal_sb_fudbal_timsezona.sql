@@ -16,12 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_sudija`
+-- Dumping data for table `fudbal_timsezona`
 --
 
-LOCK TABLES `fudbal_sudija` WRITE;
-/*!40000 ALTER TABLE `fudbal_sudija` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fudbal_sudija` ENABLE KEYS */;
+LOCK TABLES `fudbal_timsezona` WRITE;
+/*!40000 ALTER TABLE `fudbal_timsezona` DISABLE KEYS */;
+INSERT INTO `fudbal_timsezona` VALUES (1,0,1,2),(2,1,1,4),(3,1,1,5),(4,1,1,6),(5,1,1,7),(6,1,1,8),(7,1,1,10),(8,1,1,9);
+/*!40000 ALTER TABLE `fudbal_timsezona` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:48:22
+-- Dump completed on 2019-12-13  0:14:53
