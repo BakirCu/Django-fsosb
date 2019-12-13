@@ -127,5 +127,5 @@ class VestDetailView(DetailView):
 class GalleryListView(ListView):
     model = Slika
     context_object_name = "slike"
-    paginate_by = 12
+    paginate_by = 6
     queryset = Slika.objects.exclude(vest_id__isnull=False)
