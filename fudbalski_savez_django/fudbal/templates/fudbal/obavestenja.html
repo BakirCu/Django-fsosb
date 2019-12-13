@@ -6,9 +6,9 @@
     <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid md-5">
 </div>
 
-<div class='container mt-5 text-center'>
+<div class='container text-center'>
     {% for obavestenje in obavestenja %}
-    <h2>{{obavestenje.naslov}}</h2>
+    <h2 class="mt-4">{{obavestenje.naslov}}</h2>
     <div class="row">
         <div class="embed-responsive embed-responsive-4by3">
             <iframe src="https://docs.google.com/viewer?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true">

@@ -6,11 +6,11 @@
     <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid md-5">
 </div>
 
-<div class="container mt-5">
+<div class="container">
     <div class="row">
         {% for clan in clanovi %}
         <div class="col-sm-6">
-            <div class="card mt-5">
+            <div class="card mt-4">
                 <h2 class="card-header text-center">{{clan.funkcija}}</h2>
                 <div class="card-body">
                     {% if clan.slika %}
@@ -19,7 +19,7 @@
                     {% endif %}
                     <h4 class="card-title text-center">{{clan.ime}} {{clan.prezime}}</h4>
                     {% if clan.rezime %}
-                    <p class="card-text">{{clan.rezime}}</p>
+                    <p class="card-text centered">{{clan.rezime}}</p>
                     {% endif %}
                 </div>
 

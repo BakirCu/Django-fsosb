@@ -6,11 +6,12 @@
     <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid md-5">
 </div>
 
-<div class="container mt-5">
+<div class="container mt-4">
     {% for propis in propisi %}
-    <h3>{{propis.naslov}}</h3>
+    <h2>{{propis.naslov}}</h2>
 
-    <a href="{{propis.fajl.url}}"><i class="fa fa-download" aria-hidden="true"></i> <b>{{propis.fajl}}</b></a>
+    <h3><a href="{{propis.fajl.url}}"><i class="fa fa-download" aria-hidden="true"></i>
+            <b>{{propis.fajl}}</b></a></h3>
 
     {% endfor %}
 </div>

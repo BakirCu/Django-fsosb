@@ -7,11 +7,11 @@
     <img src="{% static 'fudbal/images/galerija.jpg'%}" class="img-fluid md-5">
     <h1 class="centered-text">Galerija</h1>
 </div>
-<div class="container mt-5">
+<div class="container">
     <div class="row text-center">
 
         {% for slika in slike %}
-        <div class="col-lg-4 text-center mt-5">
+        <div class="col-lg-4 text-center mt-4">
             <a href="{{slika.slika.url}}" data-title="{{slika.naslov}}"
                 data-footer="{{slika.vreme_posta|date:'d.m.Y.'}}" data-toggle="lightbox" data-gallery="example-gallery"
                 class="col-sm-4 ">
@@ -23,7 +23,7 @@
 
     </div>
     <!--Paginations-->
-    <ul class="pagination justify-content-center">
+    <ul class="pagination mt-4 justify-content-center">
         {% if is_paginated %}
 
         {% if page_obj.has_previous %}

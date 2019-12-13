@@ -36,6 +36,10 @@
     color: white;
 }
 
+.centered {
+    text-align: justify;
+}
+
 h1 {
     font-size: 25px;
     text-shadow: 3px 3px 8px #000000;
@@ -47,18 +51,22 @@ h2 {
     text-shadow: 1px 1px 1px #000000;
 }
 
+h3 {
+    font-size: 15px;
+    text-align: center;
+}
+
 tr {
     line-height: 7px;
     min-height: 7px;
     height: 7px;
     font-size: 7px;
  }
-p {
-    text-align: justify;
-  }
+
 @media only screen and (min-width: 992px) {
     h1 {font-size: 80px;}
     h2 {font-size: 50px;}
+    h3 {font-size: 30px;}
 
     tr {
         line-height: 15px;

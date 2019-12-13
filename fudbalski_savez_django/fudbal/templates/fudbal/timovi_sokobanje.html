@@ -6,9 +6,9 @@
     <img src="{% static 'fudbal/images/savez.jpg'%}" class="img-fluid md-5">
 </div>
 
-<div class="container mt-5">
+<div class="container">
     {% for liga, timovi in lige.items %}
-    <h4 class="bg-secondary mt-5">{{ liga }}</h4>
+    <h4 class="bg-secondary mt-4">{{ liga }}</h4>
     {% for tim in timovi %}
     <div class="media mt-3 ml-5">
         <img src="{{tim.logo.url}}" class="align-self-center mr-3" style="width:60px">
