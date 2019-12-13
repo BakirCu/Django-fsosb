@@ -16,13 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_odbor`
+-- Dumping data for table `fudbal_video`
 --
 
-LOCK TABLES `fudbal_odbor` WRITE;
-/*!40000 ALTER TABLE `fudbal_odbor` DISABLE KEYS */;
-INSERT INTO `fudbal_odbor` VALUES (1,'Rukovodstvo'),(2,'Odbor za hitna pitanja'),(3,'Nadzorni odbor'),(4,'Izvršni odbor');
-/*!40000 ALTER TABLE `fudbal_odbor` ENABLE KEYS */;
+LOCK TABLES `fudbal_video` WRITE;
+/*!40000 ALTER TABLE `fudbal_video` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fudbal_video` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-13 15:01:28
+-- Dump completed on 2019-12-13 16:27:39

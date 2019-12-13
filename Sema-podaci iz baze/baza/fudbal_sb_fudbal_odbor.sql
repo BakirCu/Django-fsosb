@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_obavestenja`
+-- Dumping data for table `fudbal_odbor`
 --
 
-LOCK TABLES `fudbal_obavestenja` WRITE;
-/*!40000 ALTER TABLE `fudbal_obavestenja` DISABLE KEYS */;
-INSERT INTO `fudbal_obavestenja` VALUES (1,'Specifikacija troškova i registracija do 03.10.219','','obavestenja/Specifikacija_troškova_i_registracija_do_03.10.2019.docx'),(2,'FK Napredak 1976 isključen iz daljeg takmičenja','','obavestenja/ФУДБАЛСКИ_САВЕЗ_ОПШТИНЕ_СОКОБАЊА_Искључење_из_лиге.docx');
-/*!40000 ALTER TABLE `fudbal_obavestenja` ENABLE KEYS */;
+LOCK TABLES `fudbal_odbor` WRITE;
+/*!40000 ALTER TABLE `fudbal_odbor` DISABLE KEYS */;
+INSERT INTO `fudbal_odbor` VALUES (1,'Rukovodstvo'),(2,'Odbor za hitna pitanja'),(3,'Nadzorni odbor'),(4,'Izvršni odbor');
+/*!40000 ALTER TABLE `fudbal_odbor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-13 15:01:25
+-- Dump completed on 2019-12-13 16:27:39

@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_timsezona`
+-- Dumping data for table `fudbal_tim`
 --
 
-LOCK TABLES `fudbal_timsezona` WRITE;
-/*!40000 ALTER TABLE `fudbal_timsezona` DISABLE KEYS */;
-INSERT INTO `fudbal_timsezona` VALUES (1,0,1,2),(2,1,1,4),(3,1,1,5),(4,1,1,6),(5,1,1,7),(6,1,1,8),(7,1,1,10),(8,1,1,9);
-/*!40000 ALTER TABLE `fudbal_timsezona` ENABLE KEYS */;
+LOCK TABLES `fudbal_tim` WRITE;
+/*!40000 ALTER TABLE `fudbal_tim` DISABLE KEYS */;
+INSERT INTO `fudbal_tim` VALUES (2,'FK Napredak 1976'),(4,'FK Mladost'),(5,'FK Sloga'),(6,'FK Palilulac'),(7,'SU Skograd'),(8,'FK Slemen'),(9,'FK Rtanj'),(10,'FK Jedinstvo 1952');
+/*!40000 ALTER TABLE `fudbal_tim` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-13 15:01:25
+-- Dump completed on 2019-12-13 16:27:38
