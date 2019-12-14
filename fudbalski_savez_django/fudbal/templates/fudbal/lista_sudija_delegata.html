@@ -19,7 +19,7 @@
             <h4>{{sudija.ime}} {{sudija.prezime}}</h4>
             <h6>{{sudija.zvanje}}.</h6>
             {% if sudija.datum_rodjenja %}
-            <p>{{sudija.datum_rodjenja}}</p>
+            <p>{{sudija.datum_rodjenja|date:"d.m.Y."}}</p>
             {% endif %}
         </div>
         {% endfor %}

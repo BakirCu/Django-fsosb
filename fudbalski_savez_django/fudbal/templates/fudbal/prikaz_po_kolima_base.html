@@ -1,7 +1,7 @@
 {% extends "fudbal/base.html" %}
 {% block content %}
 {% load static %}
-{% now "m" as current_month %}
+
 
 <div class="image-text-container">
     {% if request.path == '/delegiranje/' %}
@@ -23,8 +23,8 @@
                 {{obj.utakmice.0.kolo}}.kolo
             </a>
         </div>
-        <div id="b{{obj.utakmice.0.kolo}}" class="{% for utakmica in obj.utakmice%}{% if utakmica.datum_zakazano|date:'m' == current_month %}
-            collapse show {% else %} collapse {% endif %} {% endfor %}" data-parent="#accordion">
+        <div id="b{{obj.utakmice.0.kolo}}" class="{% if forloop.first %}
+            collapse show {% else %} collapse {% endif %} " data-parent="#accordion">
             <div class="card-body">
                 {% block table %}
                 {% endblock %}
