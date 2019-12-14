@@ -16,12 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_video`
+-- Dumping data for table `fudbal_propisi`
 --
 
-LOCK TABLES `fudbal_video` WRITE;
-/*!40000 ALTER TABLE `fudbal_video` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fudbal_video` ENABLE KEYS */;
+LOCK TABLES `fudbal_propisi` WRITE;
+/*!40000 ALTER TABLE `fudbal_propisi` DISABLE KEYS */;
+INSERT INTO `fudbal_propisi` VALUES (1,'Propozicije takmičenja za 2019/2020 godinu','propisi/ПРОПОЗИЦИЈЕ_ТАКМИЧЕЊА.docx');
+/*!40000 ALTER TABLE `fudbal_propisi` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-13 16:27:39
+-- Dump completed on 2019-12-14 14:26:38

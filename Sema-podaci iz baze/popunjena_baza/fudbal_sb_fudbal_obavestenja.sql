@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `fudbal_timovisokobanja`
+-- Dumping data for table `fudbal_obavestenja`
 --
 
-LOCK TABLES `fudbal_timovisokobanja` WRITE;
-/*!40000 ALTER TABLE `fudbal_timovisokobanja` DISABLE KEYS */;
-INSERT INTO `fudbal_timovisokobanja` VALUES (1,'KMF Ozren','Regionalna futsal liga - grupa Sever','logo_img/KMF_Ozren.jpg'),(2,'FK Ozren (Sokobanja)','Zaječarska okružna liga','logo_img/FK_Ozren.png'),(3,'FK Trebič (Sokobanja)','Zaječarska okružna liga','logo_img/FK_Trebic.jpg'),(4,'FK Hajduk (Rujevica)','Zaječarska okružna liga','logo_img/Webp.jpg'),(5,'FK Mladost (Resnik)','OFL Sokobanja','logo_img/FK_Mladost.jpg'),(6,'FK Jedinstvo (Mužinac)','OFL Sokobanja','logo_img/FK_Jedinstvo.jpg'),(7,'FK Paliliulac (Šarbanovac)','OFL Sokobanja','logo_img/FK_Palilulac.jpg'),(8,'FK Rtanj (Vrmdža)','OFL Sokobanja','logo_img/FK_Rtanj.jpg'),(9,'FK Slemen (Milušinac)','OFL Sokobanja','logo_img/FK_Slemen.jpg'),(10,'FK Sloga (Žučkovac)','OFL Sokobanja','logo_img/FK_Sloga.jpg'),(11,'FK Sokograd (Sokobanja)','OFL Sokobanja','logo_img/Sokograd.png'),(12,'FK Napredak 1976 (Jošanica)','OFL Sokobanja','logo_img/FK_Napredak_1976.jpg');
-/*!40000 ALTER TABLE `fudbal_timovisokobanja` ENABLE KEYS */;
+LOCK TABLES `fudbal_obavestenja` WRITE;
+/*!40000 ALTER TABLE `fudbal_obavestenja` DISABLE KEYS */;
+INSERT INTO `fudbal_obavestenja` VALUES (1,'Specifikacija troškova i registracija do 03.10.219','','obavestenja/Specifikacija_troškova_i_registracija_do_03.10.2019.docx'),(2,'FK Napredak 1976 isključen iz daljeg takmičenja','','obavestenja/ФУДБАЛСКИ_САВЕЗ_ОПШТИНЕ_СОКОБАЊА_Искључење_из_лиге.docx');
+/*!40000 ALTER TABLE `fudbal_obavestenja` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-13 16:27:37
+-- Dump completed on 2019-12-14 14:26:38
